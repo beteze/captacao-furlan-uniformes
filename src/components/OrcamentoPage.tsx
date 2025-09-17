@@ -170,7 +170,7 @@ export default function OrcamentoPage({
             Voltar ao pedido
           </button>
           
-          <div className="flex justify-between items-start">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
             <h1 className="text-3xl font-bold text-gray-900">
               {isReview ? 'Revisão do seu Orçamento' : 'Resumo do seu Orçamento'}
             </h1>

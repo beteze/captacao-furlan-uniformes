@@ -25,7 +25,7 @@ const DisqualifiedPage: React.FC<DisqualifiedPageProps> = ({ onBack }) => {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative bg-white rounded-lg shadow-md p-8 text-center">
+        <div className="relative bg-white rounded-lg shadow-md p-4 sm:p-8 text-center">
           <div className="flex justify-between items-start mb-4">
             <HelpButton onClick={handleOpenHelpModal} />
           </div>
@@ -56,7 +56,7 @@ const DisqualifiedPage: React.FC<DisqualifiedPageProps> = ({ onBack }) => {
                 href={whatsappSmallCompanies}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+                className="w-full sm:w-auto inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
               >
                 <MessageCircle className="mr-2 w-5 h-5" />
                 WhatsApp Direto
@@ -64,7 +64,7 @@ const DisqualifiedPage: React.FC<DisqualifiedPageProps> = ({ onBack }) => {
               
               <a
                 href={`mailto:${emailContact}?subject=Interesse em uniformes - Empresa pequeno porte`}
-                className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                className="w-full sm:w-auto inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
               >
                 <Mail className="mr-2 w-5 h-5" />
                 Enviar E-mail

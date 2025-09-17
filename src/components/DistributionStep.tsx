@@ -248,7 +248,7 @@ export default function DistributionStep({
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={distributeAutomatically}
-              className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+              className="w-full sm:w-auto inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
             >
               <Zap className="w-4 h-4 mr-2" />
               Distribuir automaticamente
@@ -256,7 +256,7 @@ export default function DistributionStep({
             
             <button
               onClick={() => setIsSelectionPhase(true)}
-              className="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
+              className="w-full sm:w-auto inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Alterar seleção

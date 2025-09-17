@@ -96,13 +96,13 @@ export default function SavedQuotesModal({
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
-      <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+      <div className="flex items-center justify-center min-h-screen px-2 sm:px-4 pt-4 pb-20 text-center sm:block sm:p-0">
         <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" onClick={onClose}></div>
 
-        <div className="inline-block w-full max-w-4xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+        <div className="inline-block w-full max-w-full sm:max-w-4xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-2xl font-bold text-gray-900 flex items-center">
-              <FileText className="w-6 h-6 mr-3 text-blue-600" />
+              <FileText className="w-6 h-6 mr-3 text-blue-600 flex-shrink-0" />
               Orçamentos Salvos ({savedQuizzes.length})
             </h3>
             <button
@@ -126,23 +126,23 @@ export default function SavedQuotesModal({
               {/* Ações em lote */}
               {selectedQuotes.length > 0 && (
                 <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                     <span className="text-blue-800 font-medium">
                       {selectedQuotes.length} orçamento{selectedQuotes.length > 1 ? 's' : ''} selecionado{selectedQuotes.length > 1 ? 's' : ''}
                     </span>
-                    <div className="flex gap-3">
+                    <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                       <a
                         href={`https://wa.me/5519990040666?text=${generateMultipleQuotesMessage()}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm"
+                        className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm"
                       >
                         <MessageCircle className="w-4 h-4 mr-2" />
                         Enviar {selectedQuotes.length} via WhatsApp
                       </a>
                       <button
                         onClick={() => setSelectedQuotes([])}
-                        className="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors text-sm"
+                        className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors text-sm"
                       >
                         Cancelar seleção
                       </button>
@@ -154,7 +154,7 @@ export default function SavedQuotesModal({
               {/* Lista de orçamentos */}
               <div className="space-y-4 max-h-96 overflow-y-auto">
                 {savedQuizzes.map((quote, index) => (
-                  <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                  <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow flex flex-col sm:flex-row sm:items-start sm:justify-between">
                     <div className="flex items-start justify-between">
                       <div className="flex items-start space-x-3 flex-1">
                         <input

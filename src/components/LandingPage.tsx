@@ -61,7 +61,7 @@ export default function LandingPage({ onStartQuiz }: LandingPageProps) {
       >
         {/* Faixa de destaque no topo */}
         <div className="absolute top-0 left-0 right-0 w-full bg-orange-500 text-white text-center py-3 z-10">
-          <p className="text-xl font-bold">
+          <p className="text-lg sm:text-xl font-bold">
             GARANTA SEU UNIFORME DE FORMA RÁPIDA E PRÁTICA
           </p>
         </div>
@@ -88,7 +88,7 @@ export default function LandingPage({ onStartQuiz }: LandingPageProps) {
           {/* Botão CTA único e central */}
           <button
             onClick={onStartQuiz}
-            className="inline-flex items-center px-12 py-6 text-xl font-bold text-blue-900 bg-yellow-400 hover:bg-yellow-300 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
+            className="w-full sm:w-auto inline-flex items-center px-12 py-6 text-xl font-bold text-blue-900 bg-yellow-400 hover:bg-yellow-300 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
           >
             <Zap className="mr-3 w-6 h-6" />
             Quero meu orçamento agora
