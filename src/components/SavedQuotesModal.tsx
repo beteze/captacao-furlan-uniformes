@@ -132,7 +132,7 @@ export default function SavedQuotesModal({
                     </span>
                     <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                       <a
-                        href={`https://wa.me/5519990040666?text=${generateMultipleQuotesMessage()}`}
+                        href={`https://tintim.link/whatsapp/50e910d9-fdf1-4e71-86db-aa6f9701e2cb/bf4c6f7d-8dcc-4a76-af54-1ed4f79becfe?text=${generateMultipleQuotesMessage()}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm"

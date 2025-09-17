@@ -302,7 +302,7 @@ export default function HelpModal({
                       Email
                     </a>
                     <a
-                      href={`https://wa.me/5519990040666?text=${generateWhatsAppMessage(selectedCategory.title)}`}
+                      href={`https://tintim.link/whatsapp/50e910d9-fdf1-4e71-86db-aa6f9701e2cb/bf4c6f7d-8dcc-4a76-af54-1ed4f79becfe?text=${generateWhatsAppMessage(selectedCategory.title)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1 inline-flex items-center justify-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"

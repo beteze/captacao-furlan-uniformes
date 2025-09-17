@@ -153,6 +153,7 @@ export default function OrcamentoPage({
   };
 
   const whatsappUrl = `https://wa.me/5519990040666?text=${generateWhatsAppMessage()}`;
+  const whatsappUrl = `https://tintim.link/whatsapp/50e910d9-fdf1-4e71-86db-aa6f9701e2cb/bf4c6f7d-8dcc-4a76-af54-1ed4f79becfe?text=${generateWhatsAppMessage()}`;
   const emailSubject = encodeURIComponent('Solicitação de Orçamento - Uniformes Corporativos');
   const emailBody = encodeURIComponent(generateWhatsAppMessage().replace(/\n/g, '\r\n'));
   const emailUrl = `mailto:comercial@furlanunifromes.com.br?subject=${emailSubject}&body=${emailBody}`;

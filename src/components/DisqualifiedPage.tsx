@@ -19,7 +19,7 @@ const DisqualifiedPage: React.FC<DisqualifiedPageProps> = ({ onBack }) => {
     setIsHelpModalOpen(false);
   };
 
-  const whatsappSmallCompanies = "https://wa.me/5519990040666?text=Olá,%20tenho%20uma%20empresa%20com%20menos%20de%20100%20colaboradores%20e%20gostaria%20de%20saber%20sobre%20uniformes";
+  const whatsappSmallCompanies = "https://tintim.link/whatsapp/50e910d9-fdf1-4e71-86db-aa6f9701e2cb/bf4c6f7d-8dcc-4a76-af54-1ed4f79becfe?text=Olá,%20tenho%20uma%20empresa%20com%20menos%20de%20100%20colaboradores%20e%20gostaria%20de%20saber%20sobre%20uniformes";
   const emailContact = "comercial@furlanunifromes.com.br";
 
   return (
