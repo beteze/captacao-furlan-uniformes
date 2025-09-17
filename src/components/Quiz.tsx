@@ -133,7 +133,7 @@ const Quiz: React.FC<QuizProps> = ({
               
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Nome da pessoa
+                  Seu nome
                 </label>
                 <input
                   type="text"
@@ -153,6 +153,7 @@ const Quiz: React.FC<QuizProps> = ({
                   value={email}
                   onChange={(e) => onEmailChange(e.target.value)}
                   placeholder="contato@empresa.com"
+                  maxLength={254}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
