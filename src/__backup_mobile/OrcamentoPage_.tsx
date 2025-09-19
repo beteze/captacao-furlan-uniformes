@@ -159,6 +159,7 @@ export default function OrcamentoPage({
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <div className="mb-8">
           <button
             onClick={onBack}
@@ -168,21 +169,23 @@ export default function OrcamentoPage({
             Voltar ao pedido
           </button>
           
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
             <h1 className="text-3xl font-bold text-gray-900">
               {isReview ? 'Revisão do seu Orçamento' : 'Resumo do seu Orçamento'}
             </h1>
             <p className="text-gray-600 mt-2">
               {isReview ? 'Confira todos os detalhes antes de continuar' : 'Confira todos os detalhes antes de finalizar'}
             </p>
-            <div className="flex justify-end">
+            <div className="flex gap-3">
               <HelpButton onClick={handleOpenHelpModal} />
             </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          {/* Resumo Detalhado */}
           <div className="lg:col-span-2 space-y-6">
+            {/* Dados da Empresa */}
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
                 <Building className="mr-2 w-5 h-5 text-blue-900" />
@@ -231,6 +234,7 @@ export default function OrcamentoPage({
               </div>
             </div>
 
+            {/* Detalhes do Pedido */}
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
                 <Palette className="mr-2 w-5 h-5 text-blue-900" />
@@ -315,6 +319,7 @@ export default function OrcamentoPage({
               </div>
             </div>
 
+            {/* Prazo */}
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
                 <Clock className="mr-2 w-5 h-5 text-blue-900" />
@@ -336,6 +341,7 @@ export default function OrcamentoPage({
             </div>
           </div>
 
+          {/* Ações */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-md p-6 lg:sticky lg:top-20">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">

@@ -99,7 +99,7 @@ export default function SavedQuotesModal({
       <div className="flex items-center justify-center min-h-screen px-2 sm:px-4 pt-4 pb-20 text-center sm:block sm:p-0">
         <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" onClick={onClose}></div>
 
-        <div className="inline-block w-full max-w-full sm:max-w-4xl p-4 sm:p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+        <div className="inline-block w-full max-w-full sm:max-w-4xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-2xl font-bold text-gray-900 flex items-center">
               <FileText className="w-6 h-6 mr-3 text-blue-600 flex-shrink-0" />
@@ -123,6 +123,7 @@ export default function SavedQuotesModal({
             </div>
           ) : (
             <>
+              {/* Ações em lote */}
               {selectedQuotes.length > 0 && (
                 <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -150,9 +151,10 @@ export default function SavedQuotesModal({
                 </div>
               )}
 
+              {/* Lista de orçamentos */}
               <div className="space-y-4 max-h-96 overflow-y-auto">
                 {savedQuizzes.map((quote, index) => (
-                  <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                  <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow flex flex-col sm:flex-row sm:items-start sm:justify-between">
                     <div className="flex items-start justify-between">
                       <div className="flex items-start space-x-3 flex-1">
                         <input
@@ -218,6 +220,7 @@ export default function SavedQuotesModal({
                 ))}
               </div>
 
+              {/* Instruções */}
               <div className="mt-6 p-4 bg-gray-50 rounded-lg">
                 <h4 className="font-medium text-gray-900 mb-2">Como usar:</h4>
                 <ul className="text-sm text-gray-600 space-y-1">
@@ -228,6 +231,7 @@ export default function SavedQuotesModal({
                 </ul>
               </div>
 
+              {/* Botão para iniciar novo orçamento */}
               <div className="mt-6 pt-4 border-t border-gray-200">
                 <button
                   onClick={onStartNewQuiz}
