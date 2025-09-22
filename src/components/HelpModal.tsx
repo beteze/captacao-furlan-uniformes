@@ -238,7 +238,7 @@ export default function HelpModal({
       <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
         <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" onClick={handleClose}></div>
 
-        <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+        <div className="inline-block w-full max-w-full sm:max-w-md p-4 sm:p-6 mx-2 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center">
               {currentHelpStep !== 'categories' && (
@@ -296,7 +296,7 @@ export default function HelpModal({
                   <div className="flex flex-col sm:flex-row gap-3">
                     <a
                       href={`mailto:comercial@furlanunifromes.com.br?subject=Ajuda: ${selectedCategory.title}&body=${generateWhatsAppMessage(selectedCategory.title).replace(/%0A/g, '%0D%0A')}`}
-                      className="flex-1 inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                      className="w-full sm:flex-1 inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
                     >
                       <Mail className="w-4 h-4 mr-2" />
                       Email
@@ -305,7 +305,7 @@ export default function HelpModal({
                       href={`https://tintim.link/whatsapp/50e910d9-fdf1-4e71-86db-aa6f9701e2cb/bf4c6f7d-8dcc-4a76-af54-1ed4f79becfe?text=${generateWhatsAppMessage(selectedCategory.title)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 inline-flex items-center justify-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+                      className="w-full sm:flex-1 inline-flex items-center justify-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
                     >
                       <MessageCircle className="w-4 h-4 mr-2" />
                       WhatsApp
