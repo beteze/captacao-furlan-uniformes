@@ -25,11 +25,8 @@ const DisqualifiedPage: React.FC<DisqualifiedPageProps> = ({ onBack }) => {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg shadow-md p-4 sm:p-8 text-center pb-20">
-          <div className="flex items-center justify-between mb-6">
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              Obrigado pelo seu interesse!
-            </h1>
+        <div className="relative bg-white rounded-lg shadow-md p-4 sm:p-8 text-center">
+          <div className="flex justify-between items-start mb-4">
             <HelpButton onClick={handleOpenHelpModal} />
           </div>
           
@@ -37,6 +34,9 @@ const DisqualifiedPage: React.FC<DisqualifiedPageProps> = ({ onBack }) => {
             <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <MessageCircle className="w-8 h-8 text-orange-600" />
             </div>
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">
+              Obrigado pelo seu interesse!
+            </h1>
             <p className="text-xl text-gray-600 mb-6">
               No momento, atendemos empresas com 100 colaboradores ou mais através do nosso sistema automatizado.
             </p>
@@ -51,12 +51,12 @@ const DisqualifiedPage: React.FC<DisqualifiedPageProps> = ({ onBack }) => {
               Nossa equipe especializada poderá te atender com uma proposta personalizada.
             </p>
 
-            <div className="flex flex-col gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href={whatsappSmallCompanies}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center px-6 py-4 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-lg font-medium"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
               >
                 <MessageCircle className="mr-2 w-5 h-5" />
                 WhatsApp Direto
@@ -64,7 +64,7 @@ const DisqualifiedPage: React.FC<DisqualifiedPageProps> = ({ onBack }) => {
               
               <a
                 href={`mailto:${emailContact}?subject=Interesse em uniformes - Empresa pequeno porte`}
-                className="w-full inline-flex items-center justify-center px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-lg font-medium"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
               >
                 <Mail className="mr-2 w-5 h-5" />
                 Enviar E-mail
@@ -79,11 +79,15 @@ const DisqualifiedPage: React.FC<DisqualifiedPageProps> = ({ onBack }) => {
 
           <button
             onClick={onBack}
-            className="w-full inline-flex items-center justify-center px-6 py-4 text-gray-600 hover:text-gray-800 transition-colors text-lg font-medium"
+            className="inline-flex items-center px-6 py-3 text-gray-600 hover:text-gray-800 transition-colors"
           >
             <ArrowLeft className="mr-2 w-4 h-4" />
             Voltar ao início
           </button>
+          
+          <div className="mt-6 pt-4 border-t border-gray-200 flex justify-center">
+            <HelpButton onClick={handleOpenHelpModal} />
+          </div>
         </div>
         
         <HelpModal

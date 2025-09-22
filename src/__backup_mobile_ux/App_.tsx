@@ -244,7 +244,7 @@ function App() {
   };
 
   return (
-    <div className={`App ${currentView !== 'landing' ? 'pt-16 pb-20' : 'pb-20'}`}>
+    <div className={`App ${currentView !== 'landing' ? 'pt-16' : ''}`}>
       {currentView !== 'landing' && (
         <ProgressBar 
           currentView={currentView}

@@ -159,6 +159,9 @@ export default function DistributionStep({
   return (
     <div className="space-y-6">
       <div className="text-center">
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">
+          {isSelectionPhase ? 'Selecione os tipos de uniformes' : 'Distribuição de Uniformes'}
+        </h2>
         <p className="text-gray-600">
           {isSelectionPhase 
             ? 'Escolha quais tipos de uniformes sua empresa precisa'
@@ -214,7 +217,7 @@ export default function DistributionStep({
             <button
               onClick={proceedToQuantityPhase}
               disabled={selectedTypes.length === 0}
-              className={`w-full px-6 py-4 rounded-lg font-medium transition-all text-lg ${
+              className={`w-full sm:w-auto px-6 sm:px-8 py-3 rounded-lg font-medium transition-all ${
                 selectedTypes.length > 0
                   ? 'bg-blue-600 text-white hover:bg-blue-700'
                   : 'bg-gray-300 text-gray-500 cursor-not-allowed'
@@ -245,7 +248,7 @@ export default function DistributionStep({
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={distributeAutomatically}
-              className="w-full inline-flex items-center justify-center px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-lg font-medium"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
             >
               <Zap className="w-4 h-4 mr-2" />
               Distribuir automaticamente
@@ -253,7 +256,7 @@ export default function DistributionStep({
             
             <button
               onClick={() => setIsSelectionPhase(true)}
-              className="w-full inline-flex items-center justify-center px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors text-lg font-medium"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Alterar seleção

@@ -169,20 +169,20 @@ export default function OrcamentoPage({
             Voltar ao pedido
           </button>
           
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between">
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-                {isReview ? 'Revisão do seu Orçamento' : 'Resumo do seu Orçamento'}
-              </h1>
-              <HelpButton onClick={handleOpenHelpModal} />
-            </div>
-            <p className="text-base sm:text-lg text-gray-600">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
+            <h1 className="text-3xl font-bold text-gray-900">
+              {isReview ? 'Revisão do seu Orçamento' : 'Resumo do seu Orçamento'}
+            </h1>
+            <p className="text-base sm:text-lg text-gray-600 mt-2">
               {isReview ? 'Confira todos os detalhes antes de continuar' : 'Confira todos os detalhes antes de finalizar'}
             </p>
+            <div className="flex justify-end">
+              <HelpButton onClick={handleOpenHelpModal} />
+            </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
@@ -371,7 +371,7 @@ export default function OrcamentoPage({
                 {isReview ? (
                   <button
                     onClick={hasSavedQuotes ? onViewSavedQuotes : onReviewComplete}
-                    className="w-full inline-flex items-center justify-center px-4 py-4 bg-blue-900 hover:bg-blue-800 text-white rounded-lg transition-all font-medium text-lg"
+                    className="w-full inline-flex items-center justify-center px-4 py-3 bg-blue-900 hover:bg-blue-800 text-white rounded-lg transition-all font-medium"
                   >
                     <ArrowRight className="mr-2 w-5 h-5" />
                     {hasSavedQuotes ? 'Ver todos meus pedidos de orçamento' : 'Salvar pedido de orçamento'}
@@ -383,7 +383,7 @@ export default function OrcamentoPage({
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={handleQuoteFinalization}
-                      className="w-full inline-flex items-center justify-center px-4 py-4 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-all font-medium text-lg"
+                      className="w-full inline-flex items-center justify-center px-4 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-all font-medium"
                     >
                       <MessageCircle className="mr-2 w-5 h-5" />
                       Enviar via WhatsApp
@@ -392,7 +392,7 @@ export default function OrcamentoPage({
                     <a
                       href={emailUrl}
                       onClick={handleQuoteFinalization}
-                      className="w-full inline-flex items-center justify-center px-4 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all font-medium text-lg"
+                      className="w-full inline-flex items-center justify-center px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all font-medium"
                     >
                       <Mail className="mr-2 w-5 h-5" />
                       Enviar por E-mail
@@ -400,7 +400,7 @@ export default function OrcamentoPage({
                     
                     <button
                       onClick={onStartNewQuiz}
-                      className="w-full inline-flex items-center justify-center px-4 py-4 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-all text-lg font-medium"
+                      className="w-full inline-flex items-center justify-center px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-all"
                     >
                       <User className="mr-2 w-5 h-5" />
                       Fazer Novo Orçamento

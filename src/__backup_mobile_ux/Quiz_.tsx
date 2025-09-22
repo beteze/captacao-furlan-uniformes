@@ -108,11 +108,12 @@ const Quiz: React.FC<QuizProps> = ({
     switch (currentStep) {
       case 1:
         return (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-800">Dados da Empresa</h2>
+          <div className="relative space-y-6">
+            <div className="absolute top-0 right-0">
               <HelpButton onClick={handleOpenHelpModal} />
             </div>
+            
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">Dados da Empresa</h2>
             
             <div className="space-y-4">
               <div>
@@ -218,9 +219,8 @@ const Quiz: React.FC<QuizProps> = ({
 
       case 2:
         return (
-          <div>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-800">Distribuição de Uniformes</h2>
+          <div className="relative">
+            <div className="absolute top-0 right-0 z-10">
               <HelpButton onClick={handleOpenHelpModal} />
             </div>
             
@@ -236,14 +236,15 @@ const Quiz: React.FC<QuizProps> = ({
 
       case 3:
         return (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 flex items-center">
-                <Palette className="w-6 h-6 mr-3 text-blue-900" />
-                Detalhes do Pedido
-              </h2>
+          <div className="relative space-y-6">
+            <div className="absolute top-0 right-0">
               <HelpButton onClick={handleOpenHelpModal} />
             </div>
+            
+            <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+              <Palette className="w-6 h-6 mr-3 text-blue-900" />
+              Detalhes do Pedido
+            </h2>
             
             <div className="space-y-6">
               <div>
@@ -362,12 +363,10 @@ const Quiz: React.FC<QuizProps> = ({
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg shadow-sm p-4 sm:p-8 flex flex-col min-h-[calc(100vh-8rem)]">
-          <div className="flex-grow">
-            {renderStep()}
-          </div>
+        <div className="bg-white rounded-lg shadow-sm p-4 sm:p-8">
+          {renderStep()}
           
-          <div className="flex-shrink-0 flex flex-col sm:flex-row justify-between items-center mt-8 pt-6 border-t gap-3">
+          <div className="flex flex-col sm:flex-row justify-between items-center mt-8 pt-6 border-t gap-3">
             <button
               onClick={handleBack}
               className="w-full sm:w-auto flex items-center justify-center px-6 py-3 text-gray-600 hover:text-gray-800 transition-colors"
