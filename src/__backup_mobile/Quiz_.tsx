@@ -109,7 +109,6 @@ const Quiz: React.FC<QuizProps> = ({
       case 1:
         return (
           <div className="relative space-y-6">
-            {/* Botão de ajuda no canto superior direito */}
             <div className="absolute top-0 right-0">
               <HelpButton onClick={handleOpenHelpModal} />
             </div>
@@ -221,7 +220,6 @@ const Quiz: React.FC<QuizProps> = ({
       case 2:
         return (
           <div className="relative">
-            {/* Botão de ajuda no canto superior direito */}
             <div className="absolute top-0 right-0 z-10">
               <HelpButton onClick={handleOpenHelpModal} />
             </div>
@@ -239,7 +237,6 @@ const Quiz: React.FC<QuizProps> = ({
       case 3:
         return (
           <div className="relative space-y-6">
-            {/* Botão de ajuda no canto superior direito */}
             <div className="absolute top-0 right-0">
               <HelpButton onClick={handleOpenHelpModal} />
             </div>
@@ -250,7 +247,6 @@ const Quiz: React.FC<QuizProps> = ({
             </h2>
             
             <div className="space-y-6">
-              {/* Personalização */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-3">
                   Tipo de personalização *
@@ -277,7 +273,6 @@ const Quiz: React.FC<QuizProps> = ({
                 </div>
               </div>
 
-              {/* Elemento Personalizado - apenas se bordado ou silk */}
               {(quizData.personalizacao === 'bordado' || quizData.personalizacao === 'silk') && (
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -300,7 +295,6 @@ const Quiz: React.FC<QuizProps> = ({
                     Descreva o elemento que deseja personalizar nos uniformes
                   </p>
                   
-                  {/* Opção de ajuda */}
                   <div className="mt-3">
                     <label className="flex items-center">
                       <input
@@ -323,7 +317,6 @@ const Quiz: React.FC<QuizProps> = ({
                 </div>
               )}
 
-              {/* Prazo */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Prazo ideal de entrega
@@ -344,7 +337,6 @@ const Quiz: React.FC<QuizProps> = ({
                 </p>
               </div>
 
-              {/* Informações sobre prazos */}
               <div className="bg-blue-50 rounded-lg p-4">
                 <h3 className="font-semibold text-blue-900 mb-2 flex items-center">
                   <Clock className="w-4 h-4 mr-2" />
@@ -374,7 +366,6 @@ const Quiz: React.FC<QuizProps> = ({
         <div className="bg-white rounded-lg shadow-sm p-4 sm:p-8">
           {renderStep()}
           
-          {/* Navegação */}
           <div className="flex flex-col sm:flex-row justify-between items-center mt-8 pt-6 border-t gap-3">
             <button
               onClick={handleBack}

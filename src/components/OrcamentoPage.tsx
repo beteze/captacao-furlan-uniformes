@@ -152,6 +152,7 @@ export default function OrcamentoPage({
     return encodeURIComponent(message);
   };
 
+  const whatsappUrl = `https://tintim.link/whatsapp/50e910d9-fdf1-4e71-86db-aa6f9701e2cb/bf4c6f7d-8dcc-4a76-af54-1ed4f79becfe?text=${generateWhatsAppMessage()}`;
   const emailSubject = encodeURIComponent('Solicitação de Orçamento - Uniformes Corporativos');
   const emailBody = encodeURIComponent(generateWhatsAppMessage().replace(/\n/g, '\r\n'));
   const emailUrl = `mailto:comercial@furlanunifromes.com.br?subject=${emailSubject}&body=${emailBody}`;
@@ -172,7 +173,7 @@ export default function OrcamentoPage({
             <h1 className="text-3xl font-bold text-gray-900">
               {isReview ? 'Revisão do seu Orçamento' : 'Resumo do seu Orçamento'}
             </h1>
-            <p className="text-gray-600 mt-2">
+            <p className="text-base sm:text-lg text-gray-600 mt-2">
               {isReview ? 'Confira todos os detalhes antes de continuar' : 'Confira todos os detalhes antes de finalizar'}
             </p>
             <div className="flex justify-end">
@@ -183,7 +184,7 @@ export default function OrcamentoPage({
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           <div className="lg:col-span-2 space-y-6">
-            <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
                 <Building className="mr-2 w-5 h-5 text-blue-900" />
                 Dados da Empresa
@@ -231,7 +232,7 @@ export default function OrcamentoPage({
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
                 <Palette className="mr-2 w-5 h-5 text-blue-900" />
                 Detalhes do Pedido
@@ -315,7 +316,7 @@ export default function OrcamentoPage({
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
                 <Clock className="mr-2 w-5 h-5 text-blue-900" />
                 Informações sobre Prazo
@@ -337,7 +338,7 @@ export default function OrcamentoPage({
           </div>
 
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6 lg:sticky lg:top-20">
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 lg:sticky lg:top-20">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <FileText className="mr-2 w-5 h-5" />
                 {isReview ? 'Confirmar Dados' : 'Finalizar Orçamento'}

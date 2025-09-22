@@ -88,7 +88,7 @@ export default function LandingPage({ onStartQuiz }: LandingPageProps) {
           {/* Botão CTA único e central */}
           <button
             onClick={onStartQuiz}
-            className="w-full sm:w-auto inline-flex items-center justify-center px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl font-bold text-blue-900 bg-yellow-400 hover:bg-yellow-300 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
+            className="w-full sm:w-auto inline-flex items-center justify-center px-8 sm:px-12 py-4 sm:py-6 text-base sm:text-xl font-bold text-blue-900 bg-yellow-400 hover:bg-yellow-300 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
           >
             <Zap className="mr-3 w-6 h-6" />
             Quero meu orçamento agora
@@ -99,16 +99,16 @@ export default function LandingPage({ onStartQuiz }: LandingPageProps) {
       {/* Seção de Diferenciais */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
             Por que escolher a Furlan Uniformes?
           </h2>
-          <p className="text-xl text-center text-gray-600 mb-16 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-center text-gray-600 mb-16 max-w-3xl mx-auto">
             Mais de 18 anos de experiência vestindo empresas com qualidade e confiança
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {diferenciais.map((item, index) => (
-              <div key={index} className="bg-white p-6 sm:p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-blue-900">
+              <div key={index} className="bg-white p-4 sm:p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-blue-900">
                 <div className="flex flex-col items-center text-center">
                   <div className="mb-6 p-4 bg-blue-50 rounded-full">
                     {item.icon}
@@ -129,10 +129,10 @@ export default function LandingPage({ onStartQuiz }: LandingPageProps) {
       {/* Seção Como Funciona */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
             Como funciona o processo
           </h2>
-          <p className="text-xl text-center text-gray-600 mb-16 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-center text-gray-600 mb-16 max-w-3xl mx-auto">
             Simples, rápido e profissional para você receber seu orçamento
           </p>
           
@@ -155,7 +155,7 @@ export default function LandingPage({ onStartQuiz }: LandingPageProps) {
                   <h3 className="text-xl font-bold text-gray-900 mb-4">
                     {passo.titulo}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
                     {passo.descricao}
                   </p>
                 </div>

@@ -117,7 +117,7 @@ const Quiz: React.FC<QuizProps> = ({
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
                   CNPJ *
                 </label>
                 <input
@@ -131,7 +131,7 @@ const Quiz: React.FC<QuizProps> = ({
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
                   Seu nome
                 </label>
                 <input
@@ -144,7 +144,7 @@ const Quiz: React.FC<QuizProps> = ({
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
                   E-mail *
                 </label>
                 <input
@@ -158,7 +158,7 @@ const Quiz: React.FC<QuizProps> = ({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
                   Segmento *
                 </label>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -198,7 +198,7 @@ const Quiz: React.FC<QuizProps> = ({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
                   Quantidade total de uniformes necessários *
                 </label>
                 <input
@@ -248,7 +248,7 @@ const Quiz: React.FC<QuizProps> = ({
             
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
+                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-3">
                   Tipo de personalização *
                 </label>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -275,7 +275,7 @@ const Quiz: React.FC<QuizProps> = ({
 
               {(quizData.personalizacao === 'bordado' || quizData.personalizacao === 'silk') && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
                     Elemento personalizado
                   </label>
                   <div className="flex items-center space-x-3">
@@ -318,7 +318,7 @@ const Quiz: React.FC<QuizProps> = ({
               )}
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
                   Prazo ideal de entrega
                 </label>
                 <div className="flex items-center space-x-3">
@@ -378,7 +378,7 @@ const Quiz: React.FC<QuizProps> = ({
             <button
               onClick={handleNext}
               disabled={!canProceed()}
-              className={`w-full sm:w-auto flex items-center justify-center px-8 py-3 rounded-lg font-medium transition-all ${
+              className={`w-full sm:w-auto flex items-center justify-center px-6 sm:px-8 py-3 rounded-lg font-medium transition-all ${
                 canProceed()
                   ? 'bg-blue-600 text-white hover:bg-blue-700'
                   : 'bg-gray-300 text-gray-500 cursor-not-allowed'

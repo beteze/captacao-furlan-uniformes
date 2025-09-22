@@ -248,7 +248,7 @@ export default function DistributionStep({
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={distributeAutomatically}
-              className="w-full sm:w-auto inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
             >
               <Zap className="w-4 h-4 mr-2" />
               Distribuir automaticamente
@@ -256,14 +256,13 @@ export default function DistributionStep({
             
             <button
               onClick={() => setIsSelectionPhase(true)}
-              className="w-full sm:w-auto inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Alterar seleção
             </button>
           </div>
 
-          {/* Distribution Categories */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {selectedTypes.map((typeId) => {
               const category = defaultCategories.find(c => c.id === typeId);
@@ -307,14 +306,12 @@ export default function DistributionStep({
                     </button>
                   </div>
                   
-                  {/* Campos adicionais opcionais */}
                   {(distribution[category.id]?.quantity || 0) > 0 && (
                     <div className="mt-4 space-y-3 p-3 bg-gray-50 rounded-lg">
                       <p className="text-xs text-gray-600 mb-2">
                         Esses detalhes podem ser definidos depois com o atendente
                       </p>
                       
-                      {/* Tipo de malha */}
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
                           Tipo de malha
@@ -333,7 +330,6 @@ export default function DistributionStep({
                         </select>
                       </div>
 
-                      {/* Descrição da malha (somente leitura) */}
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
                           Descrição da malha
@@ -343,7 +339,6 @@ export default function DistributionStep({
                         </div>
                       </div>
 
-                      {/* Tipo de corte */}
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           Tipo de corte

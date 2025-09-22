@@ -217,7 +217,7 @@ export default function DistributionStep({
             <button
               onClick={proceedToQuantityPhase}
               disabled={selectedTypes.length === 0}
-              className={`px-8 py-3 rounded-lg font-medium transition-all ${
+              className={`w-full sm:w-auto px-6 sm:px-8 py-3 rounded-lg font-medium transition-all ${
                 selectedTypes.length > 0
                   ? 'bg-blue-600 text-white hover:bg-blue-700'
                   : 'bg-gray-300 text-gray-500 cursor-not-allowed'
