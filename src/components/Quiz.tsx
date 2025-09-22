@@ -367,7 +367,7 @@ const Quiz: React.FC<QuizProps> = ({
             {renderStep()}
           </div>
           
-          <div className="flex-shrink-0 flex flex-col sm:flex-row justify-between items-center mt-8 pt-6 border-t gap-3">
+          <div className="flex-shrink-0 flex flex-col-reverse sm:flex-row justify-between items-center mt-8 pt-6 border-t gap-3">
             <button
               onClick={handleBack}
               className="w-full sm:w-auto flex items-center justify-center px-6 py-3 text-gray-600 hover:text-gray-800 transition-colors"

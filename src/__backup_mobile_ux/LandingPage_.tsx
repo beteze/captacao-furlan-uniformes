@@ -61,7 +61,7 @@ export default function LandingPage({ onStartQuiz }: LandingPageProps) {
       >
         {/* Faixa de destaque no topo */}
         <div className="absolute top-0 left-0 right-0 w-full bg-orange-500 text-white text-center py-3 z-10">
-          <p className="text-sm sm:text-xl font-bold">
+          <p className="text-lg sm:text-xl font-bold">
             GARANTA SEU UNIFORME DE FORMA RÁPIDA E PRÁTICA
           </p>
         </div>
