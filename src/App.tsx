@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { useEffect } from 'react';
 import LandingPage from './components/LandingPage';
 import Quiz from './components/Quiz';
 import OrcamentoPage from './components/OrcamentoPage';
@@ -25,6 +26,16 @@ function App() {
   const [showSavedQuotes, setShowSavedQuotes] = useState(false);
 
   const hasSavedQuotes = savedQuizzes.length > 0;
+
+  // Check URL parameters on component mount
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const startParam = urlParams.get('start');
+    
+    if (startParam === 'quiz' || startParam === 'form') {
+      setCurrentView('dados');
+    }
+  }, []);
 
   // Check URL parameters on component mount
   useEffect(() => {
