@@ -12,7 +12,7 @@ import { QuizData } from './types';
 type AppState = 'landing' | 'dados' | 'pedido' | 'review' | 'orcamento' | 'disqualified';
 
 function App() {
-  const [currentView, setCurrentView] = useState<AppState>('landing');
+  const [currentView, setCurrentView] = useState<AppState>('dados');
   const [quizData, setQuizData] = useState<Partial<QuizData>>({
     distribution: {},
     customUniformTypes: []
@@ -27,30 +27,6 @@ function App() {
 
   const hasSavedQuotes = savedQuizzes.length > 0;
 
-  // Check URL parameters on component mount
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const startParam = urlParams.get('start');
-    
-    if (startParam === 'quiz' || startParam === 'form') {
-      setCurrentView('dados');
-    }
-  }, []);
-
-  // Check URL parameters on component mount
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const startParam = urlParams.get('start');
-    
-    if (startParam === 'quiz' || startParam === 'form') {
-      setCurrentView('dados');
-    }
-  }, []);
-
-  const handleStartQuiz = () => {
-    setCurrentView('dados');
-  };
-
   const handleQuizComplete = (data: QuizData) => {
     setQuizData(data);
     setCurrentView('review');
@@ -61,7 +37,7 @@ function App() {
   };
 
   const handleBackToLanding = () => {
-    setCurrentView('landing');
+    setCurrentView('dados');
     setQuizData({
       distribution: {},
       customUniformTypes: []
@@ -194,11 +170,6 @@ function App() {
 
   const renderCurrentView = () => {
     switch (currentView) {
-      case 'landing':
-        return (
-          <LandingPage onStartQuiz={handleStartQuiz} />
-        );
-      
       case 'dados':
         return (
           <Quiz
@@ -259,21 +230,32 @@ function App() {
       
       default:
         return (
-          <LandingPage onStartQuiz={handleStartQuiz} />
+          <Quiz
+            onComplete={handleQuizComplete}
+            quizData={quizData}
+            onQuizDataChange={handleQuizDataChange}
+            onBack={handleBackToLanding}
+            onDisqualified={handleDisqualified}
+            onStepChange={handleQuizStepChange}
+            cnpj={cnpj}
+            email={email}
+            companyName={companyName}
+            onCnpjChange={handleCnpjChange}
+            onEmailChange={handleEmailChange}
+            onCompanyNameChange={handleCompanyNameChange}
+          />
         );
     }
   };
 
   return (
-    <div className={`App ${currentView !== 'landing' ? 'pt-16' : ''}`}>
-      {currentView !== 'landing' && (
-        <ProgressBar 
-          currentView={currentView}
-          currentQuizStep={currentQuizStep}
-          isQuoteFinalized={isQuoteFinalized}
-          hasSavedQuotes={hasSavedQuotes}
-        />
-      )}
+    <div className="App pt-16">
+      <ProgressBar 
+        currentView={currentView}
+        currentQuizStep={currentQuizStep}
+        isQuoteFinalized={isQuoteFinalized}
+        hasSavedQuotes={hasSavedQuotes}
+      />
       {renderCurrentView()}
       
       <SavedQuotesModal
