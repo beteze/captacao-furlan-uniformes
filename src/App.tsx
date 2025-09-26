@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { useEffect } from 'react';
 import LandingPage from './components/LandingPage';
 import Quiz from './components/Quiz';
 import OrcamentoPage from './components/OrcamentoPage';
