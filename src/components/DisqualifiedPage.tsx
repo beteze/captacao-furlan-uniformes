@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { ArrowLeft, Mail, MessageCircle } from 'lucide-react';
+import { ArrowLeft, Mail, MessageCircle, X } from 'lucide-react';
 import HelpButton from './HelpButton';
 import HelpModal from './HelpModal';
 
@@ -25,6 +25,18 @@ const DisqualifiedPage: React.FC<DisqualifiedPageProps> = ({ onBack }) => {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Botão Fechar */}
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={onBack}
+            className="inline-flex items-center px-4 py-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
+            title="Fechar e voltar ao início"
+          >
+            <X className="w-5 h-5 mr-2" />
+            Fechar
+          </button>
+        </div>
+        
         <div className="bg-white rounded-lg shadow-md p-4 sm:p-8 text-center">
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
@@ -33,10 +45,14 @@ const DisqualifiedPage: React.FC<DisqualifiedPageProps> = ({ onBack }) => {
             <HelpButton onClick={handleOpenHelpModal} />
           </div>
           
+          <div className="text-center mb-8">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+              Obrigado pelo seu interesse!
+            </h1>
+            <HelpButton onClick={handleOpenHelpModal} />
+          </div>
+          
           <div className="mb-6">
-            <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <MessageCircle className="w-8 h-8 text-orange-600" />
-            </div>
             <p className="text-xl text-gray-600 mb-6">
               No momento, atendemos empresas com 100 colaboradores ou mais através do nosso sistema automatizado.
             </p>
