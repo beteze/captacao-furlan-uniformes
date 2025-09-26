@@ -325,6 +325,14 @@ export default function DistributionStep({
                             </option>
                           ))}
                         </select>
+                        {distribution[category.id]?.malhaType && (
+                          <div className="mt-2 p-2 bg-blue-50 rounded text-sm text-blue-800">
+                            <strong>
+                              {malhaOptions.find(opt => opt.id === distribution[category.id]?.malhaType)?.name}:
+                            </strong>{' '}
+                            {malhaOptions.find(opt => opt.id === distribution[category.id]?.malhaType)?.description}
+                          </div>
+                        )}
                       </div>
 
                       <div>

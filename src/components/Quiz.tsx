@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ArrowRight, Building, Palette, Clock, Upload } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Building, Palette, Clock, Upload, X } from 'lucide-react';
 import { QuizData } from '../types';
 import DistributionStep from './DistributionStep';
 import HelpButton from './HelpButton';
@@ -18,6 +18,7 @@ interface QuizProps {
   onCnpjChange: (cnpj: string) => void;
   onEmailChange: (email: string) => void;
   onCompanyNameChange: (companyName: string) => void;
+  onBackToLanding: () => void;
 }
 
 const Quiz: React.FC<QuizProps> = ({
@@ -32,10 +33,13 @@ const Quiz: React.FC<QuizProps> = ({
   companyName,
   onCnpjChange,
   onEmailChange,
-  onCompanyNameChange
+  onCompanyNameChange,
+  onBackToLanding
 }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isHelpModalOpen, setIsHelpModalOpen] = useState(false);
+  const [emailError, setEmailError] = useState<string>('');
+  const [quantityError, setQuantityError] = useState<string>('');
 
   const formatCNPJ = (value: string) => {
     // Remove tudo que não é dígito
@@ -52,6 +56,32 @@ const Quiz: React.FC<QuizProps> = ({
   const handleCNPJChange = (value: string) => {
     const formatted = formatCNPJ(value);
     onCnpjChange(formatted);
+  };
+
+  const handleEmailChange = (value: string) => {
+    onEmailChange(value);
+    
+    // Validação simples de e-mail
+    if (value.trim() === '') {
+      setEmailError('');
+    } else if (!value.includes('@') || !value.includes('.')) {
+      setEmailError('Por favor, insira um e-mail válido');
+    } else {
+      setEmailError('');
+    }
+  };
+
+  const handleQuantityChange = (value: number) => {
+    onQuizDataChange({ colaboradores: value });
+    
+    // Validação de quantidade mínima
+    if (value === 0) {
+      setQuantityError('');
+    } else if (value < 10) {
+      setQuantityError('A quantidade mínima é de 10 uniformes');
+    } else {
+      setQuantityError('');
+    }
   };
 
   const handleOpenHelpModal = () => {
@@ -86,7 +116,13 @@ const Quiz: React.FC<QuizProps> = ({
   const canProceed = () => {
     switch (currentStep) {
       case 1:
-        return cnpj.trim() && email.trim() && quizData.segmento && quizData.colaboradores && quizData.colaboradores > 0;
+        return cnpj.trim() && 
+               email.trim() && 
+               !emailError && 
+               quizData.segmento && 
+               quizData.colaboradores && 
+               quizData.colaboradores >= 10 && 
+               !quantityError;
       case 2:
         const totalDistributed = Object.values(quizData.distribution || {}).reduce((sum, detail) => sum + (detail?.quantity || 0), 0);
         return totalDistributed === quizData.colaboradores;
@@ -109,6 +145,13 @@ const Quiz: React.FC<QuizProps> = ({
       case 1:
         return (
           <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">Solicitação de Orçamento</h2>
+              <p className="text-lg text-gray-600">
+                Preencha os dados da sua empresa para receber uma proposta personalizada
+              </p>
+            </div>
+            
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-800">Dados da Empresa</h2>
               <HelpButton onClick={handleOpenHelpModal} />
@@ -149,11 +192,16 @@ const Quiz: React.FC<QuizProps> = ({
                 <input
                   type="email"
                   value={email}
-                  onChange={(e) => onEmailChange(e.target.value)}
+                  onChange={(e) => handleEmailChange(e.target.value)}
                   placeholder="contato@empresa.com"
                   maxLength={254}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    emailError ? 'border-red-500' : 'border-gray-300'
+                  }`}
                 />
+                {emailError && (
+                  <p className="text-red-600 text-sm mt-1">{emailError}</p>
+                )}
               </div>
 
               <div>
@@ -203,13 +251,18 @@ const Quiz: React.FC<QuizProps> = ({
                 <input
                   type="number"
                   value={quizData.colaboradores || ''}
-                  onChange={(e) => onQuizDataChange({ colaboradores: parseInt(e.target.value) || 0 })}
+                  onChange={(e) => handleQuantityChange(parseInt(e.target.value) || 0)}
                   placeholder="Ex: 150"
-                  min="1"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  min="10"
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    quantityError ? 'border-red-500' : 'border-gray-300'
+                  }`}
                 />
+                {quantityError && (
+                  <p className="text-red-600 text-sm mt-1">{quantityError}</p>
+                )}
                 <p className="text-sm text-gray-500 mt-1">
-                  Informe o número total de peças de uniforme que sua empresa precisa
+                  Informe o número total de peças de uniforme que sua empresa precisa (mínimo 10)
                 </p>
               </div>
             </div>
@@ -362,6 +415,18 @@ const Quiz: React.FC<QuizProps> = ({
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Botão Fechar */}
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={onBackToLanding}
+            className="inline-flex items-center px-4 py-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
+            title="Fechar e voltar ao início"
+          >
+            <X className="w-5 h-5 mr-2" />
+            Fechar
+          </button>
+        </div>
+        
         <div className="bg-white rounded-lg shadow-sm p-4 sm:p-8 flex flex-col min-h-[calc(100vh-8rem)]">
           <div className="flex-grow">
             {renderStep()}

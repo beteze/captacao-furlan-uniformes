@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { ArrowLeft, MessageCircle, User, Building, Clock, Palette, Mail, FileText, ArrowRight } from 'lucide-react';
+import { ArrowLeft, MessageCircle, User, Building, Clock, Palette, Mail, FileText, ArrowRight, X } from 'lucide-react';
 import HelpButton from './HelpButton';
 import HelpModal from './HelpModal';
 import { QuizData } from '../types';
@@ -160,6 +160,18 @@ export default function OrcamentoPage({
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Botão Fechar */}
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={onBackToLanding}
+            className="inline-flex items-center px-4 py-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
+            title="Fechar e voltar ao início"
+          >
+            <X className="w-5 h-5 mr-2" />
+            Fechar
+          </button>
+        </div>
+        
         <div className="mb-8">
           <button
             onClick={onBack}

@@ -183,6 +183,7 @@ function App() {
             onCnpjChange={handleCnpjChange}
             onEmailChange={handleEmailChange}
             onCompanyNameChange={handleCompanyNameChange}
+            onBackToLanding={handleBackToLanding}
           />
         );
       
