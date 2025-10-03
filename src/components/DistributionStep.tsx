@@ -416,7 +416,7 @@ export default function DistributionStep({
                         <option key={fabric} value={fabric}>
                           {fabric}
                         </option>
-                Total selecionado: {totalDistributed} uniformes
+                      ))}
                     </select>
                   </div>
                 </>
