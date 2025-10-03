@@ -139,8 +139,9 @@ export default function OrcamentoPage({
     message += `\n📊 RESUMO:\n`;
     message += `• Funcionários da empresa: ${(() => {
       const ranges: { [key: string]: string } = {
+        '10-49': '10 a 49',
         '50-100': '50 a 100',
-        '101-300': '101 a 300', 
+        '101-300': '101 a 300',
         '301-500': '301 a 500',
         '501-1000': '501 a 1000',
         'mais-1000': 'Mais de 1000'
@@ -236,8 +237,9 @@ export default function OrcamentoPage({
                   <label className="block text-sm font-medium text-gray-700 mb-1">Quantidade de funcionários</label>
                   <p className="text-gray-900 font-semibold">{(() => {
                     const ranges: { [key: string]: string } = {
+                      '10-49': '10 a 49',
                       '50-100': '50 a 100',
-                      '101-300': '101 a 300', 
+                      '101-300': '101 a 300',
                       '301-500': '301 a 500',
                       '501-1000': '501 a 1000',
                       'mais-1000': 'Mais de 1000'
@@ -410,7 +412,7 @@ export default function OrcamentoPage({
                 ) : (
                   <>
                     <a
-                      id="orcamentoWhats"
+                      id="btnSendWhatsApp"
                       href={whatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -422,7 +424,7 @@ export default function OrcamentoPage({
                     </a>
                     
                     <a
-                      id="orcamentoEmail"
+                      id="btnSendEmail"
                       href={emailUrl}
                       onClick={handleQuoteFinalization}
                       className="w-full inline-flex items-center justify-center px-4 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all font-medium text-lg"

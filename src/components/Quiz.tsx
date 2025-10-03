@@ -250,6 +250,7 @@ const Quiz: React.FC<QuizProps> = ({
                     }`}
                   >
                     <option value="">Selecione a quantidade de funcionários</option>
+                    <option value="10-49">10 a 49 funcionários</option>
                     <option value="50-100">50 a 100 funcionários</option>
                     <option value="101-300">101 a 300 funcionários</option>
                     <option value="301-500">301 a 500 funcionários</option>

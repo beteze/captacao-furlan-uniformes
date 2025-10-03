@@ -222,8 +222,9 @@ export default function DistributionStep({
   // Converter faixa de funcionários para texto
   const getFuncionariosDisplay = () => {
     const ranges: { [key: string]: string } = {
+      '10-49': '10 a 49',
       '50-100': '50 a 100',
-      '101-300': '101 a 300', 
+      '101-300': '101 a 300',
       '301-500': '301 a 500',
       '501-1000': '501 a 1000',
       'mais-1000': 'Mais de 1000'
@@ -307,7 +308,14 @@ export default function DistributionStep({
           Catálogo de Uniformes
         </h2>
         <p className="text-gray-600">
-          Selecione os produtos e quantidades necessárias para sua empresa ({getFuncionariosDisplay()} funcionários)
+          Selecione os modelos e quantidades necessárias para sua empresa
+        </p>
+      </div>
+
+      {/* Informational Tip */}
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <p className="text-sm text-blue-800">
+          <strong>Dica:</strong> Nosso consultor especializado poderá auxiliar com detalhes técnicos, medidas e personalizações específicas.
         </p>
       </div>
 
@@ -412,12 +420,16 @@ export default function DistributionStep({
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                       <option value="">Selecione o tecido</option>
+                      <option value="preciso-ajuda">Preciso de ajuda para definir</option>
                       {product.fabrics.map(fabric => (
                         <option key={fabric} value={fabric}>
                           {fabric}
                         </option>
                       ))}
                     </select>
+                    <p className="text-xs text-gray-500 mt-1">
+                      Se não tiver certeza, não selecione agora. A definição será feita com nosso consultor ao elaborar o orçamento.
+                    </p>
                   </div>
                 </>
               )}
