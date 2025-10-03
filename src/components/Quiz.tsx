@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ArrowRight, Building, Palette, Clock, Upload, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Building, Palette, Clock, Upload, X, ChevronDown } from 'lucide-react';
 import { QuizData } from '../types';
 import DistributionStep from './DistributionStep';
 import HelpButton from './HelpButton';
@@ -108,11 +108,12 @@ const Quiz: React.FC<QuizProps> = ({
   const canProceed = () => {
     switch (currentStep) {
       case 1:
-        return cnpj.trim() && 
-               email.trim() && 
-               !emailError && 
-               quizData.segmento && 
-               quizData.colaboradores && 
+        return cnpj.trim() !== '' &&
+               email.trim() !== '' &&
+               !emailError &&
+               quizData.segmento &&
+               quizData.segmento.trim() !== '' &&
+               quizData.colaboradores &&
                quizData.colaboradores.trim() !== '';
       case 2:
         // Para a etapa 2, vamos manter a validação simples por enquanto
@@ -240,26 +241,22 @@ const Quiz: React.FC<QuizProps> = ({
                 <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
                   Quantidade de funcionários da empresa *
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {[
-                    { id: '50-100', name: '50 a 100' },
-                    { id: '101-300', name: '101 a 300' },
-                    { id: '301-500', name: '301 a 500' },
-                    { id: '501-1000', name: '501 a 1000' },
-                    { id: 'mais-1000', name: 'Mais de 1000' }
-                  ].map((option) => (
-                    <button
-                      key={option.id}
-                      onClick={() => handleColaboradoresChange(option.id)}
-                      className={`p-3 border-2 rounded-lg text-left transition-all ${
-                        quizData.colaboradores === option.id
-                          ? 'border-blue-500 bg-blue-50'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}
-                    >
-                      <span className="font-medium">{option.name} funcionários</span>
-                    </button>
-                  ))}
+                <div className="relative">
+                  <select
+                    value={quizData.colaboradores || ''}
+                    onChange={(e) => handleColaboradoresChange(e.target.value)}
+                    className={`w-full px-4 py-3 border rounded-lg appearance-none bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                      colaboradoresError ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                  >
+                    <option value="">Selecione a quantidade de funcionários</option>
+                    <option value="50-100">50 a 100 funcionários</option>
+                    <option value="101-300">101 a 300 funcionários</option>
+                    <option value="301-500">301 a 500 funcionários</option>
+                    <option value="501-1000">501 a 1000 funcionários</option>
+                    <option value="mais-1000">Mais de 1000 funcionários</option>
+                  </select>
+                  <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
                 </div>
                 {colaboradoresError && (
                   <p className="text-red-600 text-sm mt-1">{colaboradoresError}</p>
