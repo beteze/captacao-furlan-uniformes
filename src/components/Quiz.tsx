@@ -39,8 +39,7 @@ const Quiz: React.FC<QuizProps> = ({
   const [currentStep, setCurrentStep] = useState(1);
   const [isHelpModalOpen, setIsHelpModalOpen] = useState(false);
   const [emailError, setEmailError] = useState<string>('');
-  const [quantityError, setQuantityError] = useState<string>('');
-  const [funcionariosError, setFuncionariosError] = useState<string>('');
+  const [colaboradoresError, setColaboradoresError] = useState<string>('');
 
   const formatCNPJ = (value: string) => {
     // Remove tudo que não é dígito
@@ -72,32 +71,9 @@ const Quiz: React.FC<QuizProps> = ({
     }
   };
 
-  const handleQuantityChange = (value: number) => {
+  const handleColaboradoresChange = (value: string) => {
     onQuizDataChange({ colaboradores: value });
-    
-    // Validação de quantidade mínima
-    if (value === 0) {
-      setQuantityError('');
-    } else if (value < 10) {
-      setQuantityError('A quantidade mínima é de 10 uniformes');
-    } else {
-      setQuantityError('');
-    }
-  };
-
-  const handleFuncionariosChange = (value: number) => {
-    onQuizDataChange({ numFuncionarios: value });
-    
-    // Validação de funcionários
-    if (value === 0) {
-      setFuncionariosError('');
-    } else if (value < 1) {
-      setFuncionariosError('Deve ser um número positivo');
-    } else if (!Number.isInteger(value)) {
-      setFuncionariosError('Deve ser um número inteiro');
-    } else {
-      setFuncionariosError('');
-    }
+    setColaboradoresError('');
   };
 
   const handleOpenHelpModal = () => {
@@ -137,12 +113,11 @@ const Quiz: React.FC<QuizProps> = ({
                !emailError && 
                quizData.segmento && 
                quizData.colaboradores && 
-               quizData.colaboradores >= 10 && 
-               !quantityError &&
-               !funcionariosError;
+               quizData.colaboradores.trim() !== '';
       case 2:
+        // Para a etapa 2, vamos manter a validação simples por enquanto
         const totalDistributed = Object.values(quizData.distribution || {}).reduce((sum, detail) => sum + (detail?.quantity || 0), 0);
-        return totalDistributed === quizData.colaboradores;
+        return totalDistributed > 0; // Simplificado para aceitar qualquer distribuição
       case 3:
         if (!quizData.personalizacao || !quizData.personalizacao.trim()) return false;
         
@@ -263,45 +238,34 @@ const Quiz: React.FC<QuizProps> = ({
 
               <div>
                 <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
-                  Quantidade total de uniformes necessários *
+                  Quantidade de funcionários da empresa *
                 </label>
-                <input
-                  type="number"
-                  value={quizData.colaboradores || ''}
-                  onChange={(e) => handleQuantityChange(parseInt(e.target.value) || 0)}
-                  placeholder="Ex: 150"
-                  min="10"
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                    quantityError ? 'border-red-500' : 'border-gray-300'
-                  }`}
-                />
-                {quantityError && (
-                  <p className="text-red-600 text-sm mt-1">{quantityError}</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {[
+                    { id: '50-100', name: '50 a 100' },
+                    { id: '101-300', name: '101 a 300' },
+                    { id: '301-500', name: '301 a 500' },
+                    { id: '501-1000', name: '501 a 1000' },
+                    { id: 'mais-1000', name: 'Mais de 1000' }
+                  ].map((option) => (
+                    <button
+                      key={option.id}
+                      onClick={() => handleColaboradoresChange(option.id)}
+                      className={`p-3 border-2 rounded-lg text-left transition-all ${
+                        quizData.colaboradores === option.id
+                          ? 'border-blue-500 bg-blue-50'
+                          : 'border-gray-200 hover:border-gray-300'
+                      }`}
+                    >
+                      <span className="font-medium">{option.name} funcionários</span>
+                    </button>
+                  ))}
+                </div>
+                {colaboradoresError && (
+                  <p className="text-red-600 text-sm mt-1">{colaboradoresError}</p>
                 )}
                 <p className="text-sm text-gray-500 mt-1">
-                  Informe o número total de peças de uniforme que sua empresa precisa (mínimo 10)
-                </p>
-              </div>
-
-              <div>
-                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
-                  Quantidade de funcionários
-                </label>
-                <input
-                  type="number"
-                  value={quizData.numFuncionarios || ''}
-                  onChange={(e) => handleFuncionariosChange(parseInt(e.target.value) || 0)}
-                  placeholder="Ex: 50"
-                  min="1"
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                    funcionariosError ? 'border-red-500' : 'border-gray-300'
-                  }`}
-                />
-                {funcionariosError && (
-                  <p className="text-red-600 text-sm mt-1">{funcionariosError}</p>
-                )}
-                <p className="text-sm text-gray-500 mt-1">
-                  Número total de funcionários da empresa (opcional)
+                  Selecione a faixa que melhor representa o número de funcionários da sua empresa
                 </p>
               </div>
             </div>
@@ -317,7 +281,7 @@ const Quiz: React.FC<QuizProps> = ({
             </div>
             
             <DistributionStep
-              totalUniforms={quizData.colaboradores || 0}
+              totalUniforms={quizData.colaboradores || ''}
               initialDistribution={quizData.distribution || {}}
               initialCustomUniformTypes={quizData.customUniformTypes || []}
               onDistributionChange={(distribution) => onQuizDataChange({ distribution })}

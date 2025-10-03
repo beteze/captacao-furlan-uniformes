@@ -3,7 +3,7 @@ import { ArrowLeft, Zap, AlertCircle, CheckCircle, Clock, Upload } from 'lucide-
 import { UniformDetail } from '../types';
 
 interface DistributionStepProps {
-  totalUniforms: number;
+  totalUniforms: string;
   initialDistribution: { [key: string]: UniformDetail };
   initialCustomUniformTypes: string[];
   onDistributionChange: (distribution: { [key: string]: UniformDetail }) => void;
@@ -218,27 +218,33 @@ export default function DistributionStep({
 
   // Calcular totais
   const totalDistributed = Object.values(distribution).reduce((sum, detail) => sum + (detail?.quantity || 0), 0);
-  const remaining = totalUniforms - totalDistributed;
-  const isExceeded = totalDistributed > totalUniforms;
-  const isComplete = totalDistributed === totalUniforms;
+  
+  // Converter faixa de funcionários para texto
+  const getFuncionariosDisplay = () => {
+    const ranges: { [key: string]: string } = {
+      '50-100': '50 a 100',
+      '101-300': '101 a 300', 
+      '301-500': '301 a 500',
+      '501-1000': '501 a 1000',
+      'mais-1000': 'Mais de 1000'
+    };
+    return ranges[totalUniforms] || totalUniforms;
+  };
 
   // Determinar cor do status
   const getStatusColor = () => {
-    if (isExceeded) return 'text-red-600 bg-red-50 border-red-200';
-    if (isComplete) return 'text-green-600 bg-green-50 border-green-200';
-    return 'text-yellow-600 bg-yellow-50 border-yellow-200';
+    if (totalDistributed > 0) return 'text-green-600 bg-green-50 border-green-200';
+    return 'text-gray-600 bg-gray-50 border-gray-200';
   };
 
   const getStatusIcon = () => {
-    if (isExceeded) return <AlertCircle className="w-5 h-5" />;
-    if (isComplete) return <CheckCircle className="w-5 h-5" />;
+    if (totalDistributed > 0) return <CheckCircle className="w-5 h-5" />;
     return <Clock className="w-5 h-5" />;
   };
 
   const getStatusMessage = () => {
-    if (isExceeded) return `Excesso de ${totalDistributed - totalUniforms} uniformes`;
-    if (isComplete) return 'Distribuição completa!';
-    return `Restam ${remaining} uniformes para distribuir`;
+    if (totalDistributed > 0) return `${totalDistributed} uniformes selecionados para ${getFuncionariosDisplay()} funcionários`;
+    return `Selecione os uniformes necessários para ${getFuncionariosDisplay()} funcionários`;
   };
 
   // Atualizar distribuição
@@ -263,14 +269,13 @@ export default function DistributionStep({
     if (selectedProducts.length === 0) {
       // Se nenhum produto selecionado, distribuir entre os 3 primeiros
       const defaultProducts = uniformProducts.slice(0, 3);
-      const perProduct = Math.floor(totalUniforms / defaultProducts.length);
-      const remainder = totalUniforms % defaultProducts.length;
+      const baseQuantity = 50; // Quantidade base para distribuição automática
       
       const newDistribution: { [key: string]: UniformDetail } = {};
       
       defaultProducts.forEach((product, index) => {
         newDistribution[product.id] = {
-          quantity: perProduct + (index < remainder ? 1 : 0),
+          quantity: baseQuantity,
           malhaType: product.fabrics[0]
         };
       });
@@ -279,15 +284,14 @@ export default function DistributionStep({
       onDistributionChange(newDistribution);
     } else {
       // Distribuir entre produtos já selecionados
-      const perProduct = Math.floor(totalUniforms / selectedProducts.length);
-      const remainder = totalUniforms % selectedProducts.length;
+      const baseQuantity = 30;
       
       const newDistribution = { ...distribution };
       
       selectedProducts.forEach((productId, index) => {
         newDistribution[productId] = {
           ...newDistribution[productId],
-          quantity: perProduct + (index < remainder ? 1 : 0)
+          quantity: baseQuantity
         };
       });
       
@@ -303,7 +307,7 @@ export default function DistributionStep({
           Catálogo de Uniformes
         </h2>
         <p className="text-gray-600">
-          Selecione os produtos e quantidades necessárias para sua empresa
+          Selecione os produtos e quantidades necessárias para sua empresa ({getFuncionariosDisplay()} funcionários)
         </p>
       </div>
 
@@ -412,7 +416,7 @@ export default function DistributionStep({
                         <option key={fabric} value={fabric}>
                           {fabric}
                         </option>
-                      ))}
+                Total selecionado: {totalDistributed} uniformes
                     </select>
                   </div>
                 </>

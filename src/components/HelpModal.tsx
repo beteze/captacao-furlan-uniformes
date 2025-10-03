@@ -161,10 +161,17 @@ export default function HelpModal({
       message += `• E-mail: Não informado\n`;
     }
     message += `• Segmento: ${getSegmentoDisplayHelp()}\n`;
-    message += `• Quantidade total de uniformes: ${quizData.colaboradores || 'Não informado'}\n`;
-    if (quizData.numFuncionarios) {
-      message += `• Quantidade de funcionários: ${quizData.numFuncionarios}\n`;
-    }
+    message += `• Funcionários da empresa: ${(() => {
+      if (!quizData.colaboradores) return 'Não informado';
+      const ranges: { [key: string]: string } = {
+        '50-100': '50 a 100',
+        '101-300': '101 a 300', 
+        '301-500': '301 a 500',
+        '501-1000': '501 a 1000',
+        'mais-1000': 'Mais de 1000'
+      };
+      return ranges[quizData.colaboradores] || quizData.colaboradores;
+    })()}\n`;
     
     const hasDistribution = quizData.distribution && Object.values(quizData.distribution).some(qty => qty > 0);
     if (hasDistribution) {
