@@ -207,14 +207,6 @@ const uniformProducts: UniformProduct[] = [
   }
 ];
 
-const personalizationOptions = [
-  { id: 'sem', name: 'Sem personalização' },
-  { id: 'bordado', name: 'Bordado' },
-  { id: 'silk', name: 'Silk Screen' },
-  { id: 'dtf', name: 'DTF' },
-  { id: 'sublimacao', name: 'Sublimação' }
-];
-
 export default function DistributionStep({
   totalUniforms,
   initialDistribution,
@@ -279,8 +271,7 @@ export default function DistributionStep({
       defaultProducts.forEach((product, index) => {
         newDistribution[product.id] = {
           quantity: perProduct + (index < remainder ? 1 : 0),
-          malhaType: product.fabrics[0],
-          personalizacao: 'sem'
+          malhaType: product.fabrics[0]
         };
       });
       
@@ -364,7 +355,6 @@ export default function DistributionStep({
         {uniformProducts.map((product) => {
           const currentDetail = distribution[product.id] || { quantity: 0 };
           const hasQuantity = currentDetail.quantity > 0;
-          const needsCustomElement = (currentDetail.personalizacao === 'bordado' || currentDetail.personalizacao === 'silk');
 
           return (
             <div key={product.id} className={`bg-white border-2 rounded-lg p-4 transition-all ${
@@ -424,86 +414,6 @@ export default function DistributionStep({
                         </option>
                       ))}
                     </select>
-                  </div>
-
-                  {/* Radio Personalização */}
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Personalização
-                    </label>
-                    <div className="space-y-2">
-                      {personalizationOptions.map(option => (
-                        <label key={option.id} className="flex items-center">
-                          <input
-                            type="radio"
-                            name={`personalization-${product.id}`}
-                            value={option.id}
-                            checked={currentDetail.personalizacao === option.id}
-                            onChange={(e) => updateDistribution(product.id, 'personalizacao', e.target.value)}
-                            className="mr-2 text-blue-600 focus:ring-blue-500"
-                          />
-                          <span className="text-sm text-gray-700">{option.name}</span>
-                        </label>
-                      ))}
-                    </div>
-                    {!currentDetail.personalizacao && (
-                      <p className="text-orange-600 text-xs mt-1">
-                        ⚠️ Selecione um tipo de personalização
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Campo Elemento Personalizado */}
-                  {needsCustomElement && (
-                    <div className="mb-4">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Elemento personalizado
-                      </label>
-                      <input
-                        type="text"
-                        value={currentDetail.elementoPersonalizado || ''}
-                        onChange={(e) => updateDistribution(product.id, 'elementoPersonalizado', e.target.value)}
-                        placeholder="Descreva seu logotipo, desenho, frase, etc."
-                        disabled={currentDetail.elementoPersonalizadoHelp}
-                        className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                          currentDetail.elementoPersonalizadoHelp ? 'bg-gray-100 text-gray-500' : ''
-                        }`}
-                      />
-                      
-                      <div className="mt-2">
-                        <label className="flex items-center">
-                          <input
-                            type="checkbox"
-                            checked={currentDetail.elementoPersonalizadoHelp || false}
-                            onChange={(e) => {
-                              const isChecked = e.target.checked;
-                              updateDistribution(product.id, 'elementoPersonalizadoHelp', isChecked);
-                              if (isChecked) {
-                                updateDistribution(product.id, 'elementoPersonalizado', '');
-                              }
-                            }}
-                            className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                          />
-                          <span className="ml-2 text-xs text-gray-700">
-                            Ainda não sei, preciso de ajuda
-                          </span>
-                        </label>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Observações adicionais */}
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Observações adicionais (opcional)
-                    </label>
-                    <textarea
-                      value={currentDetail.observacoes || ''}
-                      onChange={(e) => updateDistribution(product.id, 'observacoes', e.target.value)}
-                      placeholder="Informações extras sobre este produto..."
-                      rows={2}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                    />
                   </div>
                 </>
               )}

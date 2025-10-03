@@ -3,10 +3,6 @@ export interface UniformDetail {
   malhaType?: string;
   malhaDescription?: string;
   cutType?: string[];
-  personalizacao?: string;
-  elementoPersonalizado?: string;
-  elementoPersonalizadoHelp?: boolean;
-  observacoes?: string;
 }
 
 export interface QuizData {
