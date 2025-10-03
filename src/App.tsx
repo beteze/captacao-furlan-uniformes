@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import LandingPage from './components/LandingPage';
 import Quiz from './components/Quiz';
 import OrcamentoPage from './components/OrcamentoPage';
-import DisqualifiedPage from './components/DisqualifiedPage';
 import ProgressBar from './components/ProgressBar';
 import SavedQuotesModal from './components/SavedQuotesModal';
 import { QuizData } from './types';
 
-type AppState = 'landing' | 'dados' | 'pedido' | 'review' | 'orcamento' | 'disqualified';
+type AppState = 'landing' | 'dados' | 'pedido' | 'review' | 'orcamento';
 
 function App() {
   const [currentView, setCurrentView] = useState<AppState>('landing');
@@ -103,9 +102,6 @@ function App() {
     setCurrentQuizStep(step);
   };
 
-  const handleDisqualified = () => {
-    setCurrentView('disqualified');
-  };
 
   const handleCnpjChange = (newCnpj: string) => {
     setCnpj(newCnpj);
@@ -184,7 +180,6 @@ function App() {
             quizData={quizData}
             onQuizDataChange={handleQuizDataChange}
             onBack={handleBackToLanding}
-            onDisqualified={handleDisqualified}
             onStepChange={handleQuizStepChange}
             cnpj={cnpj}
             email={email}
@@ -229,11 +224,6 @@ function App() {
             hasSavedQuotes={hasSavedQuotes}
             onViewSavedQuotes={handleViewSavedQuotes}
           />
-        );
-      
-      case 'disqualified':
-        return (
-          <DisqualifiedPage onBack={handleBackToLanding} />
         );
       
       default:

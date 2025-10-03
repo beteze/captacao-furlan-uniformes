@@ -19,8 +19,6 @@ export default function ProgressBar({ currentView, currentQuizStep = 1, isQuoteF
         return 90;
       case 'orcamento':
         return isQuoteFinalized ? 100 : 90;
-      case 'disqualified':
-        return 100;
       default:
         return 0;
     }
@@ -39,8 +37,6 @@ export default function ProgressBar({ currentView, currentQuizStep = 1, isQuoteF
         return hasSavedQuotes ? '4. Revisão - Gerenciar Orçamentos' : '4. Revisão';
       case 'orcamento':
         return isQuoteFinalized ? '5. Pedido de orçamento finalizado' : '5. Finalizar pedido de orçamento';
-      case 'disqualified':
-        return 'Contato';
       default:
         return 'Carregando...';
     }

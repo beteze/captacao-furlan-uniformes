@@ -210,8 +210,6 @@ export default function HelpModal({
         return 'Revisão do Orçamento';
       case 'orcamento':
         return 'Finalização do Orçamento';
-      case 'disqualified':
-        return 'Página de contato';
       default:
         return 'Navegando no site';
     }
