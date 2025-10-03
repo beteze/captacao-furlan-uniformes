@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Zap, AlertCircle, CheckCircle, Clock } from 'lucide-react';
+import { ArrowLeft, Zap, AlertCircle, CheckCircle, Clock, Upload } from 'lucide-react';
 import { UniformDetail } from '../types';
-
-const DEFAULT_UNIFORM_DESCRIPTIONS = {
-  'camisa-polo': 'Malha piquet 50% algodão, 50% poliéster, gramatura 200g.',
-  'calca': 'Brim leve 100% algodão, resistente e confortável.',
-  'jaleco': 'Gabardine 67% poliéster, 33% algodão, de fácil manutenção.',
-  'outros': 'Malha fria poliéster, toque leve, ideal para uniformes promocionais.'
-};
 
 interface DistributionStepProps {
   totalUniforms: number;
@@ -17,40 +10,209 @@ interface DistributionStepProps {
   onCustomUniformTypesChange: (customTypes: string[]) => void;
 }
 
-const defaultCategories = [
-  { 
-    id: 'camisa-polo', 
+interface UniformProduct {
+  id: string;
+  name: string;
+  bullets: string[];
+  fabrics: string[];
+}
+
+const uniformProducts: UniformProduct[] = [
+  {
+    id: 'camisa-gola-redonda',
+    name: 'Camisa Gola Redonda',
+    bullets: [
+      'Conforto e praticidade para o dia a dia',
+      'Corte moderno e versátil',
+      'Ideal para uniformes corporativos',
+      'Disponível em diversas cores'
+    ],
+    fabrics: ['PV Premium', 'PV', 'Dry Fit Esportivo', 'PP', 'Dry Fit Poliamida']
+  },
+  {
+    id: 'camisa-gola-v',
+    name: 'Camisa Gola V',
+    bullets: [
+      'Design elegante com decote em V',
+      'Valoriza o visual profissional',
+      'Tecidos de alta qualidade',
+      'Corte feminino e masculino'
+    ],
+    fabrics: ['PV Premium', 'PV', 'Dry Fit Esportivo', 'PP', 'Dry Fit Poliamida']
+  },
+  {
+    id: 'camisa-gola-v-raglan',
+    name: 'Camisa Gola V Manga Raglan',
+    bullets: [
+      'Manga raglan para maior mobilidade',
+      'Conforto superior nos movimentos',
+      'Design esportivo e moderno',
+      'Ideal para atividades dinâmicas'
+    ],
+    fabrics: ['PV Premium', 'PV', 'Dry Fit Esportivo', 'PP']
+  },
+  {
+    id: 'camisa-polo',
     name: 'Camisa Polo',
-    imageUrl: 'https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=2'
+    bullets: [
+      'Clássica e elegante',
+      'Gola e punhos em ribana',
+      'Versatilidade para diversos ambientes',
+      'Qualidade premium garantida'
+    ],
+    fabrics: ['Piquet Supremo', 'PV Premium', 'PV', 'Dry Fit Supremo', 'PP']
   },
-  { 
-    id: 'calca', 
-    name: 'Calça',
-    imageUrl: 'https://images.pexels.com/photos/1598507/pexels-photo-1598507.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=2'
+  {
+    id: 'camisa-social-masculina',
+    name: 'Camisa Social Masculina',
+    bullets: [
+      'Elegância para ambientes corporativos',
+      'Corte social tradicional',
+      'Tecidos nobres e duráveis',
+      'Acabamento profissional'
+    ],
+    fabrics: ['Tricoline Ibiza', 'Cannes', 'Profit', 'London', 'Micro Vichy', 'Confort Plus', 'Importada']
   },
-  { 
-    id: 'jaleco', 
-    name: 'Jaleco',
-    imageUrl: 'https://images.pexels.com/photos/6749778/pexels-photo-6749778.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=2'
+  {
+    id: 'camisa-social-feminina',
+    name: 'Camisa Social Feminina',
+    bullets: [
+      'Corte feminino valorizado',
+      'Elegância e sofisticação',
+      'Tecidos de alta qualidade',
+      'Modelagem exclusiva'
+    ],
+    fabrics: ['Tricoline Ibiza', 'Cannes', 'Profit', 'London', 'Micro Vichy', 'Confort Plus', 'Importada']
   },
-  { 
-    id: 'outros', 
-    name: 'Outros',
-    imageUrl: 'https://images.pexels.com/photos/7659564/pexels-photo-7659564.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=2'
+  {
+    id: 'calca-social-feminina',
+    name: 'Calça Social Feminina',
+    bullets: [
+      'Modelagem feminina exclusiva',
+      'Tecido nobre e resistente',
+      'Caimento perfeito',
+      'Elegância profissional'
+    ],
+    fabrics: ['Prada']
+  },
+  {
+    id: 'calca-social-masculina',
+    name: 'Calça Social Masculina (Sport Fino)',
+    bullets: [
+      'Corte social masculino',
+      'Resistência e durabilidade',
+      'Tecidos de qualidade superior',
+      'Acabamento refinado'
+    ],
+    fabrics: ['Prada', 'Brim Pesado']
+  },
+  {
+    id: 'calca-elastico-cordao',
+    name: 'Calça Elástico com Cordão',
+    bullets: [
+      'Máximo conforto e praticidade',
+      'Ajuste perfeito com elástico',
+      'Ideal para atividades operacionais',
+      'Resistente ao uso intenso'
+    ],
+    fabrics: ['Brim pesado', 'Brim leve', 'Jeans', 'Jeans com elastano']
+  },
+  {
+    id: 'jaleco-consultorio',
+    name: 'Jaleco de Consultório',
+    bullets: [
+      'Elegância para área da saúde',
+      'Tecidos antibacterianos',
+      'Corte profissional',
+      'Fácil manutenção'
+    ],
+    fabrics: ['Gabardine', 'Oxfordine', 'Oxford', 'Prada']
+  },
+  {
+    id: 'jaleco-operacional-botao',
+    name: 'Jaleco Operacional (Botão)',
+    bullets: [
+      'Resistência para área industrial',
+      'Fechamento com botões',
+      'Tecidos reforçados',
+      'Proteção e durabilidade'
+    ],
+    fabrics: ['Brim pesado', 'Brim leve']
+  },
+  {
+    id: 'jaleco-operacional-polo',
+    name: 'Jaleco Operacional (Modelo Polo)',
+    bullets: [
+      'Design moderno tipo polo',
+      'Conforto operacional',
+      'Tecidos resistentes',
+      'Praticidade no uso'
+    ],
+    fabrics: ['Brim leve', 'Brim pesado']
+  },
+  {
+    id: 'blazer-feminino',
+    name: 'Blazer Feminino Forrado',
+    bullets: [
+      'Elegância máxima feminina',
+      'Forrado para melhor caimento',
+      'Tecido nobre premium',
+      'Acabamento sob medida'
+    ],
+    fabrics: ['Prada']
+  },
+  {
+    id: 'colete-feminino',
+    name: 'Colete Feminino com Zíper',
+    bullets: [
+      'Praticidade com zíper frontal',
+      'Corte feminino moderno',
+      'Versatilidade de uso',
+      'Tecido de qualidade'
+    ],
+    fabrics: ['Prada']
+  },
+  {
+    id: 'blusa-gola-drape',
+    name: 'Blusa Gola Drape',
+    bullets: [
+      'Design sofisticado drapeado',
+      'Tecido com elastano',
+      'Conforto e elegância',
+      'Modelagem exclusiva'
+    ],
+    fabrics: ['Crepe com elastano']
+  },
+  {
+    id: 'blusa-gola-redonda',
+    name: 'Blusa Gola Redonda',
+    bullets: [
+      'Clássica e versátil',
+      'Tecido com elastano',
+      'Conforto superior',
+      'Corte feminino valorizado'
+    ],
+    fabrics: ['Crepe com elastano']
+  },
+  {
+    id: 'guarda-po-operacional',
+    name: 'Guarda-Pó Operacional',
+    bullets: [
+      'Proteção completa',
+      'Resistência industrial',
+      'Tecidos reforçados',
+      'Praticidade operacional'
+    ],
+    fabrics: ['Brim leve', 'Brim pesado']
   }
 ];
 
-const malhaOptions = [
-  { id: 'malha-fria', name: 'Malha Fria', description: 'Tecido leve e fresco' },
-  { id: 'algodao-penteado', name: 'Algodão Penteado', description: 'Macio e resistente' },
-  { id: 'dry-fit', name: 'Dry Fit', description: 'Tecnologia que absorve o suor' },
-  { id: 'piquet', name: 'Piquet', description: 'Textura diferenciada' }
-];
-
-const cutOptions = [
-  { id: 'feminino', name: 'Feminino' },
-  { id: 'masculino', name: 'Masculino' },
-  { id: 'unissex', name: 'Unissex' }
+const personalizationOptions = [
+  { id: 'sem', name: 'Sem personalização' },
+  { id: 'bordado', name: 'Bordado' },
+  { id: 'silk', name: 'Silk Screen' },
+  { id: 'dtf', name: 'DTF' },
+  { id: 'sublimacao', name: 'Sublimação' }
 ];
 
 export default function DistributionStep({
@@ -61,14 +223,6 @@ export default function DistributionStep({
   onCustomUniformTypesChange
 }: DistributionStepProps) {
   const [distribution, setDistribution] = useState<{ [key: string]: UniformDetail }>(initialDistribution);
-  const [selectedTypes, setSelectedTypes] = useState<string[]>(() => {
-    // Inicializar com tipos que já têm distribuição
-    return Object.keys(initialDistribution).filter(key => initialDistribution[key]?.quantity > 0);
-  });
-  const [isSelectionPhase, setIsSelectionPhase] = useState(() => {
-    // Se já há tipos selecionados, pular a fase de seleção
-    return Object.keys(initialDistribution).filter(key => initialDistribution[key]?.quantity > 0).length === 0;
-  });
 
   // Calcular totais
   const totalDistributed = Object.values(distribution).reduce((sum, detail) => sum + (detail?.quantity || 0), 0);
@@ -96,11 +250,11 @@ export default function DistributionStep({
   };
 
   // Atualizar distribuição
-  const updateDistribution = (categoryId: string, field: keyof UniformDetail, value: any) => {
-    const currentDetail = distribution[categoryId] || { quantity: 0 };
+  const updateDistribution = (productId: string, field: keyof UniformDetail, value: any) => {
+    const currentDetail = distribution[productId] || { quantity: 0 };
     const newDistribution = {
       ...distribution,
-      [categoryId]: {
+      [productId]: {
         ...currentDetail,
         [field]: field === 'quantity' ? Math.max(0, value) : value
       }
@@ -109,273 +263,261 @@ export default function DistributionStep({
     onDistributionChange(newDistribution);
   };
 
-  // Selecionar/deselecionar tipo de uniforme
-  const toggleTypeSelection = (typeId: string) => {
-    setSelectedTypes(prev => {
-      if (prev.includes(typeId)) {
-        return prev.filter(id => id !== typeId);
-      } else {
-        return [...prev, typeId];
-      }
-    });
-  };
-
-  // Continuar para fase de quantidade
-  const proceedToQuantityPhase = () => {
-    if (selectedTypes.length > 0) {
-      setIsSelectionPhase(false);
-      // Inicializar distribuição para tipos selecionados
+  // Distribuir automaticamente
+  const distributeAutomatically = () => {
+    // Pegar apenas produtos com quantidade > 0
+    const selectedProducts = Object.keys(distribution).filter(key => distribution[key]?.quantity > 0);
+    
+    if (selectedProducts.length === 0) {
+      // Se nenhum produto selecionado, distribuir entre os 3 primeiros
+      const defaultProducts = uniformProducts.slice(0, 3);
+      const perProduct = Math.floor(totalUniforms / defaultProducts.length);
+      const remainder = totalUniforms % defaultProducts.length;
+      
       const newDistribution: { [key: string]: UniformDetail } = {};
-      selectedTypes.forEach(typeId => {
-        newDistribution[typeId] = distribution[typeId] || { 
-          quantity: 0,
-          malhaDescription: DEFAULT_UNIFORM_DESCRIPTIONS[typeId as keyof typeof DEFAULT_UNIFORM_DESCRIPTIONS] || ''
+      
+      defaultProducts.forEach((product, index) => {
+        newDistribution[product.id] = {
+          quantity: perProduct + (index < remainder ? 1 : 0),
+          malhaType: product.fabrics[0],
+          personalizacao: 'sem'
         };
       });
+      
+      setDistribution(newDistribution);
+      onDistributionChange(newDistribution);
+    } else {
+      // Distribuir entre produtos já selecionados
+      const perProduct = Math.floor(totalUniforms / selectedProducts.length);
+      const remainder = totalUniforms % selectedProducts.length;
+      
+      const newDistribution = { ...distribution };
+      
+      selectedProducts.forEach((productId, index) => {
+        newDistribution[productId] = {
+          ...newDistribution[productId],
+          quantity: perProduct + (index < remainder ? 1 : 0)
+        };
+      });
+      
       setDistribution(newDistribution);
       onDistributionChange(newDistribution);
     }
   };
 
-  // Distribuir automaticamente
-  const distributeAutomatically = () => {
-    const perCategory = Math.floor(totalUniforms / selectedTypes.length);
-    const remainder = totalUniforms % selectedTypes.length;
-    
-    const newDistribution: { [key: string]: UniformDetail } = {};
-    
-    selectedTypes.forEach((categoryId, index) => {
-      newDistribution[categoryId] = {
-        quantity: perCategory + (index < remainder ? 1 : 0),
-        malhaDescription: DEFAULT_UNIFORM_DESCRIPTIONS[categoryId as keyof typeof DEFAULT_UNIFORM_DESCRIPTIONS] || ''
-      };
-    });
-    
-    setDistribution(newDistribution);
-    onDistributionChange(newDistribution);
-  };
-
-
   return (
     <div className="space-y-6">
       <div className="text-center">
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">
+          Catálogo de Uniformes
+        </h2>
         <p className="text-gray-600">
-          {isSelectionPhase 
-            ? 'Escolha quais tipos de uniformes sua empresa precisa'
-            : `Distribua os ${totalUniforms} uniformes entre os tipos selecionados`
-          }
+          Selecione os produtos e quantidades necessárias para sua empresa
         </p>
       </div>
 
-      {isSelectionPhase ? (
-        <>
-          {/* Fase de Seleção */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {defaultCategories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => toggleTypeSelection(category.id)}
-                className={`p-4 border-2 rounded-lg text-left transition-all ${
-                  selectedTypes.includes(category.id)
-                    ? 'border-blue-500 bg-blue-50'
-                    : 'border-gray-200 hover:border-gray-300'
-                }`}
-              >
-                <div className="flex items-center">
-                  <img 
-                    src={category.imageUrl} 
-                    alt={category.name}
-                    className="w-16 h-16 object-cover rounded-lg mr-4 border border-gray-200"
-                  />
-                  <div className="flex-1">
-                    <h3 className="font-medium text-gray-900">{category.name}</h3>
-                    <div className="flex items-center mt-2">
-                      <div className={`w-5 h-5 border-2 rounded flex items-center justify-center ${
-                        selectedTypes.includes(category.id)
-                          ? 'border-blue-500 bg-blue-500'
-                          : 'border-gray-300'
-                      }`}>
-                        {selectedTypes.includes(category.id) && (
-                          <CheckCircle className="w-3 h-3 text-white" />
-                        )}
-                      </div>
-                      <span className="ml-2 text-sm text-gray-600">
-                        {selectedTypes.includes(category.id) ? 'Selecionado' : 'Selecionar'}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </button>
-            ))}
+      {/* Status Counter */}
+      <div className={`p-4 rounded-lg border-2 ${getStatusColor()} transition-all duration-300`}>
+        <div className="flex items-center justify-center space-x-3">
+          {getStatusIcon()}
+          <div className="text-center">
+            <p className="font-semibold text-lg">
+              Total distribuído: {totalDistributed} de {totalUniforms}
+            </p>
+            <p className="text-sm">
+              {getStatusMessage()}
+            </p>
           </div>
+        </div>
+      </div>
 
-          {/* Botão Continuar */}
-          <div className="flex justify-center">
-            <button
-              onClick={proceedToQuantityPhase}
-              disabled={selectedTypes.length === 0}
-              className={`w-full px-6 py-4 rounded-lg font-medium transition-all text-lg ${
-                selectedTypes.length > 0
-                  ? 'bg-blue-600 text-white hover:bg-blue-700'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }`}
-            >
-              Continuar ({selectedTypes.length} tipo{selectedTypes.length !== 1 ? 's' : ''} selecionado{selectedTypes.length !== 1 ? 's' : ''})
-            </button>
-          </div>
-        </>
-      ) : (
-        <>
-          {/* Status Counter */}
-          <div className={`p-4 rounded-lg border-2 ${getStatusColor()} transition-all duration-300`}>
-            <div className="flex items-center justify-center space-x-3">
-              {getStatusIcon()}
-              <div className="text-center">
-                <p className="font-semibold text-lg">
-                  Total distribuído: {totalDistributed} de {totalUniforms}
-                </p>
-                <p className="text-sm">
-                  {getStatusMessage()}
-                </p>
+      {/* Action Button */}
+      <div className="flex justify-center">
+        <button
+          onClick={distributeAutomatically}
+          className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium"
+        >
+          <Zap className="w-4 h-4 mr-2" />
+          Distribuir automaticamente
+        </button>
+      </div>
+
+      {/* Upload de imagem atual */}
+      <div className="bg-blue-50 rounded-lg p-4">
+        <h3 className="font-medium text-blue-900 mb-2 flex items-center">
+          <Upload className="w-4 h-4 mr-2" />
+          Uniforme atual da empresa (opcional)
+        </h3>
+        <p className="text-sm text-blue-700 mb-3">
+          Envie uma foto do uniforme atual para nosso consultor analisar
+        </p>
+        <input
+          type="file"
+          accept="image/*"
+          className="w-full px-3 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+          placeholder="Selecionar arquivo..."
+        />
+      </div>
+
+      {/* Products Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {uniformProducts.map((product) => {
+          const currentDetail = distribution[product.id] || { quantity: 0 };
+          const hasQuantity = currentDetail.quantity > 0;
+          const needsCustomElement = (currentDetail.personalizacao === 'bordado' || currentDetail.personalizacao === 'silk');
+
+          return (
+            <div key={product.id} className={`bg-white border-2 rounded-lg p-4 transition-all ${
+              hasQuantity ? 'border-blue-500 shadow-md' : 'border-gray-200 hover:border-gray-300'
+            }`}>
+              {/* Nome do produto */}
+              <h3 className="font-bold text-gray-900 mb-3 text-lg leading-tight">
+                {product.name}
+              </h3>
+
+              {/* Bullets descritivos */}
+              <ul className="text-sm text-gray-600 mb-4 space-y-1">
+                {product.bullets.map((bullet, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 mr-2 flex-shrink-0"></span>
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+
+              {/* Campo Quantidade */}
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Quantidade *
+                </label>
+                <input
+                  type="number"
+                  value={currentDetail.quantity || ''}
+                  onChange={(e) => updateDistribution(product.id, 'quantity', parseInt(e.target.value) || 0)}
+                  placeholder="Mín. 10"
+                  min="0"
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    currentDetail.quantity > 0 && currentDetail.quantity < 10 ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                />
+                {currentDetail.quantity > 0 && currentDetail.quantity < 10 && (
+                  <p className="text-red-600 text-xs mt-1">Quantidade mínima: 10 unidades</p>
+                )}
               </div>
-            </div>
-          </div>
 
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <button
-              onClick={distributeAutomatically}
-              className="w-full inline-flex items-center justify-center px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-lg font-medium"
-            >
-              <Zap className="w-4 h-4 mr-2" />
-              Distribuir automaticamente
-            </button>
-            
-            <button
-              onClick={() => setIsSelectionPhase(true)}
-              className="w-full inline-flex items-center justify-center px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors text-lg font-medium"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Alterar seleção
-            </button>
-          </div>
+              {hasQuantity && (
+                <>
+                  {/* Dropdown Tecido */}
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Tecido
+                    </label>
+                    <select
+                      value={currentDetail.malhaType || ''}
+                      onChange={(e) => updateDistribution(product.id, 'malhaType', e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                      <option value="">Selecione o tecido</option>
+                      {product.fabrics.map(fabric => (
+                        <option key={fabric} value={fabric}>
+                          {fabric}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {selectedTypes.map((typeId) => {
-              const category = defaultCategories.find(c => c.id === typeId);
-              if (!category) return null;
-              
-              return (
-                <div key={category.id} className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                  <div className="flex items-center mb-4">
-                    <img 
-                      src={category.imageUrl} 
-                      alt={category.name}
-                      className="w-16 h-16 object-cover rounded-lg mr-4 border border-gray-200"
-                    />
-                    <div className="flex-1">
-                      <h3 className="font-medium text-gray-900">{category.name}</h3>
+                  {/* Radio Personalização */}
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Personalização
+                    </label>
+                    <div className="space-y-2">
+                      {personalizationOptions.map(option => (
+                        <label key={option.id} className="flex items-center">
+                          <input
+                            type="radio"
+                            name={`personalization-${product.id}`}
+                            value={option.id}
+                            checked={currentDetail.personalizacao === option.id}
+                            onChange={(e) => updateDistribution(product.id, 'personalizacao', e.target.value)}
+                            className="mr-2 text-blue-600 focus:ring-blue-500"
+                          />
+                          <span className="text-sm text-gray-700">{option.name}</span>
+                        </label>
+                      ))}
                     </div>
-                  </div>
-                  
-                  <div className="flex items-center space-x-3">
-                    <button
-                      onClick={() => updateDistribution(category.id, 'quantity', (distribution[category.id]?.quantity || 0) - 1)}
-                      className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors"
-                      disabled={(distribution[category.id]?.quantity || 0) <= 0}
-                    >
-                      <span className="text-lg font-medium">−</span>
-                    </button>
-                    
-                    <input
-                      type="number"
-                      value={distribution[category.id]?.quantity || 0}
-                      onChange={(e) => updateDistribution(category.id, 'quantity', parseInt(e.target.value) || 0)}
-                      className="flex-1 text-center px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      min="0"
-                    />
-                    
-                    <button
-                      onClick={() => updateDistribution(category.id, 'quantity', (distribution[category.id]?.quantity || 0) + 1)}
-                      className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors"
-                    >
-                      <span className="text-lg font-medium">+</span>
-                    </button>
-                  </div>
-                  
-                  {(distribution[category.id]?.quantity || 0) > 0 && (
-                    <div className="mt-4 space-y-3 p-3 bg-gray-50 rounded-lg">
-                      <p className="text-xs text-gray-600 mb-2">
-                        Esses detalhes podem ser definidos depois com o atendente
+                    {!currentDetail.personalizacao && (
+                      <p className="text-orange-600 text-xs mt-1">
+                        ⚠️ Selecione um tipo de personalização
                       </p>
+                    )}
+                  </div>
+
+                  {/* Campo Elemento Personalizado */}
+                  {needsCustomElement && (
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Elemento personalizado
+                      </label>
+                      <input
+                        type="text"
+                        value={currentDetail.elementoPersonalizado || ''}
+                        onChange={(e) => updateDistribution(product.id, 'elementoPersonalizado', e.target.value)}
+                        placeholder="Descreva seu logotipo, desenho, frase, etc."
+                        disabled={currentDetail.elementoPersonalizadoHelp}
+                        className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                          currentDetail.elementoPersonalizadoHelp ? 'bg-gray-100 text-gray-500' : ''
+                        }`}
+                      />
                       
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                          Tipo de malha
+                      <div className="mt-2">
+                        <label className="flex items-center">
+                          <input
+                            type="checkbox"
+                            checked={currentDetail.elementoPersonalizadoHelp || false}
+                            onChange={(e) => {
+                              const isChecked = e.target.checked;
+                              updateDistribution(product.id, 'elementoPersonalizadoHelp', isChecked);
+                              if (isChecked) {
+                                updateDistribution(product.id, 'elementoPersonalizado', '');
+                              }
+                            }}
+                            className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                          />
+                          <span className="ml-2 text-xs text-gray-700">
+                            Ainda não sei, preciso de ajuda
+                          </span>
                         </label>
-                        <select
-                          value={distribution[category.id]?.malhaType || ''}
-                          onChange={(e) => updateDistribution(category.id, 'malhaType', e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        >
-                          <option value="">Selecione o tipo de malha</option>
-                          {malhaOptions.map(option => (
-                            <option key={option.id} value={option.id}>
-                              {option.name} - {option.description}
-                            </option>
-                          ))}
-                        </select>
-                        {distribution[category.id]?.malhaType && (
-                          <div className="mt-2 p-2 bg-blue-50 rounded text-sm text-blue-800">
-                            <strong>
-                              {malhaOptions.find(opt => opt.id === distribution[category.id]?.malhaType)?.name}:
-                            </strong>{' '}
-                            {malhaOptions.find(opt => opt.id === distribution[category.id]?.malhaType)?.description}
-                          </div>
-                        )}
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                          Descrição da malha
-                        </label>
-                        <div className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-lg text-sm text-gray-600">
-                          {distribution[category.id]?.malhaDescription || 'Descrição será preenchida automaticamente'}
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Tipo de corte
-                        </label>
-                        <div className="flex flex-wrap gap-3">
-                          {cutOptions.map(option => (
-                            <label key={option.id} className="flex items-center">
-                              <input
-                                type="checkbox"
-                                checked={distribution[category.id]?.cutType?.includes(option.id) || false}
-                                onChange={(e) => {
-                                  const currentCuts = distribution[category.id]?.cutType || [];
-                                  const newCuts = e.target.checked
-                                    ? [...currentCuts, option.id]
-                                    : currentCuts.filter(cut => cut !== option.id);
-                                  updateDistribution(category.id, 'cutType', newCuts);
-                                }}
-                                className="mr-2 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                              />
-                              <span className="text-sm text-gray-700">{option.name}</span>
-                            </label>
-                          ))}
-                        </div>
                       </div>
                     </div>
                   )}
-                </div>
-              );
-            })}
-          </div>
-        </>
-      )}
+
+                  {/* Observações adicionais */}
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Observações adicionais (opcional)
+                    </label>
+                    <textarea
+                      value={currentDetail.observacoes || ''}
+                      onChange={(e) => updateDistribution(product.id, 'observacoes', e.target.value)}
+                      placeholder="Informações extras sobre este produto..."
+                      rows={2}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                    />
+                  </div>
+                </>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Aviso sobre consultor */}
+      <div className="bg-gray-50 rounded-lg p-4">
+        <p className="text-sm text-gray-600 text-center">
+          💡 <strong>Dica:</strong> Nosso consultor especializado entrará em contato para ajudar com detalhes técnicos, medidas e personalizações específicas.
+        </p>
+      </div>
     </div>
   );
 }
