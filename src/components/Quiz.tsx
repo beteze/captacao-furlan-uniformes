@@ -40,6 +40,7 @@ const Quiz: React.FC<QuizProps> = ({
   const [isHelpModalOpen, setIsHelpModalOpen] = useState(false);
   const [emailError, setEmailError] = useState<string>('');
   const [quantityError, setQuantityError] = useState<string>('');
+  const [funcionariosError, setFuncionariosError] = useState<string>('');
 
   const formatCNPJ = (value: string) => {
     // Remove tudo que não é dígito
@@ -84,6 +85,21 @@ const Quiz: React.FC<QuizProps> = ({
     }
   };
 
+  const handleFuncionariosChange = (value: number) => {
+    onQuizDataChange({ numFuncionarios: value });
+    
+    // Validação de funcionários
+    if (value === 0) {
+      setFuncionariosError('');
+    } else if (value < 1) {
+      setFuncionariosError('Deve ser um número positivo');
+    } else if (!Number.isInteger(value)) {
+      setFuncionariosError('Deve ser um número inteiro');
+    } else {
+      setFuncionariosError('');
+    }
+  };
+
   const handleOpenHelpModal = () => {
     setIsHelpModalOpen(true);
   };
@@ -122,7 +138,8 @@ const Quiz: React.FC<QuizProps> = ({
                quizData.segmento && 
                quizData.colaboradores && 
                quizData.colaboradores >= 10 && 
-               !quantityError;
+               !quantityError &&
+               !funcionariosError;
       case 2:
         const totalDistributed = Object.values(quizData.distribution || {}).reduce((sum, detail) => sum + (detail?.quantity || 0), 0);
         return totalDistributed === quizData.colaboradores;
@@ -263,6 +280,28 @@ const Quiz: React.FC<QuizProps> = ({
                 )}
                 <p className="text-sm text-gray-500 mt-1">
                   Informe o número total de peças de uniforme que sua empresa precisa (mínimo 10)
+                </p>
+              </div>
+
+              <div>
+                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
+                  Quantidade de funcionários
+                </label>
+                <input
+                  type="number"
+                  value={quizData.numFuncionarios || ''}
+                  onChange={(e) => handleFuncionariosChange(parseInt(e.target.value) || 0)}
+                  placeholder="Ex: 50"
+                  min="1"
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    funcionariosError ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                />
+                {funcionariosError && (
+                  <p className="text-red-600 text-sm mt-1">{funcionariosError}</p>
+                )}
+                <p className="text-sm text-gray-500 mt-1">
+                  Número total de funcionários da empresa (opcional)
                 </p>
               </div>
             </div>

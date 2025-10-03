@@ -162,6 +162,9 @@ export default function HelpModal({
     }
     message += `• Segmento: ${getSegmentoDisplayHelp()}\n`;
     message += `• Quantidade total de uniformes: ${quizData.colaboradores || 'Não informado'}\n`;
+    if (quizData.numFuncionarios) {
+      message += `• Quantidade de funcionários: ${quizData.numFuncionarios}\n`;
+    }
     
     const hasDistribution = quizData.distribution && Object.values(quizData.distribution).some(qty => qty > 0);
     if (hasDistribution) {

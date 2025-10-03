@@ -226,6 +226,12 @@ export default function OrcamentoPage({
                   <label className="block text-sm font-medium text-gray-700 mb-1">Quantidade Total</label>
                   <p className="text-gray-900 font-semibold">{quizData.colaboradores} uniformes</p>
                 </div>
+                {quizData.numFuncionarios && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Quantidade de funcionários</label>
+                    <p className="text-gray-900">{quizData.numFuncionarios} funcionários</p>
+                  </div>
+                )}
                 {quizData.distribution && Object.values(quizData.distribution).some(detail => detail?.quantity > 0) && (
                   <div className="md:col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-1">Distribuição</label>

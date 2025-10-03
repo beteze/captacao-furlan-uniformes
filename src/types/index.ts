@@ -7,6 +7,7 @@ export interface UniformDetail {
 
 export interface QuizData {
   colaboradores: number;
+  numFuncionarios?: number;
   segmento: string;
   segmentoOutro?: string;
   companyName?: string;
