@@ -3,7 +3,7 @@ import { ArrowLeft, Zap, AlertCircle, CheckCircle, Clock, Upload } from 'lucide-
 import { UniformDetail } from '../types';
 
 interface DistributionStepProps {
-  totalUniforms: string;
+  totalUniforms: number;
   initialDistribution: { [key: string]: UniformDetail };
   initialCustomUniformTypes: string[];
   onDistributionChange: (distribution: { [key: string]: UniformDetail }) => void;
@@ -218,19 +218,6 @@ export default function DistributionStep({
 
   // Calcular totais
   const totalDistributed = Object.values(distribution).reduce((sum, detail) => sum + (detail?.quantity || 0), 0);
-  
-  // Converter faixa de funcionários para texto
-  const getFuncionariosDisplay = () => {
-    const ranges: { [key: string]: string } = {
-      '10-49': '10 a 49',
-      '50-100': '50 a 100',
-      '101-300': '101 a 300',
-      '301-500': '301 a 500',
-      '501-1000': '501 a 1000',
-      'mais-1000': 'Mais de 1000'
-    };
-    return ranges[totalUniforms] || totalUniforms;
-  };
 
   // Determinar cor do status
   const getStatusColor = () => {
@@ -244,8 +231,8 @@ export default function DistributionStep({
   };
 
   const getStatusMessage = () => {
-    if (totalDistributed > 0) return `${totalDistributed} uniformes selecionados para ${getFuncionariosDisplay()} funcionários`;
-    return `Selecione os uniformes necessários para ${getFuncionariosDisplay()} funcionários`;
+    if (totalDistributed > 0) return `${totalDistributed} uniformes selecionados de ${totalUniforms} solicitados`;
+    return `Selecione os uniformes necessários (total solicitado: ${totalUniforms})`;
   };
 
   // Atualizar distribuição
@@ -266,36 +253,36 @@ export default function DistributionStep({
   const distributeAutomatically = () => {
     // Pegar apenas produtos com quantidade > 0
     const selectedProducts = Object.keys(distribution).filter(key => distribution[key]?.quantity > 0);
-    
+
     if (selectedProducts.length === 0) {
       // Se nenhum produto selecionado, distribuir entre os 3 primeiros
       const defaultProducts = uniformProducts.slice(0, 3);
-      const baseQuantity = 50; // Quantidade base para distribuição automática
-      
+      const quantityPerProduct = Math.max(10, Math.floor(totalUniforms / defaultProducts.length));
+
       const newDistribution: { [key: string]: UniformDetail } = {};
-      
+
       defaultProducts.forEach((product, index) => {
         newDistribution[product.id] = {
-          quantity: baseQuantity,
+          quantity: quantityPerProduct,
           malhaType: product.fabrics[0]
         };
       });
-      
+
       setDistribution(newDistribution);
       onDistributionChange(newDistribution);
     } else {
       // Distribuir entre produtos já selecionados
-      const baseQuantity = 30;
-      
+      const quantityPerProduct = Math.max(10, Math.floor(totalUniforms / selectedProducts.length));
+
       const newDistribution = { ...distribution };
-      
+
       selectedProducts.forEach((productId, index) => {
         newDistribution[productId] = {
           ...newDistribution[productId],
-          quantity: baseQuantity
+          quantity: quantityPerProduct
         };
       });
-      
+
       setDistribution(newDistribution);
       onDistributionChange(newDistribution);
     }

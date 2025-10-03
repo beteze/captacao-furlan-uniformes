@@ -148,7 +148,8 @@ export default function OrcamentoPage({
       };
       return ranges[quizData.colaboradores] || quizData.colaboradores;
     })()}\n`;
-    message += `• Total de uniformes selecionados: ${Object.values(quizData.distribution || {}).reduce((sum, detail) => sum + (detail?.quantity || 0), 0)}\n`;
+    message += `• Quantidade de uniformes solicitada: ${quizData.quantidadeUniformes} unidades\n`;
+    message += `• Total de uniformes distribuídos: ${Object.values(quizData.distribution || {}).reduce((sum, detail) => sum + (detail?.quantity || 0), 0)}\n`;
     message += `• Prazo padrão: 35 dias úteis\n`;
     
     message += `\n➡️ PRÓXIMOS PASSOS:\n`;
@@ -235,7 +236,7 @@ export default function OrcamentoPage({
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Quantidade de funcionários</label>
-                  <p className="text-gray-900 font-semibold">{(() => {
+                  <p className="text-gray-900">{(() => {
                     const ranges: { [key: string]: string } = {
                       '10-49': '10 a 49',
                       '50-100': '50 a 100',
@@ -246,6 +247,10 @@ export default function OrcamentoPage({
                     };
                     return ranges[quizData.colaboradores] || quizData.colaboradores;
                   })()} funcionários</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Quantidade de uniformes</label>
+                  <p className="text-gray-900 font-bold text-lg">{quizData.quantidadeUniformes} unidades</p>
                 </div>
                 {quizData.distribution && Object.values(quizData.distribution).some(detail => detail?.quantity > 0) && (
                   <div className="md:col-span-2">

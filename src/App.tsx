@@ -131,26 +131,28 @@ function App() {
   };
 
   const saveCurrentQuizIfValid = () => {
-    const hasValidData = quizData.colaboradores && 
-                        quizData.colaboradores > 0 && 
-                        cnpj && 
-                        cnpj.trim() !== '' && 
-                        email && 
+    const hasValidData = quizData.colaboradores &&
+                        quizData.quantidadeUniformes &&
+                        quizData.quantidadeUniformes >= 10 &&
+                        cnpj &&
+                        cnpj.trim() !== '' &&
+                        email &&
                         email.trim() !== '';
-    
+
     if (hasValidData) {
       setSavedQuizzes(prev => {
         // Verificar se já existe um orçamento com os mesmos dados para evitar duplicatas
-        const isDuplicate = prev.some(saved => 
-          saved.cnpj === cnpj && 
-          saved.email === email && 
-          saved.colaboradores === quizData.colaboradores
+        const isDuplicate = prev.some(saved =>
+          saved.cnpj === cnpj &&
+          saved.email === email &&
+          saved.colaboradores === quizData.colaboradores &&
+          saved.quantidadeUniformes === quizData.quantidadeUniformes
         );
-        
+
         if (isDuplicate) {
           return prev;
         }
-        
+
         return [...prev, {
           ...(quizData as QuizData),
           cnpj,

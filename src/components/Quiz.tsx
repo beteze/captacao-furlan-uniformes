@@ -40,6 +40,7 @@ const Quiz: React.FC<QuizProps> = ({
   const [isHelpModalOpen, setIsHelpModalOpen] = useState(false);
   const [emailError, setEmailError] = useState<string>('');
   const [colaboradoresError, setColaboradoresError] = useState<string>('');
+  const [quantidadeUniformesError, setQuantidadeUniformesError] = useState<string>('');
 
   const formatCNPJ = (value: string) => {
     // Remove tudo que não é dígito
@@ -74,6 +75,19 @@ const Quiz: React.FC<QuizProps> = ({
   const handleColaboradoresChange = (value: string) => {
     onQuizDataChange({ colaboradores: value });
     setColaboradoresError('');
+  };
+
+  const handleQuantidadeUniformesChange = (value: string) => {
+    const numValue = parseInt(value) || 0;
+    onQuizDataChange({ quantidadeUniformes: numValue });
+
+    if (value.trim() === '' || numValue === 0) {
+      setQuantidadeUniformesError('');
+    } else if (numValue < 10) {
+      setQuantidadeUniformesError('A quantidade mínima é de 10 uniformes');
+    } else {
+      setQuantidadeUniformesError('');
+    }
   };
 
   const handleOpenHelpModal = () => {
@@ -114,7 +128,10 @@ const Quiz: React.FC<QuizProps> = ({
                quizData.segmento &&
                quizData.segmento.trim() !== '' &&
                quizData.colaboradores &&
-               quizData.colaboradores.trim() !== '';
+               quizData.colaboradores.trim() !== '' &&
+               quizData.quantidadeUniformes &&
+               quizData.quantidadeUniformes >= 10 &&
+               !quantidadeUniformesError;
       case 2:
         // Para a etapa 2, vamos manter a validação simples por enquanto
         const totalDistributed = Object.values(quizData.distribution || {}).reduce((sum, detail) => sum + (detail?.quantity || 0), 0);
@@ -266,6 +283,28 @@ const Quiz: React.FC<QuizProps> = ({
                   Selecione a faixa que melhor representa o número de funcionários da sua empresa
                 </p>
               </div>
+
+              <div>
+                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
+                  Quantidade de uniformes *
+                </label>
+                <input
+                  type="number"
+                  value={quizData.quantidadeUniformes || ''}
+                  onChange={(e) => handleQuantidadeUniformesChange(e.target.value)}
+                  placeholder="Mínimo 10 unidades"
+                  min="10"
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    quantidadeUniformesError ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                />
+                {quantidadeUniformesError && (
+                  <p className="text-red-600 text-sm mt-1">{quantidadeUniformesError}</p>
+                )}
+                <p className="text-sm text-gray-500 mt-1">
+                  Informe a quantidade total de uniformes que deseja solicitar (mínimo 10)
+                </p>
+              </div>
             </div>
           </div>
         );
@@ -279,7 +318,7 @@ const Quiz: React.FC<QuizProps> = ({
             </div>
             
             <DistributionStep
-              totalUniforms={quizData.colaboradores || ''}
+              totalUniforms={quizData.quantidadeUniformes || 0}
               initialDistribution={quizData.distribution || {}}
               initialCustomUniformTypes={quizData.customUniformTypes || []}
               onDistributionChange={(distribution) => onQuizDataChange({ distribution })}
