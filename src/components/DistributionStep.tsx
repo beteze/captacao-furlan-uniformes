@@ -71,7 +71,7 @@ const uniformProducts: UniformProduct[] = [
       'Tecidos nobres e duráveis',
       'Acabamento profissional'
     ],
-    fabrics: ['Tricoline Ibiza', 'Cannes', 'Profit', 'London', 'Micro Vichy', 'Confort Plus', 'Importada']
+    fabrics: ['Tricoline Ibiza', 'Tricoline Cannes', 'Tricoline Profit', 'Tricoline London', 'Tricoline Micro Vichy', 'Tricoline Confort Plus', 'Tricoline London Confort', 'Tricoline Importada']
   },
   {
     id: 'camisa-social-feminina',
@@ -82,7 +82,7 @@ const uniformProducts: UniformProduct[] = [
       'Tecidos de alta qualidade',
       'Modelagem exclusiva'
     ],
-    fabrics: ['Tricoline Ibiza', 'Cannes', 'Profit', 'London', 'Micro Vichy', 'Confort Plus', 'Importada']
+    fabrics: ['Tricoline Ibiza', 'Tricoline Cannes', 'Tricoline Profit', 'Tricoline London', 'Tricoline Micro Vichy', 'Tricoline Confort Plus', 'Tricoline London Confort', 'Tricoline Importada']
   },
   {
     id: 'calca-social-feminina',
