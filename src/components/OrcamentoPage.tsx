@@ -410,6 +410,7 @@ export default function OrcamentoPage({
                 ) : (
                   <>
                     <a
+                      id="orcamentoWhats"
                       href={whatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -421,6 +422,7 @@ export default function OrcamentoPage({
                     </a>
                     
                     <a
+                      id="orcamentoEmail"
                       href={emailUrl}
                       onClick={handleQuoteFinalization}
                       className="w-full inline-flex items-center justify-center px-4 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all font-medium text-lg"

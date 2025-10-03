@@ -271,7 +271,7 @@ const Quiz: React.FC<QuizProps> = ({
 
       case 2:
         return (
-          <div>
+          <div id="quizStep2Loaded">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-800">Distribuição de Uniformes</h2>
               <HelpButton onClick={handleOpenHelpModal} />
