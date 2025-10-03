@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import LandingPage from './components/LandingPage';
 import Quiz from './components/Quiz';
 import OrcamentoPage from './components/OrcamentoPage';
+import DisqualifiedPage from './components/DisqualifiedPage';
 import ProgressBar from './components/ProgressBar';
 import SavedQuotesModal from './components/SavedQuotesModal';
 import { QuizData } from './types';
 
-type AppState = 'landing' | 'dados' | 'pedido' | 'review' | 'orcamento';
+type AppState = 'dados' | 'pedido' | 'review' | 'orcamento' | 'disqualified';
 
 function App() {
-  const [currentView, setCurrentView] = useState<AppState>('landing');
+  const [currentView, setCurrentView] = useState<AppState>('dados');
   const [quizData, setQuizData] = useState<Partial<QuizData>>({
     distribution: {},
     customUniformTypes: []
@@ -23,10 +23,6 @@ function App() {
   const [showSavedQuotes, setShowSavedQuotes] = useState(false);
 
   const hasSavedQuotes = savedQuizzes.length > 0;
-
-  const handleStartQuiz = () => {
-    setCurrentView('dados');
-  };
 
   const handleQuizComplete = (data: QuizData) => {
     setQuizData(data);
@@ -102,6 +98,9 @@ function App() {
     setCurrentQuizStep(step);
   };
 
+  const handleDisqualified = () => {
+    setCurrentView('disqualified');
+  };
 
   const handleCnpjChange = (newCnpj: string) => {
     setCnpj(newCnpj);
@@ -168,11 +167,6 @@ function App() {
 
   const renderCurrentView = () => {
     switch (currentView) {
-      case 'landing':
-        return (
-          <LandingPage onStartQuiz={handleStartQuiz} />
-        );
-      
       case 'dados':
         return (
           <Quiz
@@ -181,6 +175,7 @@ function App() {
             onQuizDataChange={handleQuizDataChange}
             onBack={handleBackToLanding}
             onStepChange={handleQuizStepChange}
+            onDisqualified={handleDisqualified}
             cnpj={cnpj}
             email={email}
             companyName={companyName}
@@ -226,23 +221,40 @@ function App() {
           />
         );
       
+      case 'disqualified':
+        return (
+          <DisqualifiedPage onBack={handleBackToLanding} />
+        );
+      
       default:
         return (
-          <LandingPage onStartQuiz={handleStartQuiz} />
+          <Quiz
+            onComplete={handleQuizComplete}
+            quizData={quizData}
+            onQuizDataChange={handleQuizDataChange}
+            onBack={handleBackToLanding}
+            onStepChange={handleQuizStepChange}
+            onDisqualified={handleDisqualified}
+            cnpj={cnpj}
+            email={email}
+            companyName={companyName}
+            onCnpjChange={handleCnpjChange}
+            onEmailChange={handleEmailChange}
+            onCompanyNameChange={handleCompanyNameChange}
+            onBackToLanding={handleBackToLanding}
+          />
         );
     }
   };
 
   return (
-    <div className={`App ${currentView !== 'landing' ? 'pt-16' : ''}`}>
-      {currentView !== 'landing' && (
-        <ProgressBar 
-          currentView={currentView}
-          currentQuizStep={currentQuizStep}
-          isQuoteFinalized={isQuoteFinalized}
-          hasSavedQuotes={hasSavedQuotes}
-        />
-      )}
+    <div className="App pt-16">
+      <ProgressBar 
+        currentView={currentView}
+        currentQuizStep={currentQuizStep}
+        isQuoteFinalized={isQuoteFinalized}
+        hasSavedQuotes={hasSavedQuotes}
+      />
       {renderCurrentView()}
       
       <SavedQuotesModal

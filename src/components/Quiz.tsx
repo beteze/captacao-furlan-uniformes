@@ -11,6 +11,7 @@ interface QuizProps {
   onQuizDataChange: (updates: Partial<QuizData>) => void;
   onBack: () => void;
   onStepChange: (step: number) => void;
+  onDisqualified: () => void;
   cnpj: string;
   email: string;
   companyName: string;
@@ -26,6 +27,7 @@ const Quiz: React.FC<QuizProps> = ({
   onQuizDataChange,
   onBack,
   onStepChange,
+  onDisqualified,
   cnpj,
   email,
   companyName,

@@ -200,8 +200,6 @@ export default function HelpModal({
 
   const getStepDescription = () => {
     switch (currentView) {
-      case 'landing':
-        return 'Página inicial';
       case 'dados':
         return currentStep === 1 ? 'Dados da Empresa' :
                currentStep === 2 ? 'Distribuição de Uniformes' :
@@ -210,6 +208,8 @@ export default function HelpModal({
         return 'Revisão do Orçamento';
       case 'orcamento':
         return 'Finalização do Orçamento';
+      case 'disqualified':
+        return 'Página de contato';
       default:
         return 'Navegando no site';
     }

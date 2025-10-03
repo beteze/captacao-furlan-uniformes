@@ -26,8 +26,6 @@ export default function ProgressBar({ currentView, currentQuizStep = 1, isQuoteF
 
   const getStepLabel = () => {
     switch (currentView) {
-      case 'landing':
-        return 'Início';
       case 'dados':
         const stepPrefix = hasSavedQuotes ? 'Novo Orçamento - ' : '';
         return currentQuizStep === 1 ? `${stepPrefix}1. Dados da Empresa` : 
@@ -37,6 +35,8 @@ export default function ProgressBar({ currentView, currentQuizStep = 1, isQuoteF
         return hasSavedQuotes ? '4. Revisão - Gerenciar Orçamentos' : '4. Revisão';
       case 'orcamento':
         return isQuoteFinalized ? '5. Pedido de orçamento finalizado' : '5. Finalizar pedido de orçamento';
+      case 'disqualified':
+        return 'Contato direto';
       default:
         return 'Carregando...';
     }
