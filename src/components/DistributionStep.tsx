@@ -197,7 +197,7 @@ const uniformProducts: UniformProduct[] = [
       'Modelagem exclusiva'
     ],
     fabrics: ['Crepe com elastano'],
-    image: '/images/gola-redonda-2x@2x.png'
+    image: '/images/nano-banana-2025-10-04T19-17-52.png'
   },
   {
     id: 'blusa-gola-redonda',
