@@ -296,7 +296,7 @@ export default function DistributionStep({
 
   return (
     <div className="space-y-6">
-      <div className="text-center mb-6">
+      <div className="text-center">
         <h2 className="text-2xl font-bold text-gray-800 mb-2">
           Catálogo de Uniformes
         </h2>
@@ -306,14 +306,14 @@ export default function DistributionStep({
       </div>
 
       {/* Informational Tip */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6 mb-6">
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
         <p className="text-sm text-blue-800">
           <strong>Dica:</strong> Nosso consultor especializado poderá auxiliar com detalhes técnicos, medidas e personalizações específicas.
         </p>
       </div>
 
       {/* Status Counter */}
-      <div className={`p-4 rounded-lg border-2 ${getStatusColor()} transition-all duration-300 mb-6`}>
+      <div className={`p-4 rounded-lg border-2 ${getStatusColor()} transition-all duration-300`}>
         <div className="flex items-center justify-center space-x-3">
           {getStatusIcon()}
           <div className="text-center">
@@ -328,10 +328,10 @@ export default function DistributionStep({
       </div>
 
       {/* Action Button */}
-      <div className="flex justify-center mb-6">
+      <div className="flex justify-center">
         <button
           onClick={distributeAutomatically}
-          className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-sm transition-all inline-flex items-center justify-center"
+          className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-sm transition-all flex items-center justify-center"
         >
           <Zap className="w-4 h-4 mr-2" />
           Distribuir automaticamente
@@ -339,7 +339,7 @@ export default function DistributionStep({
       </div>
 
       {/* Upload de imagem atual */}
-      <div className="bg-blue-50 rounded-lg p-4 mt-6 mb-6">
+      <div className="bg-blue-50 rounded-lg p-4">
         <h3 className="font-medium text-blue-900 mb-2 flex items-center">
           <Upload className="w-4 h-4 mr-2" />
           Uniforme atual da empresa (opcional)
@@ -350,13 +350,13 @@ export default function DistributionStep({
         <input
           type="file"
           accept="image/*"
-          className="w-full text-base px-4 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+          className="w-full px-4 py-2 text-base border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
           placeholder="Selecionar arquivo..."
         />
       </div>
 
       {/* Products Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-4 mt-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-4">
         {uniformProducts.map((product) => {
           const currentDetail = distribution[product.id] || { quantity: 0 };
           const hasQuantity = currentDetail.quantity > 0;
@@ -408,12 +408,12 @@ export default function DistributionStep({
                   onChange={(e) => updateDistribution(product.id, 'quantity', parseInt(e.target.value) || 0)}
                   placeholder="Mín. 10"
                   min="0"
-                  className={`w-full text-base px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                  className={`w-full px-4 py-2 text-base border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                     currentDetail.quantity > 0 && currentDetail.quantity < 10 ? 'border-red-500' : 'border-gray-300'
                   }`}
                 />
                 {currentDetail.quantity > 0 && currentDetail.quantity < 10 && (
-                  <p className="text-red-600 text-xs mt-1">Quantidade mínima: 10 unidades</p>
+                  <p className="text-sm text-red-600 mt-1">Quantidade mínima: 10 unidades</p>
                 )}
               </div>
 
@@ -427,7 +427,7 @@ export default function DistributionStep({
                     <select
                       value={currentDetail.malhaType || ''}
                       onChange={(e) => updateDistribution(product.id, 'malhaType', e.target.value)}
-                      className="w-full text-base px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                       <option value="">Selecione o tecido</option>
                       <option value="preciso-ajuda">Preciso de ajuda para definir</option>
@@ -437,7 +437,7 @@ export default function DistributionStep({
                         </option>
                       ))}
                     </select>
-                    <p className="text-xs text-gray-500 mt-1">
+                    <p className="text-sm text-gray-500 mt-1">
                       Se não tiver certeza, não selecione agora. A definição será feita com nosso consultor ao elaborar o orçamento.
                     </p>
                   </div>
