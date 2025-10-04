@@ -231,28 +231,28 @@ export default function OrcamentoPage({
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">CNPJ</label>
-                  <p className="text-gray-900 font-mono">{cnpj}</p>
+                  <p className="text-sm font-semibold text-gray-800">CNPJ</p>
+                  <p className="text-sm text-gray-700 mt-0.5 font-mono">{cnpj}</p>
                 </div>
                 {companyName && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Nome da Empresa</label>
-                    <p className="text-gray-900">{companyName}</p>
+                    <p className="text-sm font-semibold text-gray-800">Nome da Empresa</p>
+                    <p className="text-sm text-gray-700 mt-0.5">{companyName}</p>
                   </div>
                 )}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
-                  <p className="text-gray-900">{email}</p>
+                  <p className="text-sm font-semibold text-gray-800">E-mail</p>
+                  <p className="text-sm text-gray-700 mt-0.5">{email}</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Segmento</label>
-                  <p className="text-gray-900">
+                  <p className="text-sm font-semibold text-gray-800">Segmento</p>
+                  <p className="text-sm text-gray-700 mt-0.5">
                     {getSegmentoDisplay()}
                   </p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Quantidade de funcionários</label>
-                  <p className="text-gray-900">{(() => {
+                  <p className="text-sm font-semibold text-gray-800">Quantidade de funcionários</p>
+                  <p className="text-sm text-gray-700 mt-0.5">{(() => {
                     const ranges: { [key: string]: string } = {
                       '10-49': '10 a 49',
                       '50-100': '50 a 100',
@@ -265,13 +265,13 @@ export default function OrcamentoPage({
                   })()} funcionários</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Quantidade de uniformes</label>
-                  <p className="text-gray-900 font-bold text-lg">{quizData.quantidadeUniformes} unidades</p>
+                  <p className="text-sm font-semibold text-gray-800">Quantidade de uniformes</p>
+                  <p className="text-sm text-gray-700 mt-0.5 font-bold text-lg">{quizData.quantidadeUniformes} unidades</p>
                 </div>
                 {quizData.distribution && Object.values(quizData.distribution).some(detail => detail?.quantity > 0) && (
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Distribuição</label>
-                    <div className="text-gray-900">
+                    <p className="text-sm font-semibold text-gray-800">Distribuição</p>
+                    <div className="text-sm text-gray-700 mt-0.5">
                       {Object.entries(quizData.distribution || {})
                         .filter(([_, detail]) => detail?.quantity > 0)
                         .map(([type, detail]) => (
@@ -294,29 +294,29 @@ export default function OrcamentoPage({
               
               <div className="space-y-4">
                 <div className="p-4 bg-gray-50 rounded-lg">
-                  <h3 className="font-medium text-gray-900 mb-2">Personalização</h3>
-                  <p className="text-gray-700">
+                  <p className="text-sm font-semibold text-gray-800 mb-2">Personalização</p>
+                  <p className="text-sm text-gray-700 mt-0.5">
                     {getPersonalizacaoDisplay()}
                   </p>
                 </div>
-                
+
                 {quizData.elementoPersonalizado && (
                   <div className="p-4 bg-gray-50 rounded-lg">
-                    <h3 className="font-medium text-gray-900 mb-2">Elemento Personalizado</h3>
-                    <p className="text-gray-700">{quizData.elementoPersonalizado}</p>
+                    <p className="text-sm font-semibold text-gray-800 mb-2">Elemento Personalizado</p>
+                    <p className="text-sm text-gray-700 mt-0.5">{quizData.elementoPersonalizado}</p>
                   </div>
                 )}
-                
+
                 {quizData.prazoEntrega && (
                   <div className="p-4 bg-gray-50 rounded-lg">
-                    <h3 className="font-medium text-gray-900 mb-2">Prazo Desejado</h3>
-                    <p className="text-gray-700">{quizData.prazoEntrega} dias úteis</p>
+                    <p className="text-sm font-semibold text-gray-800 mb-2">Prazo Desejado</p>
+                    <p className="text-sm text-gray-700 mt-0.5">{quizData.prazoEntrega} dias úteis</p>
                   </div>
                 )}
                 
                 {quizData.distribution && Object.values(quizData.distribution).some(detail => detail?.quantity > 0) && (
                   <div className="p-4 bg-gray-50 rounded-lg">
-                    <h3 className="font-medium text-gray-900 mb-2">Distribuição dos Uniformes</h3>
+                    <p className="text-sm font-semibold text-gray-800 mb-2">Distribuição dos Uniformes</p>
                     <div className="space-y-1">
                       {Object.entries(quizData.distribution || {})
                         .filter(([_, detail]) => detail?.quantity > 0)
@@ -425,10 +425,10 @@ export default function OrcamentoPage({
                 {isReview ? (
                   <button
                     onClick={hasSavedQuotes ? onViewSavedQuotes : onReviewComplete}
-                    className="w-full inline-flex items-center justify-center px-4 py-4 bg-blue-900 hover:bg-blue-800 text-white rounded-lg transition-all font-medium text-lg"
+                    className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-sm transition-all inline-flex items-center justify-center"
                   >
                     <ArrowRight className="mr-2 w-5 h-5" />
-                    {hasSavedQuotes ? 'Ver todos meus pedidos de orçamento' : 'Salvar pedido de orçamento'}
+                    {hasSavedQuotes ? 'Ver todos meus pedidos de orçamento' : 'Fazer pedido de orçamento'}
                   </button>
                 ) : (
                   <>
@@ -438,25 +438,25 @@ export default function OrcamentoPage({
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={handleQuoteFinalization}
-                      className="w-full inline-flex items-center justify-center px-4 py-4 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-all font-medium text-lg"
+                      className="w-full sm:w-auto px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md shadow-sm transition-all inline-flex items-center justify-center"
                     >
                       <MessageCircle className="mr-2 w-5 h-5" />
                       Enviar via WhatsApp
                     </a>
-                    
+
                     <a
                       id="btnSendEmail"
                       href={emailUrl}
                       onClick={handleQuoteFinalization}
-                      className="w-full inline-flex items-center justify-center px-4 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all font-medium text-lg"
+                      className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-sm transition-all inline-flex items-center justify-center"
                     >
                       <Mail className="mr-2 w-5 h-5" />
                       Enviar por E-mail
                     </a>
-                    
+
                     <button
                       onClick={onStartNewQuiz}
-                      className="w-full inline-flex items-center justify-center px-4 py-4 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-all text-lg font-medium"
+                      className="w-full sm:w-auto px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-md shadow-sm transition-all inline-flex items-center justify-center"
                     >
                       <User className="mr-2 w-5 h-5" />
                       Fazer Novo Orçamento
