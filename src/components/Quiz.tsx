@@ -352,10 +352,10 @@ const Quiz: React.FC<QuizProps> = ({
                     <button
                       key={option.id}
                       onClick={() => onQuizDataChange({ personalizacao: option.id })}
-                      className={`p-4 border-2 rounded-lg text-left transition-all ${
+                      className={`p-4 border-2 rounded-lg text-left transition-all hover:border-blue-500 focus:ring-blue-600 ${
                         quizData.personalizacao === option.id
                           ? 'border-blue-500 bg-blue-50'
-                          : 'border-gray-200 hover:border-gray-300'
+                          : 'border-gray-200'
                       }`}
                     >
                       <div className="font-medium text-gray-900">{option.name}</div>
@@ -420,10 +420,13 @@ const Quiz: React.FC<QuizProps> = ({
                     onChange={(e) => onQuizDataChange({ prazoEntrega: e.target.value })}
                     placeholder="30"
                     min="1"
-                    className="w-32 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="max-w-[120px] text-center px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                   <span className="text-gray-700 font-medium">dias úteis</span>
                 </div>
+                <p className="text-sm text-gray-500 mt-1">
+                  Use um dos prazos sugeridos abaixo para evitar alterações no orçamento.
+                </p>
                 <p className="text-sm text-orange-600 mt-2 font-medium">
                   ⚠️ O orçamento pode variar conforme o prazo.
                 </p>
