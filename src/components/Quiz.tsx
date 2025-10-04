@@ -61,11 +61,12 @@ const Quiz: React.FC<QuizProps> = ({
 
   const handleEmailChange = (value: string) => {
     onEmailChange(value);
-    
-    // Validação simples de e-mail
+
+    // Validação de e-mail com regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (value.trim() === '') {
       setEmailError('');
-    } else if (!value.includes('@') || !value.includes('.')) {
+    } else if (!emailRegex.test(value)) {
       setEmailError('Por favor, insira um e-mail válido');
     } else {
       setEmailError('');
@@ -121,21 +122,37 @@ const Quiz: React.FC<QuizProps> = ({
 
   const canProceed = () => {
     switch (currentStep) {
-      case 1:
-        return cnpj.trim() !== '' &&
+      case 1: {
+        // Validar CNPJ (14 dígitos)
+        const cnpjDigits = cnpj.replace(/\D/g, '');
+        const cnpjValid = cnpjDigits.length === 14;
+
+        // Validar Segmento "Outro"
+        const segmentoValid = quizData.segmento && quizData.segmento.trim() !== '' &&
+                               (quizData.segmento !== 'outro' || (quizData.segmentoOutro && quizData.segmentoOutro.trim() !== ''));
+
+        return cnpjValid &&
                email.trim() !== '' &&
                !emailError &&
-               quizData.segmento &&
-               quizData.segmento.trim() !== '' &&
+               segmentoValid &&
                quizData.colaboradores &&
                quizData.colaboradores.trim() !== '' &&
                quizData.quantidadeUniformes &&
                quizData.quantidadeUniformes >= 10 &&
                !quantidadeUniformesError;
-      case 2:
-        // Para a etapa 2, vamos manter a validação simples por enquanto
-        const totalDistributed = Object.values(quizData.distribution || {}).reduce((sum, detail) => sum + (detail?.quantity || 0), 0);
-        return totalDistributed > 0; // Simplificado para aceitar qualquer distribuição
+      }
+      case 2: {
+        // Validar que todos os produtos selecionados tenham pelo menos 10 unidades
+        const distribution = quizData.distribution || {};
+        const selectedProducts = Object.values(distribution).filter(detail => detail && detail.quantity > 0);
+
+        // Deve ter pelo menos um produto selecionado
+        if (selectedProducts.length === 0) return false;
+
+        // Todos os produtos selecionados devem ter quantidade >= 10
+        const allProductsValid = selectedProducts.every(detail => detail.quantity >= 10);
+        return allProductsValid;
+      }
       case 3:
         if (!quizData.personalizacao || !quizData.personalizacao.trim()) return false;
         
@@ -180,6 +197,7 @@ const Quiz: React.FC<QuizProps> = ({
                   onChange={(e) => handleCNPJChange(e.target.value)}
                   placeholder="00.000.000/0000-00"
                   maxLength={18}
+                  aria-label="CNPJ da empresa"
                   className="w-full px-4 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
@@ -207,6 +225,7 @@ const Quiz: React.FC<QuizProps> = ({
                   onChange={(e) => handleEmailChange(e.target.value)}
                   placeholder="contato@empresa.com"
                   maxLength={254}
+                  aria-label="E-mail de contato"
                   className={`w-full px-4 py-2 text-base border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                     emailError ? 'border-red-500' : 'border-gray-300'
                   }`}
@@ -271,6 +290,7 @@ const Quiz: React.FC<QuizProps> = ({
                   <select
                     value={quizData.colaboradores || ''}
                     onChange={(e) => handleColaboradoresChange(e.target.value)}
+                    aria-label="Quantidade de funcionários da empresa"
                     className={`w-full px-4 py-2 text-base border rounded-lg appearance-none bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                       colaboradoresError ? 'border-red-500' : 'border-gray-300'
                     }`}
@@ -288,7 +308,7 @@ const Quiz: React.FC<QuizProps> = ({
                 {colaboradoresError && (
                   <p className="text-red-600 text-sm mt-1">{colaboradoresError}</p>
                 )}
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-sm text-gray-600 mt-1">
                   Selecione a faixa que melhor representa o número de funcionários da sua empresa
                 </p>
               </div>
@@ -303,6 +323,7 @@ const Quiz: React.FC<QuizProps> = ({
                   onChange={(e) => handleQuantidadeUniformesChange(e.target.value)}
                   placeholder="Mínimo 10 unidades"
                   min="10"
+                  aria-label="Quantidade total de uniformes"
                   className={`w-full px-4 py-2 text-base border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                     quantidadeUniformesError ? 'border-red-500' : 'border-gray-300'
                   }`}
@@ -310,7 +331,7 @@ const Quiz: React.FC<QuizProps> = ({
                 {quantidadeUniformesError && (
                   <p className="text-red-600 text-sm mt-1">{quantidadeUniformesError}</p>
                 )}
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-sm text-gray-600 mt-1">
                   Informe a quantidade total de uniformes que deseja solicitar (mínimo 10)
                 </p>
               </div>
@@ -352,7 +373,7 @@ const Quiz: React.FC<QuizProps> = ({
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Tipo de personalização *
                 </label>
-                <p className="text-sm text-gray-500 mb-3">
+                <p className="text-sm text-gray-600 mb-3">
                   Escolha como deseja personalizar seus uniformes. Suas escolhas serão refletidas no orçamento final.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -402,7 +423,7 @@ const Quiz: React.FC<QuizProps> = ({
                       }`}
                     />
                   </div>
-                  <p className="text-sm text-gray-500 mt-1">
+                  <p className="text-sm text-gray-600 mt-1">
                     Descreva o elemento que deseja personalizar nos uniformes
                   </p>
                   
@@ -439,6 +460,7 @@ const Quiz: React.FC<QuizProps> = ({
                     onChange={(e) => onQuizDataChange({ prazoEntrega: e.target.value })}
                     placeholder="30"
                     min="1"
+                    aria-label="Prazo ideal de entrega em dias úteis"
                     className="max-w-[120px] px-4 py-2 text-center text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                   <span className="text-gray-700 font-medium">dias úteis</span>
@@ -517,7 +539,7 @@ const Quiz: React.FC<QuizProps> = ({
                   {currentStep === 3 ? 'Fazer pedido de orçamento' : 'Próximo'}
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </button>
-                <span className="text-xs text-gray-400 mt-1 block text-center sm:text-right">
+                <span className="text-xs text-gray-600 mt-1 block text-center sm:text-right">
                   Suas escolhas serão refletidas no orçamento final
                 </span>
               </div>

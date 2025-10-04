@@ -266,6 +266,7 @@ export default function HelpModal({
             </div>
             <button
               onClick={handleClose}
+              aria-label="Fechar modal de ajuda"
               className="text-gray-400 hover:text-gray-600"
             >
               <X className="w-6 h-6" />

@@ -281,22 +281,20 @@ function App() {
       />
       
       {/* Floating WhatsApp Button */}
-      <a 
-        href="https://wa.me/553198692472?text=Olá,%20gostaria%20de%20fazer%20um%20orçamento%20de%20uniformes." 
-        target="_blank" 
+      <a
+        href="https://wa.me/553198692472?text=Olá,%20gostaria%20de%20fazer%20um%20orçamento%20de%20uniformes."
+        target="_blank"
         rel="noopener noreferrer"
+        aria-label="Contato via WhatsApp"
+        className="fixed bottom-24 sm:bottom-5 right-5 z-[9999]"
         style={{
-          position: 'fixed',
-          zIndex: 9999,
-          right: '20px',
-          bottom: '20px',
           width: '64px',
           height: '64px',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           background: '#00AD57',
-          borderRadius: '100%',
+          borderRadius: '50%',
           boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
           transition: 'transform 0.3s ease, box-shadow 0.3s ease'
         }}

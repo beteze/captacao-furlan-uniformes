@@ -107,6 +107,7 @@ export default function SavedQuotesModal({
             </h3>
             <button
               onClick={onClose}
+              aria-label="Fechar modal de orçamentos salvos"
               className="text-gray-400 hover:text-gray-600"
             >
               <X className="w-6 h-6" />

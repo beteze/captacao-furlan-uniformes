@@ -335,8 +335,8 @@ export default function DistributionStep({
         <input
           type="file"
           accept="image/*"
+          aria-label="Upload de imagem do uniforme atual da empresa"
           className="w-full px-4 py-2 text-base border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
-          placeholder="Selecionar arquivo..."
         />
       </div>
 
@@ -367,10 +367,12 @@ export default function DistributionStep({
                 />
               ) : (
                 <div
+                  role="img"
+                  aria-label="Imagem do produto em breve"
                   className="product-image-placeholder w-full h-32 bg-gray-100 rounded-md mb-3 flex items-center justify-center"
                   data-product-id={product.id}
                 >
-                  <span className="text-gray-400 text-sm">Imagem em breve</span>
+                  <span className="text-gray-600 text-sm">Imagem em breve</span>
                 </div>
               )}
 
@@ -408,6 +410,7 @@ export default function DistributionStep({
                   onChange={(e) => updateDistribution(product.id, 'quantity', parseInt(e.target.value) || 0)}
                   placeholder="Mín. 10"
                   min="0"
+                  aria-label={`Quantidade de ${product.name}`}
                   data-product-id={product.id}
                   className={`product-quantity-input w-full px-4 py-2 text-base border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                     currentDetail.quantity > 0 && currentDetail.quantity < 10 ? 'border-red-500' : 'border-gray-300'
