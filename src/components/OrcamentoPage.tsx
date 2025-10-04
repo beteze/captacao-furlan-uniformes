@@ -223,35 +223,35 @@ export default function OrcamentoPage({
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-          <div className="lg:col-span-2 space-y-6">
-            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
                 <Building className="mr-2 w-5 h-5 text-blue-900" />
                 Dados da Empresa
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm font-semibold text-gray-800">CNPJ</p>
+                  <p className="text-sm font-medium text-gray-700">CNPJ</p>
                   <p className="text-sm text-gray-700 mt-0.5 font-mono">{cnpj}</p>
                 </div>
                 {companyName && (
                   <div>
-                    <p className="text-sm font-semibold text-gray-800">Nome da Empresa</p>
+                    <p className="text-sm font-medium text-gray-700">Nome da Empresa</p>
                     <p className="text-sm text-gray-700 mt-0.5">{companyName}</p>
                   </div>
                 )}
                 <div>
-                  <p className="text-sm font-semibold text-gray-800">E-mail</p>
+                  <p className="text-sm font-medium text-gray-700">E-mail</p>
                   <p className="text-sm text-gray-700 mt-0.5">{email}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-800">Segmento</p>
+                  <p className="text-sm font-medium text-gray-700">Segmento</p>
                   <p className="text-sm text-gray-700 mt-0.5">
                     {getSegmentoDisplay()}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-800">Quantidade de funcionários</p>
+                  <p className="text-sm font-medium text-gray-700">Quantidade de funcionários</p>
                   <p className="text-sm text-gray-700 mt-0.5">{(() => {
                     const ranges: { [key: string]: string } = {
                       '10-49': '10 a 49',
@@ -265,12 +265,12 @@ export default function OrcamentoPage({
                   })()} funcionários</p>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-800">Quantidade de uniformes</p>
+                  <p className="text-sm font-medium text-gray-700">Quantidade de uniformes</p>
                   <p className="text-sm text-gray-700 mt-0.5 font-bold text-lg">{quizData.quantidadeUniformes} unidades</p>
                 </div>
                 {quizData.distribution && Object.values(quizData.distribution).some(detail => detail?.quantity > 0) && (
                   <div className="md:col-span-2">
-                    <p className="text-sm font-semibold text-gray-800">Distribuição</p>
+                    <p className="text-sm font-medium text-gray-700">Distribuição</p>
                     <div className="text-sm text-gray-700 mt-0.5">
                       {Object.entries(quizData.distribution || {})
                         .filter(([_, detail]) => detail?.quantity > 0)
@@ -286,15 +286,15 @@ export default function OrcamentoPage({
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
                 <Palette className="mr-2 w-5 h-5 text-blue-900" />
                 Detalhes do Pedido
               </h2>
-              
+
               <div className="space-y-4">
                 <div className="p-4 bg-gray-50 rounded-lg">
-                  <p className="text-sm font-semibold text-gray-800 mb-2">Personalização</p>
+                  <p className="text-sm font-medium text-gray-700 mb-2">Personalização</p>
                   <p className="text-sm text-gray-700 mt-0.5">
                     {getPersonalizacaoDisplay()}
                   </p>
@@ -302,21 +302,21 @@ export default function OrcamentoPage({
 
                 {quizData.elementoPersonalizado && (
                   <div className="p-4 bg-gray-50 rounded-lg">
-                    <p className="text-sm font-semibold text-gray-800 mb-2">Elemento Personalizado</p>
+                    <p className="text-sm font-medium text-gray-700 mb-2">Elemento Personalizado</p>
                     <p className="text-sm text-gray-700 mt-0.5">{quizData.elementoPersonalizado}</p>
                   </div>
                 )}
 
                 {quizData.prazoEntrega && (
                   <div className="p-4 bg-gray-50 rounded-lg">
-                    <p className="text-sm font-semibold text-gray-800 mb-2">Prazo Desejado</p>
+                    <p className="text-sm font-medium text-gray-700 mb-2">Prazo Desejado</p>
                     <p className="text-sm text-gray-700 mt-0.5">{quizData.prazoEntrega} dias úteis</p>
                   </div>
                 )}
                 
                 {quizData.distribution && Object.values(quizData.distribution).some(detail => detail?.quantity > 0) && (
                   <div className="p-4 bg-gray-50 rounded-lg">
-                    <p className="text-sm font-semibold text-gray-800 mb-2">Distribuição dos Uniformes</p>
+                    <p className="text-sm font-medium text-gray-700 mb-2">Distribuição dos Uniformes</p>
                     <div className="space-y-1">
                       {Object.entries(quizData.distribution || {})
                         .filter(([_, detail]) => detail?.quantity > 0)
@@ -370,7 +370,7 @@ export default function OrcamentoPage({
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
                 <Clock className="mr-2 w-5 h-5 text-blue-900" />
                 Informações sobre Prazo
@@ -425,7 +425,7 @@ export default function OrcamentoPage({
                 {isReview ? (
                   <button
                     onClick={hasSavedQuotes ? onViewSavedQuotes : onReviewComplete}
-                    className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-sm transition-all inline-flex items-center justify-center"
+                    className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-sm transition-all flex items-center justify-center"
                   >
                     <ArrowRight className="mr-2 w-5 h-5" />
                     {hasSavedQuotes ? 'Ver todos meus pedidos de orçamento' : 'Fazer pedido de orçamento'}
@@ -438,7 +438,7 @@ export default function OrcamentoPage({
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={handleQuoteFinalization}
-                      className="w-full sm:w-auto px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md shadow-sm transition-all inline-flex items-center justify-center"
+                      className="w-full sm:w-auto px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md shadow-sm transition-all flex items-center justify-center"
                     >
                       <MessageCircle className="mr-2 w-5 h-5" />
                       Enviar via WhatsApp
@@ -448,7 +448,7 @@ export default function OrcamentoPage({
                       id="btnSendEmail"
                       href={emailUrl}
                       onClick={handleQuoteFinalization}
-                      className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-sm transition-all inline-flex items-center justify-center"
+                      className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-sm transition-all flex items-center justify-center"
                     >
                       <Mail className="mr-2 w-5 h-5" />
                       Enviar por E-mail
@@ -456,7 +456,7 @@ export default function OrcamentoPage({
 
                     <button
                       onClick={onStartNewQuiz}
-                      className="w-full sm:w-auto px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-md shadow-sm transition-all inline-flex items-center justify-center"
+                      className="w-full sm:w-auto px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-md shadow-sm transition-all flex items-center justify-center"
                     >
                       <User className="mr-2 w-5 h-5" />
                       Fazer Novo Orçamento

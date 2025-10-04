@@ -306,14 +306,14 @@ export default function DistributionStep({
       </div>
 
       {/* Informational Tip */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6">
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6 mb-6">
         <p className="text-sm text-blue-800">
           <strong>Dica:</strong> Nosso consultor especializado poderá auxiliar com detalhes técnicos, medidas e personalizações específicas.
         </p>
       </div>
 
       {/* Status Counter */}
-      <div className={`p-4 rounded-lg border-2 ${getStatusColor()} transition-all duration-300 mt-6 mb-6`}>
+      <div className={`p-4 rounded-lg border-2 ${getStatusColor()} transition-all duration-300 mb-6`}>
         <div className="flex items-center justify-center space-x-3">
           {getStatusIcon()}
           <div className="text-center">
@@ -328,10 +328,10 @@ export default function DistributionStep({
       </div>
 
       {/* Action Button */}
-      <div className="flex justify-center mt-6 mb-6">
+      <div className="flex justify-center mb-6">
         <button
           onClick={distributeAutomatically}
-          className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium"
+          className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-sm transition-all inline-flex items-center justify-center"
         >
           <Zap className="w-4 h-4 mr-2" />
           Distribuir automaticamente
@@ -350,7 +350,7 @@ export default function DistributionStep({
         <input
           type="file"
           accept="image/*"
-          className="w-full px-3 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+          className="w-full text-base px-4 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
           placeholder="Selecionar arquivo..."
         />
       </div>
@@ -362,7 +362,7 @@ export default function DistributionStep({
           const hasQuantity = currentDetail.quantity > 0;
 
           return (
-            <div key={product.id} className={`bg-white border-2 rounded-lg p-4 transition-all min-h-[360px] space-y-2 ${
+            <div key={product.id} className={`bg-white border-2 rounded-lg p-4 transition-all min-h-[360px] flex flex-col space-y-2 ${
               hasQuantity ? 'border-blue-500 shadow-md' : 'border-gray-200 hover:border-gray-300'
             }`}>
               {/* Imagem do produto */}
@@ -398,8 +398,8 @@ export default function DistributionStep({
               )}
 
               {/* Campo Quantidade */}
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Quantidade *
                 </label>
                 <input
@@ -408,7 +408,7 @@ export default function DistributionStep({
                   onChange={(e) => updateDistribution(product.id, 'quantity', parseInt(e.target.value) || 0)}
                   placeholder="Mín. 10"
                   min="0"
-                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                  className={`w-full text-base px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                     currentDetail.quantity > 0 && currentDetail.quantity < 10 ? 'border-red-500' : 'border-gray-300'
                   }`}
                 />
@@ -420,14 +420,14 @@ export default function DistributionStep({
               {hasQuantity && (
                 <>
                   {/* Dropdown Tecido */}
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
                       Tecido
                     </label>
                     <select
                       value={currentDetail.malhaType || ''}
                       onChange={(e) => updateDistribution(product.id, 'malhaType', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full text-base px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                       <option value="">Selecione o tecido</option>
                       <option value="preciso-ajuda">Preciso de ajuda para definir</option>

@@ -168,7 +168,7 @@ const Quiz: React.FC<QuizProps> = ({
             </div>
             
             <div className="space-y-6">
-              <div>
+              <div className="mt-6">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   CNPJ *
                 </label>
@@ -182,7 +182,7 @@ const Quiz: React.FC<QuizProps> = ({
                 />
               </div>
 
-              <div>
+              <div className="mt-6">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Seu nome
                 </label>
@@ -195,7 +195,7 @@ const Quiz: React.FC<QuizProps> = ({
                 />
               </div>
 
-              <div>
+              <div className="mt-6">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   E-mail *
                 </label>
@@ -214,7 +214,7 @@ const Quiz: React.FC<QuizProps> = ({
                 )}
               </div>
 
-              <div>
+              <div className="mt-6">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Segmento *
                 </label>
@@ -254,7 +254,7 @@ const Quiz: React.FC<QuizProps> = ({
                 )}
               </div>
 
-              <div>
+              <div className="mt-6">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Quantidade de funcionários da empresa *
                 </label>
@@ -284,7 +284,7 @@ const Quiz: React.FC<QuizProps> = ({
                 </p>
               </div>
 
-              <div>
+              <div className="mt-6 mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Quantidade de uniformes *
                 </label>
@@ -339,8 +339,8 @@ const Quiz: React.FC<QuizProps> = ({
             </div>
             
             <div className="space-y-6">
-              <div>
-                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-3">
+              <div className="mt-6">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Tipo de personalização *
                 </label>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -366,8 +366,8 @@ const Quiz: React.FC<QuizProps> = ({
               </div>
 
               {(quizData.personalizacao === 'bordado' || quizData.personalizacao === 'silk') && (
-                <div>
-                  <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
+                <div className="mt-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
                     Elemento personalizado
                   </label>
                   <div className="flex items-center space-x-3">
@@ -378,7 +378,7 @@ const Quiz: React.FC<QuizProps> = ({
                       onChange={(e) => onQuizDataChange({ elementoPersonalizado: e.target.value })}
                       placeholder="Descreva seu logotipo, desenho, frase, etc."
                       disabled={quizData.elementoPersonalizadoHelp}
-                      className={`flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                      className={`flex-1 text-base px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                         quizData.elementoPersonalizadoHelp ? 'bg-gray-100 text-gray-500' : ''
                       }`}
                     />
@@ -409,8 +409,8 @@ const Quiz: React.FC<QuizProps> = ({
                 </div>
               )}
 
-              <div>
-                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
+              <div className="mt-6">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Prazo ideal de entrega
                 </label>
                 <div className="flex items-center space-x-3">
@@ -420,7 +420,7 @@ const Quiz: React.FC<QuizProps> = ({
                     onChange={(e) => onQuizDataChange({ prazoEntrega: e.target.value })}
                     placeholder="30"
                     min="1"
-                    className="max-w-[120px] text-center px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="max-w-[120px] text-center text-base px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                   <span className="text-gray-700 font-medium">dias úteis</span>
                 </div>
@@ -432,7 +432,7 @@ const Quiz: React.FC<QuizProps> = ({
                 </p>
               </div>
 
-              <div className="bg-blue-50 rounded-lg p-4">
+              <div className="bg-blue-50 rounded-lg p-4 mt-6 mb-6">
                 <h3 className="font-semibold text-blue-900 mb-2 flex items-center">
                   <Clock className="w-4 h-4 mr-2" />
                   Prazos padrão da empresa:
