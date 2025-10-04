@@ -220,6 +220,7 @@ export default function DistributionStep({
   onCustomUniformTypesChange
 }: DistributionStepProps) {
   const [distribution, setDistribution] = useState<{ [key: string]: UniformDetail }>(initialDistribution);
+  const [expandedBullets, setExpandedBullets] = useState<{ [key: string]: boolean }>({});
 
   // Calcular totais
   const totalDistributed = Object.values(distribution).reduce((sum, detail) => sum + (detail?.quantity || 0), 0);
@@ -295,7 +296,7 @@ export default function DistributionStep({
 
   return (
     <div className="space-y-6">
-      <div className="text-center">
+      <div className="text-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-2">
           Catálogo de Uniformes
         </h2>
@@ -305,18 +306,18 @@ export default function DistributionStep({
       </div>
 
       {/* Informational Tip */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6">
         <p className="text-sm text-blue-800">
           <strong>Dica:</strong> Nosso consultor especializado poderá auxiliar com detalhes técnicos, medidas e personalizações específicas.
         </p>
       </div>
 
       {/* Status Counter */}
-      <div className={`p-4 rounded-lg border-2 ${getStatusColor()} transition-all duration-300`}>
+      <div className={`p-4 rounded-lg border-2 ${getStatusColor()} transition-all duration-300 mt-6 mb-6`}>
         <div className="flex items-center justify-center space-x-3">
           {getStatusIcon()}
           <div className="text-center">
-            <p className="font-semibold text-lg">
+            <p className="text-lg font-semibold">
               Total distribuído: {totalDistributed} de {totalUniforms}
             </p>
             <p className="text-sm">
@@ -327,7 +328,7 @@ export default function DistributionStep({
       </div>
 
       {/* Action Button */}
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-6 mb-6">
         <button
           onClick={distributeAutomatically}
           className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium"
@@ -338,7 +339,7 @@ export default function DistributionStep({
       </div>
 
       {/* Upload de imagem atual */}
-      <div className="bg-blue-50 rounded-lg p-4">
+      <div className="bg-blue-50 rounded-lg p-4 mt-6 mb-6">
         <h3 className="font-medium text-blue-900 mb-2 flex items-center">
           <Upload className="w-4 h-4 mr-2" />
           Uniforme atual da empresa (opcional)
@@ -355,29 +356,46 @@ export default function DistributionStep({
       </div>
 
       {/* Products Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-4 mt-6">
         {uniformProducts.map((product) => {
           const currentDetail = distribution[product.id] || { quantity: 0 };
           const hasQuantity = currentDetail.quantity > 0;
 
           return (
-            <div key={product.id} className={`bg-white border-2 rounded-lg p-4 transition-all ${
+            <div key={product.id} className={`bg-white border-2 rounded-lg p-4 transition-all min-h-[360px] space-y-2 ${
               hasQuantity ? 'border-blue-500 shadow-md' : 'border-gray-200 hover:border-gray-300'
             }`}>
+              {/* Imagem do produto */}
+              {product.image && (
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-32 object-cover rounded-md mb-3"
+                />
+              )}
+
               {/* Nome do produto */}
-              <h3 className="font-bold text-gray-900 mb-3 text-lg leading-tight">
+              <h3 className="font-bold text-gray-900 text-lg leading-tight">
                 {product.name}
               </h3>
 
               {/* Bullets descritivos */}
-              <ul className="text-sm text-gray-600 mb-4 space-y-1">
-                {product.bullets.map((bullet, index) => (
+              <ul className="text-sm leading-snug text-gray-600 space-y-1">
+                {product.bullets.slice(0, expandedBullets[product.id] ? product.bullets.length : 3).map((bullet, index) => (
                   <li key={index} className="flex items-start">
                     <span className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 mr-2 flex-shrink-0"></span>
                     {bullet}
                   </li>
                 ))}
               </ul>
+              {product.bullets.length > 3 && (
+                <button
+                  onClick={() => setExpandedBullets(prev => ({ ...prev, [product.id]: !prev[product.id] }))}
+                  className="text-xs text-blue-600 hover:text-blue-800 font-medium transition-colors"
+                >
+                  {expandedBullets[product.id] ? 'Ver menos' : `Ver mais detalhes (+${product.bullets.length - 3})`}
+                </button>
+              )}
 
               {/* Campo Quantidade */}
               <div className="mb-4">
