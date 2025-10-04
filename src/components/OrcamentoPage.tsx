@@ -190,9 +190,9 @@ export default function OrcamentoPage({
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-8">
-      <div className="max-w-4xl mx-auto">
-        {/* Botão Fechar */}
-        <div className="flex justify-end mb-4">
+      <div className="max-w-md sm:max-w-4xl mx-auto">
+        {/* Botão Fechar - Oculto no mobile */}
+        <div className="hidden sm:flex justify-end mb-4">
           <button
             onClick={onBackToLanding}
             className="inline-flex items-center px-4 py-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
@@ -219,7 +219,7 @@ export default function OrcamentoPage({
               </h1>
               <HelpButton onClick={handleOpenHelpModal} />
             </div>
-            <p className="text-base text-gray-600">
+            <p className="text-sm sm:text-base text-gray-600 leading-snug">
               {isReview
                 ? 'Confira todos os detalhes antes de continuar. Seus dados estão protegidos e seguros.'
                 : 'Revise as informações e escolha como receber sua proposta personalizada.'}
@@ -253,7 +253,7 @@ export default function OrcamentoPage({
           </div>
         )}
 
-        <div className="border-t mt-6 pt-6"></div>
+        <div className="border-t border-gray-200 mt-6 pt-6"></div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
           <div className="lg:col-span-2 space-y-6">
@@ -336,8 +336,6 @@ export default function OrcamentoPage({
                 Detalhes do Pedido
               </h2>
 
-              <div className="border-t border-gray-200 pt-4 mt-4"></div>
-
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
                   <Palette className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
@@ -371,10 +369,8 @@ export default function OrcamentoPage({
                   </div>
                 )}
                 
-                <div className="border-t border-gray-200 pt-4 mt-4"></div>
-
                 {quizData.distribution && Object.values(quizData.distribution).some(detail => detail?.quantity > 0) && (
-                  <div className="p-4 bg-gray-50 rounded-lg" id="quote-distribution-detailed">
+                  <div className="p-3 sm:p-4 bg-gray-50 rounded-lg mt-4" id="quote-distribution-detailed">
                     <p className="text-sm font-semibold text-gray-800 mb-3 flex items-center">
                       <FileText className="w-4 h-4 mr-2 text-blue-600" />
                       Distribuição dos Uniformes
@@ -448,8 +444,6 @@ export default function OrcamentoPage({
                 Informações sobre Prazo
               </h2>
 
-              <div className="border-t border-gray-200 pt-4 mt-4"></div>
-
               <div className="space-y-4">
                 <div className="bg-blue-50 rounded-lg p-4">
                   <h3 className="font-semibold text-blue-900 mb-3 flex items-center">
@@ -488,7 +482,7 @@ export default function OrcamentoPage({
                 {isReview ? 'Confirmar Dados' : 'Finalizar Orçamento'}
               </h3>
               
-              <div className="space-y-4 mb-6">
+              <div className="space-y-3 sm:space-y-4 mb-6">
                 {isReview ? (
                   <div className="bg-blue-50 rounded-lg p-4">
                     <h4 className="font-medium text-blue-900 mb-2">

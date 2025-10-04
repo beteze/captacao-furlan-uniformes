@@ -246,7 +246,7 @@ export default function HelpModal({
       <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
         <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" onClick={handleClose}></div>
 
-        <div className="inline-block w-full max-w-full sm:max-w-md p-4 sm:p-6 mx-2 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+        <div className="inline-block w-full max-w-md p-4 sm:p-6 mx-2 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center">
               {currentHelpStep !== 'categories' && (
@@ -298,7 +298,7 @@ export default function HelpModal({
                   </div>
                 ))}
                 
-                <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                <div className="mt-6 p-3 sm:p-4 bg-gray-50 rounded-lg">
                   <p className="text-center text-gray-700 font-medium mb-4">
                     Ainda não resolveu?
                   </p>

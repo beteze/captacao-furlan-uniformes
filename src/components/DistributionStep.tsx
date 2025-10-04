@@ -289,21 +289,21 @@ export default function DistributionStep({
   };
 
   return (
-    <div className="space-y-6 px-4 sm:px-8">
+    <div className="space-y-6">
       <div className="text-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-2">
           Catálogo de Uniformes
         </h2>
-        <p className="text-base text-gray-600">
+        <p className="text-sm sm:text-base text-gray-600 leading-snug">
           Informe abaixo a quantidade de cada modelo desejado.
         </p>
       </div>
 
-      <div className="border-t mt-6 pt-6"></div>
+      <div className="border-t border-gray-200 mt-6 pt-6"></div>
 
       {/* Informational Tip */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-        <p className="text-sm text-blue-800">
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4 mb-6">
+        <p className="text-sm text-blue-800 leading-snug">
           <strong>Dica:</strong> Nosso consultor especializado poderá auxiliar com detalhes técnicos, medidas e personalizações específicas.
         </p>
       </div>
@@ -324,12 +324,12 @@ export default function DistributionStep({
       </div>
 
       {/* Upload de imagem atual */}
-      <div className="bg-blue-50 rounded-lg p-4">
+      <div className="bg-blue-50 rounded-lg p-3 sm:p-4">
         <h3 className="font-medium text-blue-900 mb-2 flex items-center">
           <Upload className="w-4 h-4 mr-2" />
           Uniforme atual da empresa (opcional)
         </h3>
-        <p className="text-sm text-blue-700 mb-3">
+        <p className="text-sm text-blue-700 leading-snug mb-3">
           Envie uma foto do uniforme atual para nosso consultor analisar
         </p>
         <input
@@ -454,7 +454,7 @@ export default function DistributionStep({
                     <select
                       value={currentDetail.malhaType || ''}
                       onChange={(e) => updateDistribution(product.id, 'malhaType', e.target.value)}
-                      className="w-full px-4 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                       <option value="">Selecione o tecido</option>
                       <option value="preciso-ajuda">Preciso de ajuda para definir</option>
@@ -464,7 +464,7 @@ export default function DistributionStep({
                         </option>
                       ))}
                     </select>
-                    <p className="text-sm text-gray-500 mt-1">
+                    <p className="text-sm text-gray-500 leading-snug mt-1">
                       Se não tiver certeza, não selecione agora. A definição será feita com nosso consultor ao elaborar o orçamento.
                     </p>
                   </div>
@@ -476,8 +476,8 @@ export default function DistributionStep({
       </div>
 
       {/* Aviso sobre consultor */}
-      <div className="bg-gray-50 rounded-lg p-4 mb-6">
-        <p className="text-sm text-gray-600 text-center">
+      <div className="bg-gray-50 rounded-lg p-3 sm:p-4 mb-6">
+        <p className="text-sm text-gray-600 leading-snug text-center">
           💡 <strong>Dica:</strong> Nosso consultor especializado entrará em contato para ajudar com detalhes técnicos, medidas e personalizações específicas.
         </p>
       </div>

@@ -10,7 +10,7 @@ const ConfirmationPage: React.FC<ConfirmationPageProps> = ({ onBackToLanding }) 
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-8">
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-md sm:max-w-2xl mx-auto">
         <div className="bg-white rounded-lg shadow-md p-6 sm:p-8 text-center">
           <div className="flex justify-center mb-6">
             <CheckCircle className="w-16 h-16 sm:w-20 sm:h-20 text-green-600" />
@@ -20,11 +20,11 @@ const ConfirmationPage: React.FC<ConfirmationPageProps> = ({ onBackToLanding }) 
             Orçamento enviado com sucesso!
           </h1>
 
-          <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
+          <p className="text-sm sm:text-lg text-gray-600 leading-snug mb-6 sm:mb-8">
             Acompanhe novidades e cases nas nossas redes sociais.
           </p>
 
-          <div className="border-t pt-6 mb-6"></div>
+          <div className="border-t border-gray-200 pt-6 mb-6"></div>
 
           <div className="space-y-4 sm:space-y-0 sm:flex sm:flex-col sm:items-center sm:gap-4">
             <button
@@ -46,7 +46,7 @@ const ConfirmationPage: React.FC<ConfirmationPageProps> = ({ onBackToLanding }) 
             </a>
           </div>
 
-          <div className="border-t mt-6 pt-6">
+          <div className="border-t border-gray-200 mt-6 pt-6">
             <p className="text-sm text-gray-500">
               Nossa equipe entrará em contato em até 24 horas úteis
             </p>

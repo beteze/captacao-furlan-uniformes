@@ -185,8 +185,6 @@ const Quiz: React.FC<QuizProps> = ({
             </div>
             
             <div className="space-y-6">
-              <div className="border-t mt-6 pt-6"></div>
-
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   CNPJ *
@@ -235,7 +233,7 @@ const Quiz: React.FC<QuizProps> = ({
                 )}
               </div>
 
-              <div className="border-t mt-6 pt-6"></div>
+              <div className="border-t border-gray-200 mt-6 pt-6"></div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -280,7 +278,7 @@ const Quiz: React.FC<QuizProps> = ({
                 )}
               </div>
 
-              <div className="border-t mt-6 pt-6"></div>
+              <div className="border-t border-gray-200 mt-6 pt-6"></div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -308,7 +306,7 @@ const Quiz: React.FC<QuizProps> = ({
                 {colaboradoresError && (
                   <p className="text-red-600 text-sm mt-1">{colaboradoresError}</p>
                 )}
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-gray-600 leading-snug mt-1">
                   Selecione a faixa que melhor representa o número de funcionários da sua empresa
                 </p>
               </div>
@@ -331,7 +329,7 @@ const Quiz: React.FC<QuizProps> = ({
                 {quantidadeUniformesError && (
                   <p className="text-red-600 text-sm mt-1">{quantidadeUniformesError}</p>
                 )}
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-gray-600 leading-snug mt-1">
                   Informe a quantidade total de uniformes que deseja solicitar (mínimo 10)
                 </p>
               </div>
@@ -373,7 +371,7 @@ const Quiz: React.FC<QuizProps> = ({
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Tipo de personalização *
                 </label>
-                <p className="text-sm text-gray-600 mb-3">
+                <p className="text-sm text-gray-600 leading-snug mb-3">
                   Escolha como deseja personalizar seus uniformes. Suas escolhas serão refletidas no orçamento final.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -423,7 +421,7 @@ const Quiz: React.FC<QuizProps> = ({
                       }`}
                     />
                   </div>
-                  <p className="text-sm text-gray-600 mt-1">
+                  <p className="text-sm text-gray-600 leading-snug mt-1">
                     Descreva o elemento que deseja personalizar nos uniformes
                   </p>
                   
@@ -465,7 +463,7 @@ const Quiz: React.FC<QuizProps> = ({
                   />
                   <span className="text-gray-700 font-medium">dias úteis</span>
                 </div>
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-sm text-gray-500 leading-snug mt-1">
                   Use um dos prazos sugeridos abaixo para evitar alterações no orçamento.
                 </p>
                 <p className="text-sm text-orange-600 mt-2 font-medium">
@@ -498,9 +496,9 @@ const Quiz: React.FC<QuizProps> = ({
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-8">
-      <div className="max-w-6xl mx-auto">
-        {/* Botão Fechar */}
-        <div className="flex justify-end mb-4">
+      <div className="max-w-md sm:max-w-6xl mx-auto">
+        {/* Botão Fechar - Oculto no mobile */}
+        <div className="hidden sm:flex justify-end mb-4">
           <button
             onClick={onBackToLanding}
             className="inline-flex items-center px-4 py-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
@@ -511,7 +509,7 @@ const Quiz: React.FC<QuizProps> = ({
           </button>
         </div>
         
-        <div className="bg-white rounded-lg shadow-sm p-4 sm:p-8 flex flex-col min-h-[calc(100vh-8rem)] mb-24 sm:mb-0">
+        <div className="bg-white rounded-lg shadow-sm p-4 sm:p-8 flex flex-col min-h-[calc(100vh-8rem)] pb-32 sm:pb-0 mb-4 sm:mb-0">
           <div className="flex-grow">
             {renderStep()}
           </div>

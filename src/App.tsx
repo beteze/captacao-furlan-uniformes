@@ -280,13 +280,13 @@ function App() {
         onStartNewQuiz={startFreshQuiz}
       />
       
-      {/* Floating WhatsApp Button */}
+      {/* Floating WhatsApp Button - Oculto no mobile */}
       <a
         href="https://wa.me/553198692472?text=Olá,%20gostaria%20de%20fazer%20um%20orçamento%20de%20uniformes."
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contato via WhatsApp"
-        className="fixed bottom-24 sm:bottom-5 right-5 z-[9999]"
+        className="hidden sm:flex fixed bottom-5 right-5 z-[9999]"
         style={{
           width: '64px',
           height: '64px',

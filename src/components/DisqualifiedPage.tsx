@@ -24,7 +24,7 @@ const DisqualifiedPage: React.FC<DisqualifiedPageProps> = ({ onBack }) => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-8">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-md sm:max-w-3xl mx-auto">
         <div className="relative bg-white rounded-md shadow-md p-6 sm:p-8 text-center">
           <div className="flex justify-end mb-4">
             <HelpButton onClick={handleOpenHelpModal} />
@@ -37,18 +37,18 @@ const DisqualifiedPage: React.FC<DisqualifiedPageProps> = ({ onBack }) => {
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
               Parece que este pedido não se encaixa no nosso perfil atual.
             </h1>
-            <p className="text-base sm:text-lg text-gray-600 mb-6">
+            <p className="text-sm sm:text-lg text-gray-600 leading-snug mb-6">
               Mas ficamos felizes com seu interesse! Você pode tentar novamente ou falar com nossa equipe.
             </p>
           </div>
 
-          <div className="border-t pt-6 mb-6"></div>
+          <div className="border-t border-gray-200 pt-6 mb-6"></div>
 
           <div className="bg-blue-50 rounded-md p-6 mb-6">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">
               Entre em contato conosco
             </h2>
-            <p className="text-sm sm:text-base text-gray-700 mb-6">
+            <p className="text-sm sm:text-base text-gray-700 leading-snug mb-6">
               Nossa equipe especializada poderá te atender com uma proposta personalizada.
             </p>
 
@@ -73,7 +73,7 @@ const DisqualifiedPage: React.FC<DisqualifiedPageProps> = ({ onBack }) => {
             </div>
           </div>
 
-          <div className="border-t pt-6">
+          <div className="border-t border-gray-200 pt-6">
             <p className="text-sm text-gray-500">E-mail: {emailContact}</p>
             <p className="text-sm text-gray-500">Respondemos em até 24 horas</p>
           </div>
