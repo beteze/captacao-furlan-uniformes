@@ -29,7 +29,7 @@ const uniformProducts: UniformProduct[] = [
       'Disponível em diversas cores'
     ],
     fabrics: ['PV Premium', 'PV', 'Dry Fit Esportivo', 'PP', 'Dry Fit Poliamida'],
-    image: '/images/gola-redonda-2x@2x.png'
+    image: '/images/blazer copy.png'
   },
   {
     id: 'camisa-gola-v',
@@ -41,7 +41,7 @@ const uniformProducts: UniformProduct[] = [
       'Corte feminino e masculino'
     ],
     fabrics: ['PV Premium', 'PV', 'Dry Fit Esportivo', 'PP', 'Dry Fit Poliamida'],
-    image: '/images/gola-redonda-2x@2x.png'
+    image: '/images/blazer copy.png'
   },
   {
     id: 'camisa-gola-v-raglan',
@@ -53,7 +53,7 @@ const uniformProducts: UniformProduct[] = [
       'Ideal para atividades dinâmicas'
     ],
     fabrics: ['PV Premium', 'PV', 'Dry Fit Esportivo', 'PP'],
-    image: '/images/gola-redonda-2x@2x.png'
+    image: '/images/blazer copy.png'
   },
   {
     id: 'camisa-polo',
@@ -65,7 +65,7 @@ const uniformProducts: UniformProduct[] = [
       'Qualidade premium garantida'
     ],
     fabrics: ['Piquet Supremo', 'PV Premium', 'PV', 'Dry Fit Supremo', 'PP'],
-    image: '/images/gola-redonda-2x@2x.png'
+    image: '/images/blazer copy.png'
   },
   {
     id: 'camisa-social-masculina',
@@ -77,7 +77,7 @@ const uniformProducts: UniformProduct[] = [
       'Elegância para ambientes corporativos'
     ],
     fabrics: ['Tricoline Ibiza', 'Tricoline Cannes', 'Tricoline Profit', 'Tricoline London', 'Tricoline Micro Vichy', 'Tricoline Confort Plus', 'Tricoline London Confort', 'Tricoline Importada'],
-    image: '/images/gola-redonda-2x@2x.png'
+    image: '/images/blazer copy.png'
   },
   {
     id: 'camisa-social-feminina',
@@ -89,7 +89,7 @@ const uniformProducts: UniformProduct[] = [
       'Tecidos nobres e duráveis'
     ],
     fabrics: ['Tricoline Ibiza', 'Tricoline Cannes', 'Tricoline Profit', 'Tricoline London', 'Tricoline Micro Vichy', 'Tricoline Confort Plus', 'Tricoline London Confort', 'Tricoline Importada'],
-    image: '/images/gola-redonda-2x@2x.png'
+    image: '/images/blazer copy.png'
   },
   {
     id: 'calca-social-masculina',
@@ -101,7 +101,7 @@ const uniformProducts: UniformProduct[] = [
       'Estilo elegante ideal para ambientes corporativos'
     ],
     fabrics: ['Prada', 'Brim Pesado'],
-    image: ''
+    image: '/images/blazer copy.png'
   },
   {
     id: 'calca-social-feminina',
@@ -113,7 +113,7 @@ const uniformProducts: UniformProduct[] = [
       'Tecido resistente, confortável e de fácil manutenção'
     ],
     fabrics: ['Prada'],
-    image: ''
+    image: '/images/blazer copy.png'
   },
   {
     id: 'calca-elastico-cordao',
@@ -125,7 +125,7 @@ const uniformProducts: UniformProduct[] = [
       'Resistente ao uso intenso'
     ],
     fabrics: ['Brim pesado', 'Brim leve', 'Jeans', 'Jeans com elastano'],
-    image: '/images/gola-redonda-2x@2x.png'
+    image: '/images/blazer copy.png'
   },
   {
     id: 'jaleco-consultorio',
@@ -137,7 +137,7 @@ const uniformProducts: UniformProduct[] = [
       'Fácil manutenção'
     ],
     fabrics: ['Gabardine', 'Oxfordine', 'Oxford', 'Prada'],
-    image: '/images/gola-redonda-2x@2x.png'
+    image: '/images/blazer copy.png'
   },
   {
     id: 'jaleco-operacional-botao',
@@ -149,7 +149,7 @@ const uniformProducts: UniformProduct[] = [
       'Proteção e durabilidade'
     ],
     fabrics: ['Brim pesado', 'Brim leve'],
-    image: '/images/gola-redonda-2x@2x.png'
+    image: '/images/blazer copy.png'
   },
   {
     id: 'jaleco-operacional-polo',
@@ -161,7 +161,7 @@ const uniformProducts: UniformProduct[] = [
       'Praticidade no uso'
     ],
     fabrics: ['Brim leve', 'Brim pesado'],
-    image: '/images/gola-redonda-2x@2x.png'
+    image: '/images/blazer copy.png'
   },
   {
     id: 'blazer-feminino',
@@ -173,7 +173,7 @@ const uniformProducts: UniformProduct[] = [
       'Acabamento sob medida'
     ],
     fabrics: ['Prada'],
-    image: '/images/gola-redonda-2x@2x.png'
+    image: '/images/blazer copy.png'
   },
   {
     id: 'colete-feminino',
@@ -185,7 +185,7 @@ const uniformProducts: UniformProduct[] = [
       'Tecido de qualidade'
     ],
     fabrics: ['Prada'],
-    image: '/images/gola-redonda-2x@2x.png'
+    image: '/images/blazer copy.png'
   },
   {
     id: 'blusa-gola-drape',
@@ -197,7 +197,7 @@ const uniformProducts: UniformProduct[] = [
       'Modelagem exclusiva'
     ],
     fabrics: ['Crepe com elastano'],
-    image: '/images/nano-banana-2025-10-04T19-17-52.png'
+    image: '/images/blazer copy.png'
   },
   {
     id: 'blusa-gola-redonda',
@@ -209,7 +209,7 @@ const uniformProducts: UniformProduct[] = [
       'Corte feminino valorizado'
     ],
     fabrics: ['Crepe com elastano'],
-    image: '/images/gola-redonda-2x@2x.png'
+    image: '/images/blazer copy.png'
   },
   {
     id: 'guarda-po-operacional',
@@ -221,7 +221,7 @@ const uniformProducts: UniformProduct[] = [
       'Praticidade operacional'
     ],
     fabrics: ['Brim leve', 'Brim pesado'],
-    image: '/images/gola-redonda-2x@2x.png'
+    image: '/images/blazer copy.png'
   }
 ];
 
