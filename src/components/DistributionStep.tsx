@@ -29,7 +29,7 @@ const uniformProducts: UniformProduct[] = [
       'Disponível em diversas cores'
     ],
     fabrics: ['PV Premium', 'PV', 'Dry Fit Esportivo', 'PP', 'Dry Fit Poliamida'],
-    image: '/images/camisa gola redonda.png'
+    image: '/images/gola-redonda-2x@2x.png'
   },
   {
     id: 'camisa-gola-v',
@@ -41,7 +41,7 @@ const uniformProducts: UniformProduct[] = [
       'Corte feminino e masculino'
     ],
     fabrics: ['PV Premium', 'PV', 'Dry Fit Esportivo', 'PP', 'Dry Fit Poliamida'],
-    image: '/images/camisa gola redonda.png'
+    image: '/images/gola-redonda-2x@2x.png'
   },
   {
     id: 'camisa-gola-v-raglan',
@@ -53,7 +53,7 @@ const uniformProducts: UniformProduct[] = [
       'Ideal para atividades dinâmicas'
     ],
     fabrics: ['PV Premium', 'PV', 'Dry Fit Esportivo', 'PP'],
-    image: '/images/camisa gola redonda.png'
+    image: '/images/gola-redonda-2x@2x.png'
   },
   {
     id: 'camisa-polo',
@@ -65,7 +65,7 @@ const uniformProducts: UniformProduct[] = [
       'Qualidade premium garantida'
     ],
     fabrics: ['Piquet Supremo', 'PV Premium', 'PV', 'Dry Fit Supremo', 'PP'],
-    image: '/images/camisa gola redonda.png'
+    image: '/images/gola-redonda-2x@2x.png'
   },
   {
     id: 'camisa-social-masculina',
@@ -77,7 +77,7 @@ const uniformProducts: UniformProduct[] = [
       'Elegância para ambientes corporativos'
     ],
     fabrics: ['Tricoline Ibiza', 'Tricoline Cannes', 'Tricoline Profit', 'Tricoline London', 'Tricoline Micro Vichy', 'Tricoline Confort Plus', 'Tricoline London Confort', 'Tricoline Importada'],
-    image: '/images/camisa gola redonda.png'
+    image: '/images/gola-redonda-2x@2x.png'
   },
   {
     id: 'camisa-social-feminina',
@@ -89,7 +89,7 @@ const uniformProducts: UniformProduct[] = [
       'Tecidos nobres e duráveis'
     ],
     fabrics: ['Tricoline Ibiza', 'Tricoline Cannes', 'Tricoline Profit', 'Tricoline London', 'Tricoline Micro Vichy', 'Tricoline Confort Plus', 'Tricoline London Confort', 'Tricoline Importada'],
-    image: '/images/camisa gola redonda.png'
+    image: '/images/gola-redonda-2x@2x.png'
   },
   {
     id: 'calca-social-masculina',
@@ -125,7 +125,7 @@ const uniformProducts: UniformProduct[] = [
       'Resistente ao uso intenso'
     ],
     fabrics: ['Brim pesado', 'Brim leve', 'Jeans', 'Jeans com elastano'],
-    image: '/images/camisa gola redonda.png'
+    image: '/images/gola-redonda-2x@2x.png'
   },
   {
     id: 'jaleco-consultorio',
@@ -137,7 +137,7 @@ const uniformProducts: UniformProduct[] = [
       'Fácil manutenção'
     ],
     fabrics: ['Gabardine', 'Oxfordine', 'Oxford', 'Prada'],
-    image: '/images/camisa gola redonda.png'
+    image: '/images/gola-redonda-2x@2x.png'
   },
   {
     id: 'jaleco-operacional-botao',
@@ -149,7 +149,7 @@ const uniformProducts: UniformProduct[] = [
       'Proteção e durabilidade'
     ],
     fabrics: ['Brim pesado', 'Brim leve'],
-    image: '/images/camisa gola redonda.png'
+    image: '/images/gola-redonda-2x@2x.png'
   },
   {
     id: 'jaleco-operacional-polo',
@@ -161,7 +161,7 @@ const uniformProducts: UniformProduct[] = [
       'Praticidade no uso'
     ],
     fabrics: ['Brim leve', 'Brim pesado'],
-    image: '/images/camisa gola redonda.png'
+    image: '/images/gola-redonda-2x@2x.png'
   },
   {
     id: 'blazer-feminino',
@@ -173,7 +173,7 @@ const uniformProducts: UniformProduct[] = [
       'Acabamento sob medida'
     ],
     fabrics: ['Prada'],
-    image: '/images/camisa gola redonda.png'
+    image: '/images/gola-redonda-2x@2x.png'
   },
   {
     id: 'colete-feminino',
@@ -185,7 +185,7 @@ const uniformProducts: UniformProduct[] = [
       'Tecido de qualidade'
     ],
     fabrics: ['Prada'],
-    image: '/images/camisa gola redonda.png'
+    image: '/images/gola-redonda-2x@2x.png'
   },
   {
     id: 'blusa-gola-drape',
@@ -197,7 +197,7 @@ const uniformProducts: UniformProduct[] = [
       'Modelagem exclusiva'
     ],
     fabrics: ['Crepe com elastano'],
-    image: '/images/camisa gola redonda.png'
+    image: '/images/gola-redonda-2x@2x.png'
   },
   {
     id: 'blusa-gola-redonda',
@@ -209,7 +209,7 @@ const uniformProducts: UniformProduct[] = [
       'Corte feminino valorizado'
     ],
     fabrics: ['Crepe com elastano'],
-    image: '/images/camisa gola redonda.png'
+    image: '/images/gola-redonda-2x@2x.png'
   },
   {
     id: 'guarda-po-operacional',
@@ -221,7 +221,7 @@ const uniformProducts: UniformProduct[] = [
       'Praticidade operacional'
     ],
     fabrics: ['Brim leve', 'Brim pesado'],
-    image: '/images/camisa gola redonda.png'
+    image: '/images/gola-redonda-2x@2x.png'
   }
 ];
 
@@ -353,7 +353,7 @@ export default function DistributionStep({
               data-product-id={product.id}
               data-product-category={product.id.split('-')[0]}
               data-has-image={product.image ? 'true' : 'false'}
-              className={`uniform-product-card bg-white border-2 rounded-lg p-4 transition-all min-h-[360px] flex flex-col space-y-2 ${
+              className={`uniform-product-card bg-white border-2 rounded-lg p-4 transition-all min-h-[420px] flex flex-col space-y-2 ${
               hasQuantity ? 'border-blue-500 shadow-md' : 'border-gray-200 hover:border-gray-300'
             }`}>
               {/* Imagem do produto */}
@@ -363,13 +363,13 @@ export default function DistributionStep({
                   alt={product.name}
                   data-product-id={product.id}
                   data-image-status="loaded"
-                  className="product-image w-full h-32 object-cover rounded-md mb-3"
+                  className="product-image w-full h-48 object-cover rounded-md mb-3"
                 />
               ) : (
                 <div
                   role="img"
                   aria-label="Imagem do produto em breve"
-                  className="product-image-placeholder w-full h-32 bg-gray-100 rounded-md mb-3 flex items-center justify-center"
+                  className="product-image-placeholder w-full h-48 bg-gray-100 rounded-md mb-3 flex items-center justify-center"
                   data-product-id={product.id}
                 >
                   <span className="text-gray-600 text-sm">Imagem em breve</span>
