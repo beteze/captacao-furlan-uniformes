@@ -278,13 +278,17 @@ export default function OrcamentoPage({
                   </span>
                 </div>
                 {quizData.distribution && Object.values(quizData.distribution).some(detail => detail?.quantity > 0) && (
-                  <div className="md:col-span-2">
+                  <div className="md:col-span-2" id="quote-distribution-summary">
                     <p className="text-sm font-semibold text-gray-800">Distribuição</p>
                     <div className="text-sm text-gray-700 mt-0.5">
                       {Object.entries(quizData.distribution || {})
                         .filter(([_, detail]) => detail?.quantity > 0)
                         .map(([type, detail]) => (
-                          <div key={type} className="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm mr-2 mb-1">
+                          <div
+                            key={type}
+                            data-product-type={type}
+                            className="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm mr-2 mb-1"
+                          >
                             <div>{formatUniformType(type)}: {detail.quantity}</div>
                             {detail.gender && detail.gender !== 'Unissex' && (
                               <div className="text-xs text-gray-500 italic">Gênero: {detail.gender}</div>
@@ -342,7 +346,7 @@ export default function OrcamentoPage({
                 <div className="border-t border-gray-200 pt-4 mt-4"></div>
 
                 {quizData.distribution && Object.values(quizData.distribution).some(detail => detail?.quantity > 0) && (
-                  <div className="p-4 bg-gray-50 rounded-lg">
+                  <div className="p-4 bg-gray-50 rounded-lg" id="quote-distribution-detailed">
                     <p className="text-sm font-semibold text-gray-800 mb-3 flex items-center">
                       <FileText className="w-4 h-4 mr-2 text-blue-600" />
                       Distribuição dos Uniformes
@@ -351,7 +355,12 @@ export default function OrcamentoPage({
                       {Object.entries(quizData.distribution || {})
                         .filter(([_, detail]) => detail?.quantity > 0)
                         .map(([type, detail]) => (
-                          <div key={type} className="border-b border-gray-200 pb-2 mb-2 last:border-b-0 last:pb-0 last:mb-0">
+                          <div
+                            key={type}
+                            data-product-type={type}
+                            data-product-quantity={detail.quantity}
+                            className="product-distribution-item border-b border-gray-200 pb-2 mb-2 last:border-b-0 last:pb-0 last:mb-0"
+                          >
                             <div className="flex justify-between">
                               <span className="text-gray-700">{formatUniformType(type)}:</span>
                               <span className="font-medium">{detail.quantity} unidades</span>

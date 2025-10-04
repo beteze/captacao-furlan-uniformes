@@ -150,9 +150,14 @@ export default function SavedQuotesModal({
                 </div>
               )}
 
-              <div className="space-y-4 max-h-96 overflow-y-auto">
+              <div className="space-y-4 max-h-96 overflow-y-auto" id="saved-quotes-list">
                 {savedQuizzes.map((quote, index) => (
-                  <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                  <div
+                    key={index}
+                    data-quote-index={index}
+                    data-quote-cnpj={quote.cnpj}
+                    className="saved-quote-card border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+                  >
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between">
                       <div className="flex items-start space-x-3 flex-1">
                         <input
@@ -177,11 +182,16 @@ export default function SavedQuotesModal({
                             <p>CNPJ: {quote.cnpj}</p>
                             <p>Segmento: {getSegmentoDisplay(quote.segmento, quote.segmentoOutro)}</p>
                             {quote.distribution && Object.values(quote.distribution).some(detail => detail?.quantity > 0) && (
-                              <div className="flex flex-wrap gap-1 mt-2">
+                              <div className="flex flex-wrap gap-1 mt-2" data-quote-index={index}>
                                 {Object.entries(quote.distribution)
                                   .filter(([_, detail]) => detail?.quantity > 0)
                                   .map(([type, detail]) => (
-                                    <span key={type} className="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                                    <span
+                                      key={type}
+                                      data-product-type={type}
+                                      data-product-quantity={detail.quantity}
+                                      className="product-tag inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs"
+                                    >
                                       {formatUniformType(type)}: {detail.quantity}
                                     </span>
                                   ))

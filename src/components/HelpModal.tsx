@@ -272,9 +272,9 @@ export default function HelpModal({
             </button>
           </div>
 
-          <div className="mt-4">
+          <div className="mt-4" data-help-context="modal-content">
             {currentHelpStep === 'categories' && (
-              <div className="space-y-3">
+              <div className="space-y-3" data-help-step="categories">
                 {helpCategories.map((category) => (
                   <button
                     key={category.id}
@@ -289,7 +289,7 @@ export default function HelpModal({
             )}
 
             {currentHelpStep === 'faq' && selectedCategory && (
-              <div className="space-y-4">
+              <div className="space-y-4" data-help-step="faq" data-help-category={selectedCategory.id}>
                 {selectedCategory.faq.map((item, index) => (
                   <div key={index} className="border-b border-gray-200 pb-4">
                     <h4 className="font-medium text-gray-900 mb-2">{item.question}</h4>

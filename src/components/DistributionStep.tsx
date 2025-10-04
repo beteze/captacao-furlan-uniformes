@@ -332,20 +332,35 @@ export default function DistributionStep({
           const hasQuantity = currentDetail.quantity > 0;
 
           return (
-            <div key={product.id} className={`bg-white border-2 rounded-lg p-4 transition-all min-h-[360px] flex flex-col space-y-2 ${
+            <div
+              key={product.id}
+              id={`product-${product.id}`}
+              data-product-id={product.id}
+              data-product-category={product.id.split('-')[0]}
+              data-has-image={product.image ? 'true' : 'false'}
+              className={`uniform-product-card bg-white border-2 rounded-lg p-4 transition-all min-h-[360px] flex flex-col space-y-2 ${
               hasQuantity ? 'border-blue-500 shadow-md' : 'border-gray-200 hover:border-gray-300'
             }`}>
               {/* Imagem do produto */}
-              {product.image && (
+              {product.image ? (
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-32 object-cover rounded-md mb-3"
+                  data-product-id={product.id}
+                  data-image-status="loaded"
+                  className="product-image w-full h-32 object-cover rounded-md mb-3"
                 />
+              ) : (
+                <div
+                  className="product-image-placeholder w-full h-32 bg-gray-100 rounded-md mb-3 flex items-center justify-center"
+                  data-product-id={product.id}
+                >
+                  <span className="text-gray-400 text-sm">Imagem em breve</span>
+                </div>
               )}
 
               {/* Nome do produto */}
-              <h3 className="font-bold text-gray-900 text-lg leading-tight">
+              <h3 className="product-name font-bold text-gray-900 text-lg leading-tight">
                 {product.name}
               </h3>
 
@@ -368,7 +383,7 @@ export default function DistributionStep({
               )}
 
               {/* Campo Quantidade */}
-              <div className="mt-auto">
+              <div className="product-quantity-section mt-auto">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Quantidade *
                 </label>
@@ -378,7 +393,8 @@ export default function DistributionStep({
                   onChange={(e) => updateDistribution(product.id, 'quantity', parseInt(e.target.value) || 0)}
                   placeholder="Mín. 10"
                   min="0"
-                  className={`w-full px-4 py-2 text-base border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                  data-product-id={product.id}
+                  className={`product-quantity-input w-full px-4 py-2 text-base border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                     currentDetail.quantity > 0 && currentDetail.quantity < 10 ? 'border-red-500' : 'border-gray-300'
                   }`}
                 />
@@ -388,9 +404,9 @@ export default function DistributionStep({
               </div>
 
               {hasQuantity && (
-                <>
+                <div className="product-details" data-product-id={product.id}>
                   {shouldShowGenderField(product.id) && (
-                    <div>
+                    <div className="product-gender-section">
                       <label className="block text-sm font-medium text-gray-700 mb-1">
                         Gênero
                       </label>
@@ -413,7 +429,7 @@ export default function DistributionStep({
                   )}
 
                   {/* Dropdown Tecido */}
-                  <div>
+                  <div className="product-fabric-section">
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Tecido
                     </label>
@@ -434,7 +450,7 @@ export default function DistributionStep({
                       Se não tiver certeza, não selecione agora. A definição será feita com nosso consultor ao elaborar o orçamento.
                     </p>
                   </div>
-                </>
+                </div>
               )}
             </div>
           );
