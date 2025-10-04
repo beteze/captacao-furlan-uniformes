@@ -275,7 +275,14 @@ export default function DistributionStep({
     onDistributionChange(newDistribution);
   };
 
-  // Distribuir automaticamente
+  /*
+   * DISABLED: Automatic distribution feature
+   * This feature has been temporarily disabled as the flow no longer depends on
+   * a total uniform count to divide quantities. Can be restored in future versions.
+   *
+   * Distribuir automaticamente
+   */
+  /*
   const distributeAutomatically = () => {
     // Pegar apenas produtos com quantidade > 0
     const selectedProducts = Object.keys(distribution).filter(key => distribution[key]?.quantity > 0);
@@ -313,6 +320,7 @@ export default function DistributionStep({
       onDistributionChange(newDistribution);
     }
   };
+  */
 
   return (
     <div className="space-y-6">
@@ -321,7 +329,10 @@ export default function DistributionStep({
           Catálogo de Uniformes
         </h2>
         <p className="text-base text-gray-600">
-          Distribua os uniformes entre os modelos disponíveis. Nosso consultor ajudará com detalhes finais.
+          Informe abaixo a quantidade de cada modelo desejado.
+        </p>
+        <p className="text-xs text-gray-500 mt-1">
+          O cálculo automático de distribuição foi desativado nesta versão.
         </p>
       </div>
 
@@ -349,7 +360,8 @@ export default function DistributionStep({
         </div>
       </div>
 
-      {/* Action Button */}
+      {/* Action Button - DISABLED: Automatic distribution feature removed */}
+      {/*
       <div className="flex justify-center">
         <button
           onClick={distributeAutomatically}
@@ -359,6 +371,7 @@ export default function DistributionStep({
           Distribuir automaticamente
         </button>
       </div>
+      */}
 
       {/* Upload de imagem atual */}
       <div className="bg-blue-50 rounded-lg p-4">
