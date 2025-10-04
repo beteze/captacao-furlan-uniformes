@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Zap, AlertCircle, CheckCircle, Clock, Upload } from 'lucide-react';
+import { ArrowLeft, AlertCircle, CheckCircle, Clock, Upload } from 'lucide-react';
 import { UniformDetail } from '../types';
 
 interface DistributionStepProps {
@@ -275,53 +275,6 @@ export default function DistributionStep({
     onDistributionChange(newDistribution);
   };
 
-  /*
-   * DISABLED: Automatic distribution feature
-   * This feature has been temporarily disabled as the flow no longer depends on
-   * a total uniform count to divide quantities. Can be restored in future versions.
-   *
-   * Distribuir automaticamente
-   */
-  /*
-  const distributeAutomatically = () => {
-    // Pegar apenas produtos com quantidade > 0
-    const selectedProducts = Object.keys(distribution).filter(key => distribution[key]?.quantity > 0);
-
-    if (selectedProducts.length === 0) {
-      // Se nenhum produto selecionado, distribuir entre os 3 primeiros
-      const defaultProducts = uniformProducts.slice(0, 3);
-      const quantityPerProduct = Math.max(10, Math.floor(totalUniforms / defaultProducts.length));
-
-      const newDistribution: { [key: string]: UniformDetail } = {};
-
-      defaultProducts.forEach((product, index) => {
-        newDistribution[product.id] = {
-          quantity: quantityPerProduct,
-          malhaType: product.fabrics[0]
-        };
-      });
-
-      setDistribution(newDistribution);
-      onDistributionChange(newDistribution);
-    } else {
-      // Distribuir entre produtos já selecionados
-      const quantityPerProduct = Math.max(10, Math.floor(totalUniforms / selectedProducts.length));
-
-      const newDistribution = { ...distribution };
-
-      selectedProducts.forEach((productId, index) => {
-        newDistribution[productId] = {
-          ...newDistribution[productId],
-          quantity: quantityPerProduct
-        };
-      });
-
-      setDistribution(newDistribution);
-      onDistributionChange(newDistribution);
-    }
-  };
-  */
-
   return (
     <div className="space-y-6">
       <div className="text-center mb-6">
@@ -331,15 +284,10 @@ export default function DistributionStep({
         <p className="text-base text-gray-600">
           Informe abaixo a quantidade de cada modelo desejado.
         </p>
-        <p className="text-xs text-gray-500 mt-1">
-          O cálculo automático de distribuição foi desativado nesta versão.
-        </p>
       </div>
 
-      <div className="border-t border-gray-200 pt-6 mt-6"></div>
-
       {/* Informational Tip */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 mt-4">
         <p className="text-sm text-blue-800">
           <strong>Dica:</strong> Nosso consultor especializado poderá auxiliar com detalhes técnicos, medidas e personalizações específicas.
         </p>
@@ -359,19 +307,6 @@ export default function DistributionStep({
           </div>
         </div>
       </div>
-
-      {/* Action Button - DISABLED: Automatic distribution feature removed */}
-      {/*
-      <div className="flex justify-center">
-        <button
-          onClick={distributeAutomatically}
-          className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-sm transition-all flex items-center justify-center"
-        >
-          <Zap className="w-4 h-4 mr-2" />
-          Distribuir automaticamente
-        </button>
-      </div>
-      */}
 
       {/* Upload de imagem atual */}
       <div className="bg-blue-50 rounded-lg p-4">
