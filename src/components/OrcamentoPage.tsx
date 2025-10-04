@@ -73,7 +73,23 @@ export default function OrcamentoPage({
 
   const formatUniformType = (type: string) => {
     const types: { [key: string]: string } = {
+      'camisa-gola-redonda': 'Camisa Gola Redonda',
+      'camisa-gola-v': 'Camisa Gola V',
+      'camisa-gola-v-raglan': 'Camisa Gola V Manga Raglan',
       'camisa-polo': 'Camisa Polo',
+      'camisa-social-masculina': 'Camisa Social Masculina',
+      'camisa-social-feminina': 'Camisa Social Feminina',
+      'calca-social-masculina': 'Calça Social Masculina (Sport Fino)',
+      'calca-social-feminina': 'Calça Social Feminina com Bolso Embutido e Friso na Perna',
+      'calca-elastico-cordao': 'Calça Elástico com Cordão',
+      'jaleco-consultorio': 'Jaleco de Consultório',
+      'jaleco-operacional-botao': 'Jaleco Operacional (Botão)',
+      'jaleco-operacional-polo': 'Jaleco Operacional (Modelo Polo)',
+      'blazer-feminino': 'Blazer Feminino Forrado',
+      'colete-feminino': 'Colete Feminino com Zíper',
+      'blusa-gola-drape': 'Blusa Gola Drape',
+      'blusa-gola-redonda': 'Blusa Gola Redonda',
+      'guarda-po-operacional': 'Guarda-Pó Operacional',
       'calca': 'Calça',
       'jaleco': 'Jaleco',
       'outros': 'Outros'
