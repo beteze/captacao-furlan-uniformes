@@ -234,9 +234,31 @@ export default function DistributionStep({
 }: DistributionStepProps) {
   const [distribution, setDistribution] = useState<{ [key: string]: UniformDetail }>(initialDistribution);
   const [expandedBullets, setExpandedBullets] = useState<{ [key: string]: boolean }>({});
+  const [isSummaryVisible, setIsSummaryVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   // Calcular totais
   const totalDistributed = Object.values(distribution).reduce((sum, detail) => sum + (detail?.quantity || 0), 0);
+
+  // Auto-hide summary bar on scroll down, show on scroll up
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down - hide bar
+        setIsSummaryVisible(false);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up - show bar
+        setIsSummaryVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   // Determinar cor do status
   const getStatusColor = () => {
@@ -340,8 +362,8 @@ export default function DistributionStep({
         />
       </div>
 
-      {/* Products Grid - Add bottom margin for mobile fixed bar */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-4 mb-32 sm:mb-6">
+      {/* Products Grid - Improved spacing for mobile */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-4 mb-24 sm:mb-6">
         {uniformProducts.map((product) => {
           const currentDetail = distribution[product.id] || { quantity: 0 };
           const hasQuantity = currentDetail.quantity > 0;
@@ -482,27 +504,59 @@ export default function DistributionStep({
         </p>
       </div>
 
-      {/* Fixed Mobile Summary Bar */}
-      <div className="fixed bottom-4 left-0 right-0 bg-white border-t shadow-lg p-4 sm:hidden z-20 safe-area-bottom">
-        <div className="flex items-center justify-between text-sm font-medium">
-          <div>
-            <span className="text-gray-600">Total selecionado:</span>
-            <strong className="text-blue-600 ml-2">{totalDistributed} unidades</strong>
+      {/* Fixed Mobile Summary Bar - Improved positioning */}
+      <div
+        className={`fixed left-0 right-0 bg-white/95 backdrop-blur-sm border-t shadow-lg sm:hidden z-20 transition-all duration-300 ${
+          isSummaryVisible ? 'bottom-0 translate-y-0' : '-bottom-full translate-y-full'
+        }`}
+        style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}
+      >
+        <div className="px-4 py-2">
+          <div className="flex items-center justify-between text-sm font-medium">
+            <div className="flex items-center gap-2">
+              <span className="text-gray-600">Total:</span>
+              <strong className="text-blue-600">{totalDistributed}</strong>
+              <span className="text-xs text-gray-500">
+                {totalUniforms > 0 && `/ ${totalUniforms}`}
+              </span>
+            </div>
+            <button
+              onClick={() => setIsSummaryVisible(false)}
+              className="text-gray-400 hover:text-gray-600 transition-colors p-1"
+              aria-label="Ocultar resumo"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
           </div>
-          <div className="text-xs text-gray-500">
-            {totalUniforms > 0 && `de ${totalUniforms} solicitados`}
-          </div>
+          {totalDistributed > 0 && (
+            <div className="mt-1.5 flex justify-center">
+              <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs ${
+                totalDistributed >= totalUniforms * 0.8 ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+              }`}>
+                {totalDistributed >= totalUniforms * 0.8 ? '✓ Completo' : '⚠️ Continue'}
+              </span>
+            </div>
+          )}
         </div>
-        {totalDistributed > 0 && (
-          <div className="mt-2 text-xs text-center">
-            <span className={`inline-flex items-center px-2 py-1 rounded-full ${
-              totalDistributed >= totalUniforms * 0.8 ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
-            }`}>
-              {totalDistributed >= totalUniforms * 0.8 ? '✓ Distribuição completa' : '⚠️ Continue distribuindo'}
-            </span>
-          </div>
-        )}
       </div>
+
+      {/* Floating toggle button when summary is hidden */}
+      {!isSummaryVisible && (
+        <button
+          onClick={() => setIsSummaryVisible(true)}
+          className="fixed bottom-4 right-4 bg-blue-600 text-white rounded-full p-3 shadow-lg sm:hidden z-20 hover:bg-blue-700 transition-all"
+          aria-label="Mostrar resumo"
+        >
+          <div className="flex flex-col items-center justify-center">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+            </svg>
+            <span className="text-xs font-bold">{totalDistributed}</span>
+          </div>
+        </button>
+      )}
     </div>
   );
 }
