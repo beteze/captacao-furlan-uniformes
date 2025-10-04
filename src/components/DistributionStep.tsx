@@ -15,6 +15,7 @@ interface UniformProduct {
   name: string;
   bullets: string[];
   fabrics: string[];
+  image?: string;
 }
 
 const uniformProducts: UniformProduct[] = [
@@ -66,45 +67,49 @@ const uniformProducts: UniformProduct[] = [
     id: 'camisa-social-masculina',
     name: 'Camisa Social Masculina',
     bullets: [
-      'Elegância para ambientes corporativos',
-      'Corte social tradicional',
-      'Tecidos nobres e duráveis',
-      'Acabamento profissional'
+      'Corte estruturado que valoriza a silhueta masculina',
+      'Gola e punhos duplos e encorpados',
+      'Ideal para personalização com bordados',
+      'Elegância para ambientes corporativos'
     ],
-    fabrics: ['Tricoline Ibiza', 'Tricoline Cannes', 'Tricoline Profit', 'Tricoline London', 'Tricoline Micro Vichy', 'Tricoline Confort Plus', 'Tricoline London Confort', 'Tricoline Importada']
+    fabrics: ['Tricoline Ibiza', 'Tricoline Cannes', 'Tricoline Profit', 'Tricoline London', 'Tricoline Micro Vichy', 'Tricoline Confort Plus', 'Tricoline London Confort', 'Tricoline Importada'],
+    image: ''
   },
   {
     id: 'camisa-social-feminina',
     name: 'Camisa Social Feminina',
     bullets: [
-      'Corte feminino valorizado',
-      'Elegância e sofisticação',
-      'Tecidos de alta qualidade',
-      'Modelagem exclusiva'
+      'Corte feminino que valoriza o caimento',
+      'Gola e punhos delicados que mantêm a forma',
+      'Conforto e elegância em longas jornadas',
+      'Tecidos nobres e duráveis'
     ],
-    fabrics: ['Tricoline Ibiza', 'Tricoline Cannes', 'Tricoline Profit', 'Tricoline London', 'Tricoline Micro Vichy', 'Tricoline Confort Plus', 'Tricoline London Confort', 'Tricoline Importada']
-  },
-  {
-    id: 'calca-social-feminina',
-    name: 'Calça Social Feminina',
-    bullets: [
-      'Modelagem feminina exclusiva',
-      'Tecido nobre e resistente',
-      'Caimento perfeito',
-      'Elegância profissional'
-    ],
-    fabrics: ['Prada']
+    fabrics: ['Tricoline Ibiza', 'Tricoline Cannes', 'Tricoline Profit', 'Tricoline London', 'Tricoline Micro Vichy', 'Tricoline Confort Plus', 'Tricoline London Confort', 'Tricoline Importada'],
+    image: ''
   },
   {
     id: 'calca-social-masculina',
     name: 'Calça Social Masculina (Sport Fino)',
     bullets: [
-      'Corte social masculino',
-      'Resistência e durabilidade',
-      'Tecidos de qualidade superior',
-      'Acabamento refinado'
+      'Corte alinhado que valoriza a silhueta masculina e garante conforto',
+      'Bolso embutido discreto e funcional',
+      'Tecido resistente, confortável e de fácil manutenção',
+      'Estilo elegante ideal para ambientes corporativos'
     ],
-    fabrics: ['Prada', 'Brim Pesado']
+    fabrics: ['Prada', 'Brim Pesado'],
+    image: ''
+  },
+  {
+    id: 'calca-social-feminina',
+    name: 'Calça Social Feminina com Bolso Embutido e Friso na Perna',
+    bullets: [
+      'Corte feminino que valoriza a silhueta e garante conforto',
+      'Friso na perna que confere aparência elegante e alinhada',
+      'Bolso embutido discreto e funcional',
+      'Tecido resistente, confortável e de fácil manutenção'
+    ],
+    fabrics: ['Prada'],
+    image: ''
   },
   {
     id: 'calca-elastico-cordao',
