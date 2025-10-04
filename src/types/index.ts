@@ -3,6 +3,7 @@ export interface UniformDetail {
   malhaType?: string;
   malhaDescription?: string;
   cutType?: string[];
+  gender?: 'Masculino' | 'Feminino' | 'Unissex';
 }
 
 export interface QuizData {

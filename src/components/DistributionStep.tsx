@@ -241,14 +241,34 @@ export default function DistributionStep({
     return `Selecione os uniformes necessários (total solicitado: ${totalUniforms})`;
   };
 
-  // Atualizar distribuição
+  const productsThatNeedGender = [
+    'camisa-gola-redonda',
+    'camisa-gola-v',
+    'camisa-gola-v-raglan',
+    'camisa-polo',
+    'jaleco-consultorio',
+    'jaleco-operacional-botao',
+    'jaleco-operacional-polo',
+    'guarda-po-operacional',
+    'blusa-gola-drape',
+    'blusa-gola-redonda',
+    'calca-elastico-cordao'
+  ];
+
+  const shouldShowGenderField = (productId: string) => {
+    return productsThatNeedGender.includes(productId);
+  };
+
   const updateDistribution = (productId: string, field: keyof UniformDetail, value: any) => {
     const currentDetail = distribution[productId] || { quantity: 0 };
     const newDistribution = {
       ...distribution,
       [productId]: {
         ...currentDetail,
-        [field]: field === 'quantity' ? Math.max(0, value) : value
+        [field]: field === 'quantity' ? Math.max(0, value) : value,
+        gender: field === 'quantity' && value > 0 && !currentDetail.gender && shouldShowGenderField(productId)
+          ? 'Unissex'
+          : currentDetail.gender
       }
     };
     setDistribution(newDistribution);
@@ -421,6 +441,29 @@ export default function DistributionStep({
 
               {hasQuantity && (
                 <>
+                  {shouldShowGenderField(product.id) && (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Gênero
+                      </label>
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-2">
+                        {['Masculino', 'Feminino', 'Unissex'].map((genderOption) => (
+                          <label key={genderOption} className="flex items-center cursor-pointer">
+                            <input
+                              type="radio"
+                              name={`gender-${product.id}`}
+                              value={genderOption}
+                              checked={(currentDetail.gender || 'Unissex') === genderOption}
+                              onChange={(e) => updateDistribution(product.id, 'gender', e.target.value as 'Masculino' | 'Feminino' | 'Unissex')}
+                              className="w-4 h-4 accent-blue-600 focus:ring-blue-600 focus:ring-2"
+                            />
+                            <span className="ml-2 text-sm text-gray-700">{genderOption}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {/* Dropdown Tecido */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">

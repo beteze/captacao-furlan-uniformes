@@ -115,6 +115,9 @@ export default function OrcamentoPage({
         .filter(([_, detail]) => detail?.quantity > 0)
         .forEach(([type, detail]) => {
           message += `• ${formatUniformType(type)}: ${detail.quantity} unidades\n`;
+          if (detail.gender) {
+            message += `  - Gênero: ${detail.gender}\n`;
+          }
           if (detail.malhaType) {
             const malhaOption = [
               { id: 'malha-fria', name: 'Malha Fria' },
@@ -281,9 +284,12 @@ export default function OrcamentoPage({
                       {Object.entries(quizData.distribution || {})
                         .filter(([_, detail]) => detail?.quantity > 0)
                         .map(([type, detail]) => (
-                          <span key={type} className="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm mr-2 mb-1">
-                            {formatUniformType(type)}: {detail.quantity}
-                          </span>
+                          <div key={type} className="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm mr-2 mb-1">
+                            <div>{formatUniformType(type)}: {detail.quantity}</div>
+                            {detail.gender && detail.gender !== 'Unissex' && (
+                              <div className="text-xs text-gray-500 italic">Gênero: {detail.gender}</div>
+                            )}
+                          </div>
                         ))
                       }
                     </div>
@@ -350,6 +356,11 @@ export default function OrcamentoPage({
                               <span className="text-gray-700">{formatUniformType(type)}:</span>
                               <span className="font-medium">{detail.quantity} unidades</span>
                             </div>
+                            {detail.gender && (
+                              <div className="text-xs text-gray-500 italic mt-1">
+                                Gênero: {detail.gender}
+                              </div>
+                            )}
                             {(detail.malhaType || detail.malhaDescription || (detail.cutType && detail.cutType.length > 0)) && (
                               <div className="mt-1 text-xs text-gray-600 space-y-1">
                                 {detail.malhaType && (
