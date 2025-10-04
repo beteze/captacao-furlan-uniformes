@@ -296,24 +296,26 @@ export default function DistributionStep({
 
   return (
     <div className="space-y-6">
-      <div className="text-center">
+      <div className="text-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-2">
           Catálogo de Uniformes
         </h2>
-        <p className="text-gray-600">
-          Selecione os modelos e quantidades necessárias para sua empresa
+        <p className="text-base text-gray-600">
+          Distribua os uniformes entre os modelos disponíveis. Nosso consultor ajudará com detalhes finais.
         </p>
       </div>
 
+      <div className="border-t border-gray-200 pt-6 mt-6"></div>
+
       {/* Informational Tip */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
         <p className="text-sm text-blue-800">
           <strong>Dica:</strong> Nosso consultor especializado poderá auxiliar com detalhes técnicos, medidas e personalizações específicas.
         </p>
       </div>
 
-      {/* Status Counter */}
-      <div className={`p-4 rounded-lg border-2 ${getStatusColor()} transition-all duration-300`}>
+      {/* Status Counter - Hidden on mobile, shown on desktop */}
+      <div className={`hidden sm:block p-4 rounded-lg border-2 ${getStatusColor()} transition-all duration-300 mb-6`}>
         <div className="flex items-center justify-center space-x-3">
           {getStatusIcon()}
           <div className="text-center">
@@ -355,8 +357,8 @@ export default function DistributionStep({
         />
       </div>
 
-      {/* Products Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-4">
+      {/* Products Grid - Add bottom margin for mobile fixed bar */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-4 mb-32 sm:mb-6">
         {uniformProducts.map((product) => {
           const currentDetail = distribution[product.id] || { quantity: 0 };
           const hasQuantity = currentDetail.quantity > 0;
@@ -398,7 +400,7 @@ export default function DistributionStep({
               )}
 
               {/* Campo Quantidade */}
-              <div>
+              <div className="mt-auto">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Quantidade *
                 </label>
@@ -449,10 +451,32 @@ export default function DistributionStep({
       </div>
 
       {/* Aviso sobre consultor */}
-      <div className="bg-gray-50 rounded-lg p-4">
+      <div className="bg-gray-50 rounded-lg p-4 mb-6">
         <p className="text-sm text-gray-600 text-center">
           💡 <strong>Dica:</strong> Nosso consultor especializado entrará em contato para ajudar com detalhes técnicos, medidas e personalizações específicas.
         </p>
+      </div>
+
+      {/* Fixed Mobile Summary Bar */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg p-4 sm:hidden z-20">
+        <div className="flex items-center justify-between text-sm font-medium">
+          <div>
+            <span className="text-gray-600">Total selecionado:</span>
+            <strong className="text-blue-600 ml-2">{totalDistributed} unidades</strong>
+          </div>
+          <div className="text-xs text-gray-500">
+            {totalUniforms > 0 && `de ${totalUniforms} solicitados`}
+          </div>
+        </div>
+        {totalDistributed > 0 && (
+          <div className="mt-2 text-xs text-center">
+            <span className={`inline-flex items-center px-2 py-1 rounded-full ${
+              totalDistributed >= totalUniforms * 0.8 ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+            }`}>
+              {totalDistributed >= totalUniforms * 0.8 ? '✓ Distribuição completa' : '⚠️ Continue distribuindo'}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

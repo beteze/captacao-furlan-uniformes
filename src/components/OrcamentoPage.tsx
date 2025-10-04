@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { ArrowLeft, MessageCircle, User, Building, Clock, Palette, Mail, FileText, ArrowRight, X } from 'lucide-react';
+import { ArrowLeft, MessageCircle, User, Building, Clock, Palette, Mail, FileText, ArrowRight, X, Upload, Check } from 'lucide-react';
 import HelpButton from './HelpButton';
 import HelpModal from './HelpModal';
 import { QuizData } from '../types';
@@ -216,8 +216,10 @@ export default function OrcamentoPage({
               </h1>
               <HelpButton onClick={handleOpenHelpModal} />
             </div>
-            <p className="text-base sm:text-lg text-gray-600">
-              {isReview ? 'Confira todos os detalhes antes de continuar' : 'Confira todos os detalhes antes de finalizar'}
+            <p className="text-base text-gray-600">
+              {isReview
+                ? 'Confira todos os detalhes antes de continuar. Seus dados estão protegidos e seguros.'
+                : 'Revise as informações e escolha como receber sua proposta personalizada.'}
             </p>
           </div>
         </div>
@@ -226,47 +228,51 @@ export default function OrcamentoPage({
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                <Building className="mr-2 w-5 h-5 text-blue-900" />
+                <Building className="mr-2 w-5 h-5 text-blue-600" />
                 Dados da Empresa
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm font-semibold text-gray-800">CNPJ</p>
-                  <p className="text-sm text-gray-700 mt-0.5 font-mono">{cnpj}</p>
+                  <p className="text-sm font-medium text-gray-600 mb-1">CNPJ</p>
+                  <p className="text-sm text-gray-900 font-mono bg-gray-50 px-2 py-1 rounded">{cnpj}</p>
                 </div>
                 {companyName && (
                   <div>
-                    <p className="text-sm font-semibold text-gray-800">Nome da Empresa</p>
-                    <p className="text-sm text-gray-700 mt-0.5">{companyName}</p>
+                    <p className="text-sm font-medium text-gray-600 mb-1">Nome do Responsável</p>
+                    <p className="text-sm text-gray-900">{companyName}</p>
                   </div>
                 )}
                 <div>
-                  <p className="text-sm font-semibold text-gray-800">E-mail</p>
-                  <p className="text-sm text-gray-700 mt-0.5">{email}</p>
+                  <p className="text-sm font-medium text-gray-600 mb-1">E-mail</p>
+                  <p className="text-sm text-gray-900 bg-gray-50 px-2 py-1 rounded break-all">{email}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-800">Segmento</p>
-                  <p className="text-sm text-gray-700 mt-0.5">
+                  <p className="text-sm font-medium text-gray-600 mb-1">Segmento</p>
+                  <span className="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full font-medium">
                     {getSegmentoDisplay()}
-                  </p>
+                  </span>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-800">Quantidade de funcionários</p>
-                  <p className="text-sm text-gray-700 mt-0.5">{(() => {
-                    const ranges: { [key: string]: string } = {
-                      '10-49': '10 a 49',
-                      '50-100': '50 a 100',
-                      '101-300': '101 a 300',
-                      '301-500': '301 a 500',
-                      '501-1000': '501 a 1000',
-                      'mais-1000': 'Mais de 1000'
-                    };
-                    return ranges[quizData.colaboradores] || quizData.colaboradores;
-                  })()} funcionários</p>
+                  <p className="text-sm font-medium text-gray-600 mb-1">Funcionários</p>
+                  <span className="inline-block bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full font-medium">
+                    {(() => {
+                      const ranges: { [key: string]: string } = {
+                        '10-49': '10 a 49',
+                        '50-100': '50 a 100',
+                        '101-300': '101 a 300',
+                        '301-500': '301 a 500',
+                        '501-1000': '501 a 1000',
+                        'mais-1000': 'Mais de 1000'
+                      };
+                      return ranges[quizData.colaboradores] || quizData.colaboradores;
+                    })()}
+                  </span>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-800">Quantidade de uniformes</p>
-                  <p className="text-sm text-gray-700 mt-0.5 font-bold text-lg">{quizData.quantidadeUniformes} unidades</p>
+                  <p className="text-sm font-medium text-gray-600 mb-1">Uniformes Solicitados</p>
+                  <span className="inline-block bg-green-100 text-green-800 text-base px-3 py-1 rounded-full font-bold">
+                    {quizData.quantidadeUniformes} unidades
+                  </span>
                 </div>
                 {quizData.distribution && Object.values(quizData.distribution).some(detail => detail?.quantity > 0) && (
                   <div className="md:col-span-2">
@@ -288,36 +294,54 @@ export default function OrcamentoPage({
 
             <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                <Palette className="mr-2 w-5 h-5 text-blue-900" />
+                <Palette className="mr-2 w-5 h-5 text-blue-600" />
                 Detalhes do Pedido
               </h2>
 
+              <div className="border-t border-gray-200 pt-4 mt-4"></div>
+
               <div className="space-y-4">
-                <div className="p-4 bg-gray-50 rounded-lg">
-                  <p className="text-sm font-semibold text-gray-800 mb-2">Personalização</p>
-                  <p className="text-sm text-gray-700 mt-0.5">
-                    {getPersonalizacaoDisplay()}
-                  </p>
+                <div className="flex items-start space-x-3">
+                  <Palette className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Personalização</p>
+                    <span className="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full font-medium mt-1">
+                      {getPersonalizacaoDisplay()}
+                    </span>
+                  </div>
                 </div>
 
                 {quizData.elementoPersonalizado && (
-                  <div className="p-4 bg-gray-50 rounded-lg">
-                    <p className="text-sm font-semibold text-gray-800 mb-2">Elemento Personalizado</p>
-                    <p className="text-sm text-gray-700 mt-0.5">{quizData.elementoPersonalizado}</p>
+                  <div className="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg">
+                    <Upload className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-sm font-medium text-gray-800 mb-1">Elemento Personalizado</p>
+                      <p className="text-sm text-gray-700">{quizData.elementoPersonalizado}</p>
+                    </div>
                   </div>
                 )}
 
                 {quizData.prazoEntrega && (
-                  <div className="p-4 bg-gray-50 rounded-lg">
-                    <p className="text-sm font-semibold text-gray-800 mb-2">Prazo Desejado</p>
-                    <p className="text-sm text-gray-700 mt-0.5">{quizData.prazoEntrega} dias úteis</p>
+                  <div className="flex items-start space-x-3">
+                    <Clock className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-sm font-medium text-gray-600">Prazo Desejado</p>
+                      <span className="inline-block bg-orange-100 text-orange-800 text-sm px-3 py-1 rounded-full font-medium mt-1">
+                        {quizData.prazoEntrega} dias úteis
+                      </span>
+                    </div>
                   </div>
                 )}
                 
+                <div className="border-t border-gray-200 pt-4 mt-4"></div>
+
                 {quizData.distribution && Object.values(quizData.distribution).some(detail => detail?.quantity > 0) && (
                   <div className="p-4 bg-gray-50 rounded-lg">
-                    <p className="text-sm font-semibold text-gray-800 mb-2">Distribuição dos Uniformes</p>
-                    <div className="space-y-1">
+                    <p className="text-sm font-semibold text-gray-800 mb-3 flex items-center">
+                      <FileText className="w-4 h-4 mr-2 text-blue-600" />
+                      Distribuição dos Uniformes
+                    </p>
+                    <div className="space-y-2">
                       {Object.entries(quizData.distribution || {})
                         .filter(([_, detail]) => detail?.quantity > 0)
                         .map(([type, detail]) => (
@@ -372,20 +396,38 @@ export default function OrcamentoPage({
 
             <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                <Clock className="mr-2 w-5 h-5 text-blue-900" />
+                <Clock className="mr-2 w-5 h-5 text-blue-600" />
                 Informações sobre Prazo
               </h2>
+
+              <div className="border-t border-gray-200 pt-4 mt-4"></div>
+
               <div className="space-y-4">
                 <div className="bg-blue-50 rounded-lg p-4">
-                  <h3 className="font-semibold text-blue-900 mb-2">Prazos padrão da empresa:</h3>
-                  <ul className="text-blue-800 text-sm space-y-1">
-                    <li>• 30 dias úteis (pedidos urgentes)</li>
-                    <li>• 35 dias úteis (prazo padrão recomendado)</li>
-                    <li>• 45 dias úteis (pedidos com maior volume)</li>
+                  <h3 className="font-semibold text-blue-900 mb-3 flex items-center">
+                    <Clock className="w-4 h-4 mr-2" />
+                    Prazos padrão da empresa
+                  </h3>
+                  <ul className="text-blue-800 text-sm space-y-2">
+                    <li className="flex items-start">
+                      <span className="inline-block w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 mr-2 flex-shrink-0"></span>
+                      <span><strong>30 dias úteis</strong> - Pedidos urgentes</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="inline-block w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 mr-2 flex-shrink-0"></span>
+                      <span><strong>35 dias úteis</strong> - Prazo padrão recomendado</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="inline-block w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 mr-2 flex-shrink-0"></span>
+                      <span><strong>45 dias úteis</strong> - Pedidos com maior volume</span>
+                    </li>
                   </ul>
-                  <p className="text-blue-700 text-sm mt-2">
-                    Todos os prazos incluem confecção e personalização completa
-                  </p>
+                  <div className="mt-3 pt-3 border-t border-blue-200">
+                    <p className="text-blue-700 text-sm flex items-start">
+                      <Check className="w-4 h-4 mr-2 flex-shrink-0 mt-0.5" />
+                      <span>Todos os prazos incluem confecção e personalização completa</span>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

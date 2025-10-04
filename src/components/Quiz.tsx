@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ArrowRight, Building, Palette, Clock, Upload, X, ChevronDown } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Building, Palette, Clock, Upload, X, ChevronDown, Check } from 'lucide-react';
 import { QuizData } from '../types';
 import DistributionStep from './DistributionStep';
 import HelpButton from './HelpButton';
@@ -157,8 +157,8 @@ const Quiz: React.FC<QuizProps> = ({
           <div className="space-y-6">
             <div className="text-center mb-6">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">Solicitação de Orçamento</h2>
-              <p className="text-lg text-gray-600">
-                Preencha os dados da sua empresa para receber uma proposta personalizada
+              <p className="text-base text-gray-600">
+                Use os dados da sua empresa para gerar uma proposta personalizada sob medida
               </p>
             </div>
             
@@ -230,13 +230,16 @@ const Quiz: React.FC<QuizProps> = ({
                     <button
                       key={option.id}
                       onClick={() => onQuizDataChange({ segmento: option.id })}
-                      className={`p-3 border-2 rounded-lg text-left transition-all ${
+                      className={`p-3 border-2 rounded-lg text-left transition-all flex items-center justify-between ${
                         quizData.segmento === option.id
                           ? 'border-blue-500 bg-blue-50'
                           : 'border-gray-200 hover:border-gray-300'
                       }`}
                     >
                       <span className="font-medium">{option.name}</span>
+                      {quizData.segmento === option.id && (
+                        <Check className="w-5 h-5 text-blue-600" />
+                      )}
                     </button>
                   ))}
                 </div>
@@ -343,6 +346,9 @@ const Quiz: React.FC<QuizProps> = ({
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Tipo de personalização *
                 </label>
+                <p className="text-sm text-gray-500 mb-3">
+                  Escolha como deseja personalizar seus uniformes. Suas escolhas serão refletidas no orçamento final.
+                </p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   {[
                     { id: 'sem', name: 'Sem personalização', desc: 'Uniformes sem logo ou bordado' },
@@ -352,14 +358,21 @@ const Quiz: React.FC<QuizProps> = ({
                     <button
                       key={option.id}
                       onClick={() => onQuizDataChange({ personalizacao: option.id })}
-                      className={`p-4 border-2 rounded-lg text-left transition-all hover:border-blue-500 focus:ring-blue-600 ${
+                      className={`p-4 border-2 rounded-lg text-left transition-all hover:border-blue-500 focus:ring-blue-600 relative ${
                         quizData.personalizacao === option.id
                           ? 'border-blue-500 bg-blue-50'
                           : 'border-gray-200'
                       }`}
                     >
-                      <div className="font-medium text-gray-900">{option.name}</div>
-                      <div className="text-sm text-gray-600 mt-1">{option.desc}</div>
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <div className="font-medium text-gray-900">{option.name}</div>
+                          <div className="text-sm text-gray-600 mt-1">{option.desc}</div>
+                        </div>
+                        {quizData.personalizacao === option.id && (
+                          <Check className="w-5 h-5 text-blue-600 flex-shrink-0 ml-2" />
+                        )}
+                      </div>
                     </button>
                   ))}
                 </div>
@@ -470,32 +483,39 @@ const Quiz: React.FC<QuizProps> = ({
           </button>
         </div>
         
-        <div className="bg-white rounded-lg shadow-sm p-4 sm:p-8 flex flex-col min-h-[calc(100vh-8rem)]">
+        <div className="bg-white rounded-lg shadow-sm p-4 sm:p-8 flex flex-col min-h-[calc(100vh-8rem)] mb-24 sm:mb-0">
           <div className="flex-grow">
             {renderStep()}
           </div>
           
-          <div className="flex-shrink-0 flex flex-col-reverse sm:flex-row justify-between items-center mt-8 pt-6 border-t gap-3">
-            <button
-              onClick={handleBack}
-              className="w-full sm:w-auto flex items-center justify-center px-6 py-3 text-gray-600 hover:text-gray-800 transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5 mr-2" />
-              Voltar
-            </button>
-            
-            <button
-              onClick={handleNext}
-              disabled={!canProceed()}
-              className={`w-full sm:w-auto flex items-center justify-center px-6 py-3 rounded-md font-semibold shadow-sm transition-all ${
-                canProceed()
-                  ? 'bg-blue-600 text-white hover:bg-blue-700'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }`}
-            >
-              {currentStep === 3 ? 'Fazer pedido de orçamento' : 'Próximo'}
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </button>
+          <div className="fixed bottom-4 left-4 right-4 sm:static sm:mt-8 sm:pt-6 sm:border-t bg-white sm:bg-transparent p-4 sm:p-0 shadow-lg sm:shadow-none rounded-lg sm:rounded-none z-10">
+            <div className="flex flex-col-reverse sm:flex-row justify-between items-center gap-3">
+              <button
+                onClick={handleBack}
+                className="w-full sm:w-auto flex items-center justify-center px-6 py-3 text-gray-600 hover:text-gray-800 transition-colors"
+              >
+                <ArrowLeft className="w-5 h-5 mr-2" />
+                Voltar
+              </button>
+
+              <div className="w-full sm:w-auto">
+                <button
+                  onClick={handleNext}
+                  disabled={!canProceed()}
+                  className={`w-full sm:w-auto flex items-center justify-center px-6 py-3 rounded-md font-semibold shadow-sm transition-all ${
+                    canProceed()
+                      ? 'bg-blue-600 text-white hover:bg-blue-700'
+                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  }`}
+                >
+                  {currentStep === 3 ? 'Fazer pedido de orçamento' : 'Próximo'}
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </button>
+                <span className="text-xs text-gray-400 mt-1 block text-center sm:text-right">
+                  Suas escolhas serão refletidas no orçamento final
+                </span>
+              </div>
+            </div>
           </div>
         </div>
         
