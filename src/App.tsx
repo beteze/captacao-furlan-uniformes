@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import Quiz from './components/Quiz';
 import OrcamentoPage from './components/OrcamentoPage';
 import DisqualifiedPage from './components/DisqualifiedPage';
+import ConfirmationPage from './components/ConfirmationPage';
 import ProgressBar from './components/ProgressBar';
 import SavedQuotesModal from './components/SavedQuotesModal';
 import { QuizData } from './types';
 
-type AppState = 'dados' | 'pedido' | 'review' | 'orcamento' | 'disqualified';
+type AppState = 'dados' | 'pedido' | 'review' | 'orcamento' | 'disqualified' | 'confirmation';
 
 function App() {
   const [currentView, setCurrentView] = useState<AppState>('dados');
@@ -117,9 +118,13 @@ function App() {
   const handleReviewComplete = () => {
     // Salvar o orçamento atual antes de prosseguir
     const wasSaved = saveCurrentQuizIfValid();
-    
+
     // Ir para a tela final de orçamento
     setCurrentView('orcamento');
+  };
+
+  const handleQuoteSubmission = () => {
+    setCurrentView('confirmation');
   };
 
   const handleViewSavedQuotes = () => {
@@ -216,6 +221,7 @@ function App() {
             onBackToLanding={handleBackToLanding}
             onBack={() => setCurrentView('review')}
             isReview={false}
+            onReviewComplete={handleQuoteSubmission}
             onStartNewQuiz={handleStartNewQuiz}
             setIsQuoteFinalized={setIsQuoteFinalized}
             hasSavedQuotes={hasSavedQuotes}
@@ -227,7 +233,12 @@ function App() {
         return (
           <DisqualifiedPage onBack={handleBackToLanding} />
         );
-      
+
+      case 'confirmation':
+        return (
+          <ConfirmationPage onBackToLanding={handleBackToLanding} />
+        );
+
       default:
         return (
           <Quiz

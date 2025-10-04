@@ -23,10 +23,10 @@ const DisqualifiedPage: React.FC<DisqualifiedPageProps> = ({ onBack }) => {
   const emailContact = "comercial@furlanunifromes.com.br";
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative bg-white rounded-lg shadow-md p-4 sm:p-8 text-center">
-          <div className="flex justify-between items-start mb-4">
+    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-8">
+      <div className="max-w-3xl mx-auto">
+        <div className="relative bg-white rounded-md shadow-md p-6 sm:p-8 text-center">
+          <div className="flex justify-end mb-4">
             <HelpButton onClick={handleOpenHelpModal} />
           </div>
 
@@ -34,59 +34,48 @@ const DisqualifiedPage: React.FC<DisqualifiedPageProps> = ({ onBack }) => {
             <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <MessageCircle className="w-8 h-8 text-orange-600" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">
-              Obrigado pelo seu interesse!
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+              Parece que este pedido não se encaixa no nosso perfil atual.
             </h1>
-            <p className="text-xl text-gray-600 mb-6">
-              No momento, atendemos empresas com 100 colaboradores ou mais através do nosso sistema automatizado.
+            <p className="text-base sm:text-lg text-gray-600 mb-6">
+              Mas ficamos felizes com seu interesse! Você pode tentar novamente ou falar com nossa equipe.
             </p>
           </div>
 
-          <div className="bg-blue-50 rounded-lg p-6 mb-8">
+          <div className="border-t pt-6 mb-6"></div>
+
+          <div className="bg-blue-50 rounded-md p-6 mb-6">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">
-              Mas não se preocupe! Temos uma solução para você:
+              Entre em contato conosco
             </h2>
-            <p className="text-gray-700 mb-6">
-              Entre em contato diretamente conosco através dos canais abaixo.
+            <p className="text-sm sm:text-base text-gray-700 mb-6">
               Nossa equipe especializada poderá te atender com uma proposta personalizada.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col gap-4">
+              <button
+                onClick={onBack}
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm transition-all"
+              >
+                <ArrowLeft className="mr-2 w-5 h-5" />
+                Voltar ao início
+              </button>
+
               <a
                 href={whatsappSmallCompanies}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow-sm transition-all"
               >
                 <MessageCircle className="mr-2 w-5 h-5" />
-                WhatsApp Direto
-              </a>
-
-              <a
-                href={`mailto:${emailContact}?subject=Interesse em uniformes - Empresa pequeno porte`}
-                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
-              >
-                <Mail className="mr-2 w-5 h-5" />
-                Enviar E-mail
+                Falar com um consultor
               </a>
             </div>
           </div>
 
-          <div className="text-sm text-gray-500 mb-8">
-            <p>E-mail: {emailContact}</p>
-            <p>Respondemos em até 24 horas</p>
-          </div>
-
-          <button
-            onClick={onBack}
-            className="inline-flex items-center px-6 py-3 text-gray-600 hover:text-gray-800 transition-colors"
-          >
-            <ArrowLeft className="mr-2 w-4 h-4" />
-            Voltar ao início
-          </button>
-
-          <div className="mt-6 pt-4 border-t border-gray-200 flex justify-center">
-            <HelpButton onClick={handleOpenHelpModal} />
+          <div className="border-t pt-6">
+            <p className="text-sm text-gray-500">E-mail: {emailContact}</p>
+            <p className="text-sm text-gray-500">Respondemos em até 24 horas</p>
           </div>
         </div>
 

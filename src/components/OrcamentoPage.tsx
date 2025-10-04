@@ -189,8 +189,8 @@ export default function OrcamentoPage({
   const emailUrl = `mailto:comercial@furlanunifromes.com.br?subject=${emailSubject}&body=${emailBody}`;
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-8">
+      <div className="max-w-4xl mx-auto">
         {/* Botão Fechar */}
         <div className="flex justify-end mb-4">
           <button
@@ -226,6 +226,34 @@ export default function OrcamentoPage({
             </p>
           </div>
         </div>
+
+        {isReview && (
+          <div className="mb-6">
+            <div className="bg-white rounded-lg shadow-sm p-4">
+              <h3 className="text-sm font-medium text-gray-700 mb-3">Resumo do Pedido</h3>
+              <div className="flex flex-wrap gap-2">
+                <span className="inline-flex items-center bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded-full">
+                  {quizData.quantidadeUniformes} uniformes
+                </span>
+                <span className="inline-flex items-center bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded-full">
+                  {getPersonalizacaoDisplay()}
+                </span>
+                {quizData.prazoEntrega && (
+                  <span className="inline-flex items-center bg-orange-100 text-orange-800 text-sm px-2 py-1 rounded-full">
+                    {quizData.prazoEntrega} dias
+                  </span>
+                )}
+                {quizData.distribution && Object.values(quizData.distribution).some(detail => detail?.quantity > 0) && (
+                  <span className="inline-flex items-center bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">
+                    {Object.values(quizData.distribution).filter(detail => detail?.quantity > 0).length} tipos
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="border-t mt-6 pt-6"></div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
           <div className="lg:col-span-2 space-y-6">
@@ -495,11 +523,17 @@ export default function OrcamentoPage({
                 ) : (
                   <>
                     <a
-                      id="btnSendWhatsApp"
                       href={whatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={handleQuoteFinalization}
+                      onClick={() => {
+                        handleQuoteFinalization();
+                        setTimeout(() => {
+                          if (onReviewComplete) {
+                            onReviewComplete();
+                          }
+                        }, 500);
+                      }}
                       className="w-full sm:w-auto px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md shadow-sm transition-all flex items-center justify-center"
                     >
                       <MessageCircle className="mr-2 w-5 h-5" />
@@ -507,9 +541,15 @@ export default function OrcamentoPage({
                     </a>
 
                     <a
-                      id="btnSendEmail"
                       href={emailUrl}
-                      onClick={handleQuoteFinalization}
+                      onClick={() => {
+                        handleQuoteFinalization();
+                        setTimeout(() => {
+                          if (onReviewComplete) {
+                            onReviewComplete();
+                          }
+                        }, 500);
+                      }}
                       className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-sm transition-all flex items-center justify-center"
                     >
                       <Mail className="mr-2 w-5 h-5" />

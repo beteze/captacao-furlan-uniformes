@@ -28,7 +28,8 @@ const uniformProducts: UniformProduct[] = [
       'Ideal para uniformes corporativos',
       'Disponível em diversas cores'
     ],
-    fabrics: ['PV Premium', 'PV', 'Dry Fit Esportivo', 'PP', 'Dry Fit Poliamida']
+    fabrics: ['PV Premium', 'PV', 'Dry Fit Esportivo', 'PP', 'Dry Fit Poliamida'],
+    image: '/images/placeholder.png'
   },
   {
     id: 'camisa-gola-v',
@@ -39,7 +40,8 @@ const uniformProducts: UniformProduct[] = [
       'Tecidos de alta qualidade',
       'Corte feminino e masculino'
     ],
-    fabrics: ['PV Premium', 'PV', 'Dry Fit Esportivo', 'PP', 'Dry Fit Poliamida']
+    fabrics: ['PV Premium', 'PV', 'Dry Fit Esportivo', 'PP', 'Dry Fit Poliamida'],
+    image: '/images/placeholder.png'
   },
   {
     id: 'camisa-gola-v-raglan',
@@ -50,7 +52,8 @@ const uniformProducts: UniformProduct[] = [
       'Design esportivo e moderno',
       'Ideal para atividades dinâmicas'
     ],
-    fabrics: ['PV Premium', 'PV', 'Dry Fit Esportivo', 'PP']
+    fabrics: ['PV Premium', 'PV', 'Dry Fit Esportivo', 'PP'],
+    image: '/images/placeholder.png'
   },
   {
     id: 'camisa-polo',
@@ -61,7 +64,8 @@ const uniformProducts: UniformProduct[] = [
       'Versatilidade para diversos ambientes',
       'Qualidade premium garantida'
     ],
-    fabrics: ['Piquet Supremo', 'PV Premium', 'PV', 'Dry Fit Supremo', 'PP']
+    fabrics: ['Piquet Supremo', 'PV Premium', 'PV', 'Dry Fit Supremo', 'PP'],
+    image: '/images/placeholder.png'
   },
   {
     id: 'camisa-social-masculina',
@@ -73,7 +77,7 @@ const uniformProducts: UniformProduct[] = [
       'Elegância para ambientes corporativos'
     ],
     fabrics: ['Tricoline Ibiza', 'Tricoline Cannes', 'Tricoline Profit', 'Tricoline London', 'Tricoline Micro Vichy', 'Tricoline Confort Plus', 'Tricoline London Confort', 'Tricoline Importada'],
-    image: ''
+    image: '/images/placeholder.png'
   },
   {
     id: 'camisa-social-feminina',
@@ -85,7 +89,7 @@ const uniformProducts: UniformProduct[] = [
       'Tecidos nobres e duráveis'
     ],
     fabrics: ['Tricoline Ibiza', 'Tricoline Cannes', 'Tricoline Profit', 'Tricoline London', 'Tricoline Micro Vichy', 'Tricoline Confort Plus', 'Tricoline London Confort', 'Tricoline Importada'],
-    image: ''
+    image: '/images/placeholder.png'
   },
   {
     id: 'calca-social-masculina',
@@ -120,7 +124,8 @@ const uniformProducts: UniformProduct[] = [
       'Ideal para atividades operacionais',
       'Resistente ao uso intenso'
     ],
-    fabrics: ['Brim pesado', 'Brim leve', 'Jeans', 'Jeans com elastano']
+    fabrics: ['Brim pesado', 'Brim leve', 'Jeans', 'Jeans com elastano'],
+    image: '/images/placeholder.png'
   },
   {
     id: 'jaleco-consultorio',
@@ -131,7 +136,8 @@ const uniformProducts: UniformProduct[] = [
       'Corte profissional',
       'Fácil manutenção'
     ],
-    fabrics: ['Gabardine', 'Oxfordine', 'Oxford', 'Prada']
+    fabrics: ['Gabardine', 'Oxfordine', 'Oxford', 'Prada'],
+    image: '/images/placeholder.png'
   },
   {
     id: 'jaleco-operacional-botao',
@@ -142,7 +148,8 @@ const uniformProducts: UniformProduct[] = [
       'Tecidos reforçados',
       'Proteção e durabilidade'
     ],
-    fabrics: ['Brim pesado', 'Brim leve']
+    fabrics: ['Brim pesado', 'Brim leve'],
+    image: '/images/placeholder.png'
   },
   {
     id: 'jaleco-operacional-polo',
@@ -153,7 +160,8 @@ const uniformProducts: UniformProduct[] = [
       'Tecidos resistentes',
       'Praticidade no uso'
     ],
-    fabrics: ['Brim leve', 'Brim pesado']
+    fabrics: ['Brim leve', 'Brim pesado'],
+    image: '/images/placeholder.png'
   },
   {
     id: 'blazer-feminino',
@@ -164,7 +172,8 @@ const uniformProducts: UniformProduct[] = [
       'Tecido nobre premium',
       'Acabamento sob medida'
     ],
-    fabrics: ['Prada']
+    fabrics: ['Prada'],
+    image: '/images/placeholder.png'
   },
   {
     id: 'colete-feminino',
@@ -175,7 +184,8 @@ const uniformProducts: UniformProduct[] = [
       'Versatilidade de uso',
       'Tecido de qualidade'
     ],
-    fabrics: ['Prada']
+    fabrics: ['Prada'],
+    image: '/images/placeholder.png'
   },
   {
     id: 'blusa-gola-drape',
@@ -186,7 +196,8 @@ const uniformProducts: UniformProduct[] = [
       'Conforto e elegância',
       'Modelagem exclusiva'
     ],
-    fabrics: ['Crepe com elastano']
+    fabrics: ['Crepe com elastano'],
+    image: '/images/placeholder.png'
   },
   {
     id: 'blusa-gola-redonda',
@@ -197,7 +208,8 @@ const uniformProducts: UniformProduct[] = [
       'Conforto superior',
       'Corte feminino valorizado'
     ],
-    fabrics: ['Crepe com elastano']
+    fabrics: ['Crepe com elastano'],
+    image: '/images/placeholder.png'
   },
   {
     id: 'guarda-po-operacional',
@@ -208,7 +220,8 @@ const uniformProducts: UniformProduct[] = [
       'Tecidos reforçados',
       'Praticidade operacional'
     ],
-    fabrics: ['Brim leve', 'Brim pesado']
+    fabrics: ['Brim leve', 'Brim pesado'],
+    image: '/images/placeholder.png'
   }
 ];
 
@@ -276,7 +289,7 @@ export default function DistributionStep({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 px-4 sm:px-8">
       <div className="text-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-2">
           Catálogo de Uniformes
@@ -286,8 +299,10 @@ export default function DistributionStep({
         </p>
       </div>
 
+      <div className="border-t mt-6 pt-6"></div>
+
       {/* Informational Tip */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 mt-4">
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
         <p className="text-sm text-blue-800">
           <strong>Dica:</strong> Nosso consultor especializado poderá auxiliar com detalhes técnicos, medidas e personalizações específicas.
         </p>
@@ -465,7 +480,7 @@ export default function DistributionStep({
       </div>
 
       {/* Fixed Mobile Summary Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg p-4 sm:hidden z-20">
+      <div className="fixed bottom-4 left-0 right-0 bg-white border-t shadow-lg p-4 sm:hidden z-20 safe-area-bottom">
         <div className="flex items-center justify-between text-sm font-medium">
           <div>
             <span className="text-gray-600">Total selecionado:</span>

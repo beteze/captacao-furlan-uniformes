@@ -168,6 +168,8 @@ const Quiz: React.FC<QuizProps> = ({
             </div>
             
             <div className="space-y-6">
+              <div className="border-t mt-6 pt-6"></div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   CNPJ *
@@ -214,6 +216,8 @@ const Quiz: React.FC<QuizProps> = ({
                 )}
               </div>
 
+              <div className="border-t mt-6 pt-6"></div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Segmento *
@@ -256,6 +260,8 @@ const Quiz: React.FC<QuizProps> = ({
                   </div>
                 )}
               </div>
+
+              <div className="border-t mt-6 pt-6"></div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -469,8 +475,8 @@ const Quiz: React.FC<QuizProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-8">
+      <div className="max-w-6xl mx-auto">
         {/* Botão Fechar */}
         <div className="flex justify-end mb-4">
           <button
@@ -488,7 +494,7 @@ const Quiz: React.FC<QuizProps> = ({
             {renderStep()}
           </div>
           
-          <div className="fixed bottom-4 left-4 right-4 sm:static sm:mt-8 sm:pt-6 sm:border-t bg-white sm:bg-transparent p-4 sm:p-0 shadow-lg sm:shadow-none rounded-lg sm:rounded-none z-10">
+          <div className="fixed bottom-4 left-4 right-4 sm:static sm:mt-8 sm:pt-6 sm:border-t bg-white sm:bg-transparent p-4 sm:p-0 shadow-lg sm:shadow-none rounded-lg sm:rounded-none z-10 safe-area-bottom">
             <div className="flex flex-col-reverse sm:flex-row justify-between items-center gap-3">
               <button
                 onClick={handleBack}
