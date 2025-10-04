@@ -167,9 +167,9 @@ const Quiz: React.FC<QuizProps> = ({
               <HelpButton onClick={handleOpenHelpModal} />
             </div>
             
-            <div className="space-y-4">
+            <div className="space-y-6">
               <div>
-                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   CNPJ *
                 </label>
                 <input
@@ -178,12 +178,12 @@ const Quiz: React.FC<QuizProps> = ({
                   onChange={(e) => handleCNPJChange(e.target.value)}
                   placeholder="00.000.000/0000-00"
                   maxLength={18}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full text-base px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
-              
+
               <div>
-                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Seu nome
                 </label>
                 <input
@@ -191,12 +191,12 @@ const Quiz: React.FC<QuizProps> = ({
                   value={companyName}
                   onChange={(e) => onCompanyNameChange(e.target.value)}
                   placeholder="Nome do responsável"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full text-base px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
-              
+
               <div>
-                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   E-mail *
                 </label>
                 <input
@@ -205,7 +205,7 @@ const Quiz: React.FC<QuizProps> = ({
                   onChange={(e) => handleEmailChange(e.target.value)}
                   placeholder="contato@empresa.com"
                   maxLength={254}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                  className={`w-full text-base px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                     emailError ? 'border-red-500' : 'border-gray-300'
                   }`}
                 />
@@ -215,7 +215,7 @@ const Quiz: React.FC<QuizProps> = ({
               </div>
 
               <div>
-                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Segmento *
                 </label>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -248,21 +248,21 @@ const Quiz: React.FC<QuizProps> = ({
                       placeholder="Qual segmento?"
                       value={quizData.segmentoOutro || ''}
                       onChange={(e) => onQuizDataChange({ segmentoOutro: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full text-base px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                 )}
               </div>
 
               <div>
-                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Quantidade de funcionários da empresa *
                 </label>
                 <div className="relative">
                   <select
                     value={quizData.colaboradores || ''}
                     onChange={(e) => handleColaboradoresChange(e.target.value)}
-                    className={`w-full px-4 py-3 border rounded-lg appearance-none bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    className={`w-full text-base px-4 py-2 border rounded-lg appearance-none bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                       colaboradoresError ? 'border-red-500' : 'border-gray-300'
                     }`}
                   >
@@ -285,7 +285,7 @@ const Quiz: React.FC<QuizProps> = ({
               </div>
 
               <div>
-                <label className="block text-base sm:text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Quantidade de uniformes *
                 </label>
                 <input
@@ -294,7 +294,7 @@ const Quiz: React.FC<QuizProps> = ({
                   onChange={(e) => handleQuantidadeUniformesChange(e.target.value)}
                   placeholder="Mínimo 10 unidades"
                   min="10"
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                  className={`w-full text-base px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                     quantidadeUniformesError ? 'border-red-500' : 'border-gray-300'
                   }`}
                 />
