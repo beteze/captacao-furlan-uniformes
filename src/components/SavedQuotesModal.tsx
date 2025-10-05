@@ -132,7 +132,7 @@ export default function SavedQuotesModal({
                     </span>
                     <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                       <a
-                        href={`https://wa.me/553198692472?text=${generateMultipleQuotesMessage()}`}
+                        href={`https://wa.me/553192485816?text=${generateMultipleQuotesMessage()}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm"

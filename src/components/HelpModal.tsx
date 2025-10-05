@@ -311,7 +311,7 @@ export default function HelpModal({
                       Email
                     </a>
                     <a
-                      href={`https://wa.me/553198692472?text=${generateWhatsAppMessage(selectedCategory.title)}`}
+                      href={`https://wa.me/553192485816?text=${generateWhatsAppMessage(selectedCategory.title)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full sm:flex-1 inline-flex items-center justify-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
